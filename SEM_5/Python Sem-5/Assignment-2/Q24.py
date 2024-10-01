@@ -1,9 +1,9 @@
-number = input("Enter an integer: ")
+num = input("Enter an integer: ")
 digit_words = ["ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
 
 appeared_digits = set()
 
-for char in number:
+for char in num:
     if char.isdigit():
         appeared_digits.add(char)
 

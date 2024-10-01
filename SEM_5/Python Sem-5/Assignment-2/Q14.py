@@ -1,8 +1,4 @@
-room_prices = {
-    'Standard': 100,
-    'Deluxe': 150,
-    'Suite': 250
-}
+room_prices = {'Standard': 100, 'Deluxe': 150, 'Suite': 250}
 room_type = input("Enter room type (Standard/Deluxe/Suite): ")
 if room_type not in room_prices:
     print("Invalid room type.")
