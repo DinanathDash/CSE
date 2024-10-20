@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Merge the contents of a.txt, b.txt, and c.txt, then sort them
+cat a.txt b.txt c.txt | sort -n > result
+
+# Display the sorted output on the screen
+cat result
+

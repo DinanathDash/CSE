@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if the file 'dtcal' exists
+if [ -f "dtcal" ]; then
+    # Store the counts using the wc (word count) command
+    line_count=$(wc -l < dtcal)
+    word_count=$(wc -w < dtcal)
+    char_count=$(wc -m < dtcal)
+
+    # Display the results in the required format
+    echo "Filename: dtcal"
+    echo "Line count: $line_count"
+    echo "Word count: $word_count"
+    echo "Char count: $char_count"
+else
+    echo "File 'dtcal' not found."
+fi

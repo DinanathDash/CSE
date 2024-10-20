@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if exactly 3 arguments are provided
+if [ "$#" -ne 3 ]; then
+    echo "Usage: ./ndisp <n> <m> <filename>"
+    exit 1
+fi
+
+# Assign command line arguments to variables
+n=$1
+m=$2
+file=$3
+
+# Check if the file exists
+if [ ! -f "$file" ]; then
+    echo "File '$file' not found."
+    exit 1
+fi
+
+# Display the first n lines
+echo "First $n lines of $file:"
+head -n "$n" "$file"
+
+# Display the last m lines
+echo -e "\nLast $m lines of $file:"
+tail -n "$m" "$file"

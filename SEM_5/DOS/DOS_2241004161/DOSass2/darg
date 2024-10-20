@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Display the total number of command-line arguments
+echo "Total number of arguments: $#"
+
+# Display the first two arguments (if they exist)
+echo "First argument: $1"
+echo "Second argument: $2"
+# Display all the arguments
+echo "All arguments: $@"
