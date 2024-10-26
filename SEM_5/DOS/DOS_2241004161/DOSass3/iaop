@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Prompt user for two integers
+read -p "Enter the first integer: " num1
+read -p "Enter the second integer: " num2
+
+# Perform arithmetic operations
+sum=$((num1 + num2))
+diff=$((num1 - num2))
+prod=$((num1 * num2))
+
+# Check for division by zero
+if [ "$num2" -ne 0 ]; then
+    div=$((num1 / num2))
+    echo "Division: $div"
+else
+    echo "Division: Cannot divide by zero"
+fi
+
+# Output the results
+echo "Sum: $sum"
+echo "Difference: $diff"
+echo "Product: $prod"

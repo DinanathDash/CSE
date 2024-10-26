@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Prompt user for two floating-point numbers
+read -p "Enter the first number: " num1
+read -p "Enter the second number: " num2
+
+# Perform arithmetic operations using `bc` for floating-point precision
+sum=$(echo "$num1 + $num2" | bc)
+diff=$(echo "$num1 - $num2" | bc)
+prod=$(echo "$num1 * $num2" | bc)
+
+# Check for division by zero
+if (( $(echo "$num2 != 0" | bc -l) )); then
+    div=$(echo "scale=2; $num1 / $num2" | bc)
+    echo "Division: $div"
+else
+    echo "Division: Cannot divide by zero"
+fi
+
+# Output the results
+echo "Sum: $sum"
+echo "Difference: $diff"
+echo "Product: $prod"

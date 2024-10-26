@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Prompt user for Ramesh's basic salary
+read -p "Enter Ramesh's basic salary: " basic_salary
+
+# Calculate dearness allowance (40% of basic salary)
+da=$(echo "$basic_salary * 0.4" | bc)
+
+# Calculate house rent allowance (20% of basic salary)
+hra=$(echo "$basic_salary * 0.2" | bc)
+
+# Calculate gross salary
+gross_salary=$(echo "$basic_salary + $da + $hra" | bc)
+
+# Output the results
+echo "Dearness Allowance (40%): $da"
+echo "House Rent Allowance (20%): $hra"
+echo "Gross Salary: $gross_salary"

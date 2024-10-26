@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Prompt the user to enter a day
+read -p "Enter a day (e.g., Monday, Tuesday): " day
+
+# Convert the day to lowercase for easier comparison
+day_lower=$(echo "$day" | tr '[:upper:]' '[:lower:]')
+
+# Display class time and room information based on the day entered
+case "$day_lower" in
+    "monday")
+        echo "DOS class time: 10:00 AM - Room 101"
+        ;;
+    "wednesday")
+        echo "DOS class time: 2:00 PM - Room 202"
+        ;;
+    "friday")
+        echo "DOS class time: 11:30 AM - Room 303"
+        ;;
+    "sunday")
+        echo "Holiday"
+        ;;
+    *)
+        echo "No class on $day"
+        ;;
+esac
