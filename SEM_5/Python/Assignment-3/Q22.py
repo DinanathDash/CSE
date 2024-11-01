@@ -1,8 +1,8 @@
-def arithmetic_progression(first_term, common_difference):
+def ap(first_term, com_diff):
     for i in range(10):
-        current_term = first_term + i * common_difference
-        print(current_term, end=" ")
+        curr_term = first_term + i * com_diff
+        print(curr_term, end=" ")
 first_term = int(input("Enter the first term of the AP: "))
-common_difference = int(input("Enter the common difference: "))
+com_diff = int(input("Enter the common difference: "))
 print("The first 10 terms of the arithmetic progression are:")
-arithmetic_progression(first_term, common_difference)
+ap(first_term, com_diff)

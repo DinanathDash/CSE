@@ -6,6 +6,6 @@ def shift_string(s):
         else:
             shifted_string += chr(ord(char) + 1)
     return shifted_string
-input_string = input("Enter a string of lowercase alphabets: ")
-result = shift_string(input_string)
+s = input("Enter a string of lowercase alphabets: ")
+result = shift_string(s)
 print(f"Shifted string: {result}")

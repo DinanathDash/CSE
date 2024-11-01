@@ -1,11 +1,11 @@
-def calculator(num1, num2, operation):
-    if operation == '+':
+def calculator(num1, num2, op):
+    if op == '+':
         return num1 + num2
-    elif operation == '-':
+    elif op == '-':
         return num1 - num2
-    elif operation == '*':
+    elif op == '*':
         return num1 * num2
-    elif operation == '/':
+    elif op == '/':
         if num2 == 0:
             return "Error: Division by zero is not allowed."
         else:
@@ -15,6 +15,5 @@ def calculator(num1, num2, operation):
 num1 = float(input("Enter the first number: "))
 num2 = float(input("Enter the second number: "))
 operation = input("Enter the operation (+, -, *, /): ")
-
 result = calculator(num1, num2, operation)
 print(f"The result is: {result}")

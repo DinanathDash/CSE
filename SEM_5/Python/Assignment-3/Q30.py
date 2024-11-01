@@ -1,7 +1,7 @@
-def product_of_digits(n):
+def pod(n):
     product = 1
     for digit in str(n):
         product *= int(digit)
     return product
 num = int(input("Enter a number: "))
-print(f"The product of the digits of {num} is: {product_of_digits(num)}")
+print(f"The product of the digits of {num} is: {pod(num)}")

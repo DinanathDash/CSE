@@ -5,10 +5,7 @@ def is_prime(num):
         if num % i == 0:
             return False
     return True
-
-def print_prime_numbers():
-    print("Prime numbers between 1 and 100 are:")
-    for num in range(1, 101):
-        if is_prime(num):
-            print(num, end=" ")
-print_prime_numbers()
+print("Prime numbers between 1 and 100 are:")
+for num in range(1, 101):
+    if is_prime(num):
+        print(num, end=" ")

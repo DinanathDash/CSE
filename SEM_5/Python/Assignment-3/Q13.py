@@ -9,7 +9,6 @@ def roman_to_integer(roman):
             total -= current_value
         else:
             total += current_value
-
     return total
 roman_numeral = input("Enter a Roman numeral: ")
 integer_value = roman_to_integer(roman_numeral)

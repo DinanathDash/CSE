@@ -5,6 +5,6 @@ def vowel_indices(s):
         if s[i] in vowels:
             indices.append(i)
     return indices
-input_string = input("Enter a string: ")
-vowel_positions = vowel_indices(input_string)
-print(f"The indices of vowels in the string are: {vowel_positions}")
+input_str = input("Enter a string: ")
+vowel_pos = vowel_indices(input_str)
+print(f"The indices of vowels in the string are: {vowel_pos}")

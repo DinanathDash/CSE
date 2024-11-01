@@ -1,14 +1,12 @@
-def find_top_three_digits(num):
-    digits = [int(digit) for digit in str(num)]
-    sorted_digits = sorted(digits, reverse=True)
-    top_three = []
-    for digit in sorted_digits:
-        if digit not in top_three:
-            top_three.append(digit)
-        if len(top_three) == 3:
+def topthree(num):
+    d = [int(digit) for digit in str(num)]
+    sort = sorted(d, reverse=True)
+    a = []
+    for digit in sort:
+        if digit not in a:
+            a.append(digit)
+        if len(a) == 3:
             break
-    
-    return top_three
+    return a
 num = int(input("Enter a number: "))
-result = find_top_three_digits(num)
-print("Output:", result)
+print("Output:", topthree(num))

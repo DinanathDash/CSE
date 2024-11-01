@@ -8,7 +8,6 @@ def fibonacci(n):
     a, b = 0, 1
     for _ in range(3, n + 1):
         a, b = b, a + b
-    
     return b
 n = int(input("Enter the position of the Fibonacci sequence: "))
 nth_fib = fibonacci(n)
