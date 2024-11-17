@@ -4,6 +4,7 @@ frequency = {rating: r.count(rating) for rating in range(1, 6)}
 print("Frequency of each rating:")
 for rating, count in frequency.items():
     print(f"Rating {rating}: {count}")
+
 value_range = max(r) - min(r)
 mean = st.mean(r)
 median = st.median(r)
