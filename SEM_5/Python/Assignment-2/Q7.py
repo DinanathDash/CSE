@@ -6,6 +6,7 @@ for number in range(2, limit):
         if number % i == 0:
             is_prime = False
             break
+        
     if is_prime:
         prime_sum += number
 print(f"The sum of all prime numbers less than {limit} is {prime_sum}.")

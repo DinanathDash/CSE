@@ -1,10 +1,5 @@
-user_input = input("Enter an integer: ")
-try:
-    number = int(user_input)
-except ValueError:
-    print("Invalid input")
-    exit()
-match number % 5:
+n = int(input("Enter an integer: "))
+match n % 5:
     case 0:
         print("The remainder is 0.")
     case 1:
