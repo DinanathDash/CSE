@@ -14,7 +14,7 @@ def days_in_month(month):
         'december': 31
     }
     month = month.lower()
-    return month_days.get(month, "Invalid month name")
+    return month_days.get(month)
 month_name = input("Enter the name of the month: ")
 days = days_in_month(month_name)
 print(f"No. of days: {days} days")
