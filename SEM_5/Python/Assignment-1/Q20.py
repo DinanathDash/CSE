@@ -1,5 +1,4 @@
 import math
-
 a = int(input("Enter the first integer (a): "))
 b = int(input("Enter the second integer (b): "))
 

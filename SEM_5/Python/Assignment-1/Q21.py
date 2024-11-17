@@ -1,7 +1,5 @@
 import math
-
 height = float(input("Enter the height in meters: "))
-
 initial_speed = 0
 acceleration = 9.8
 
