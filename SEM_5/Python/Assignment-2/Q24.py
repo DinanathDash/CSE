@@ -1,16 +1,9 @@
-num = input("Enter an integer: ")
-digit_words = ["ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
-
-appeared_digits = set()
-
-for char in num:
-    if char.isdigit():
-        appeared_digits.add(char)
-
-sorted_digits = sorted(appeared_digits)
-
-output = ""
-for digit in sorted_digits:
-    output += digit_words[int(digit)]
-
-print(output)
+digit_to_word = {
+    '0': 'ZERO', '1': 'ONE', '2': 'TWO', '3': 'THREE', '4': 'FOUR', '5': 'FIVE', '6': 'SIX', '7': 'SEVEN', '8': 'EIGHT', '9': 'NINE'
+}
+n = input("Enter an integer: ")
+result = ""
+for digit in n:
+    if digit in digit_to_word:
+        result += digit_to_word[digit]
+print("The digits that have appeared are:", result)
