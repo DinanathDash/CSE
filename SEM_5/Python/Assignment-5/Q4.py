@@ -3,5 +3,4 @@ e2f = {
     "cat": "chat",
     "walrus": "morse"
 }
-print("English-to-French Dictionary:")
-print(e2f)
+print("English-to-French Dictionary:", e2f)
