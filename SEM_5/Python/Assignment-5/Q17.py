@@ -25,17 +25,13 @@ print(f"a) A >= B: {A >= B}")
 # b) Combining the sets using mathematical set operators
 
 # Union
-union_result = A | B
-print(f"b) A | B (Union): {union_result}")
+print(f"b) A | B (Union): {A | B}")
 
 # Intersection
-intersection_result = A & B
-print(f"b) A & B (Intersection): {intersection_result}")
+print(f"b) A & B (Intersection): {A & B}")
 
 # Difference (A - B)
-difference_result = A - B
-print(f"b) A - B (Difference): {difference_result}")
+print(f"b) A - B (Difference): {A - B}")
 
 # Symmetric Difference (A ^ B)
-symmetric_difference_result = A ^ B
-print(f"b) A ^ B (Symmetric Difference): {symmetric_difference_result}")
+print(f"b) A ^ B (Symmetric Difference): {A ^ B}")
