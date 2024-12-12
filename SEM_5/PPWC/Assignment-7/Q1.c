@@ -5,3 +5,5 @@ struct oswcourse {
     int *marks();
     int teacher();
 } o1, o2;
+
+//Output - marks() and teacher() are invalid as structure members.

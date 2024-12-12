@@ -7,3 +7,5 @@ struct stud {
     struct date *d;
     int (*)fun(int, int);
 };
+
+//Output - Invalid Member: int (*)fun(int, int);
