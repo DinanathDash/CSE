@@ -15,3 +15,4 @@ def inverse1():
         print(f"Inverse: {inverse}")
     finally:
         print("Function inverse completed")
+inverse1() 
