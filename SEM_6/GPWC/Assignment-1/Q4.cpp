@@ -8,3 +8,4 @@ int main() {
 }
 
 //Output - 0
+//x[100] is a global array, which is automatically initialised as 0.

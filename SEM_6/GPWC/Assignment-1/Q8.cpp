@@ -14,3 +14,4 @@ int main() {
 }
 
 //Output - My destructor
+//The destructor ~MyClass() is called twice: once explicitly (obj ~MyClass()) and once when obj goes out of scope.

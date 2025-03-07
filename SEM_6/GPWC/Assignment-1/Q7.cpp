@@ -19,3 +19,4 @@ int main() {
 }
 
 //Output - A Main ~A
+//func() is called twice, but static A obj is created only once.

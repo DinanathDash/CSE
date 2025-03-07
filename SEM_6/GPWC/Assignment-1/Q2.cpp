@@ -14,3 +14,4 @@ int main () {
 }
 
 //Output - 2
+//myfun(int i, int &k)  takes one normal parameter (i) and one reference parameter (k).

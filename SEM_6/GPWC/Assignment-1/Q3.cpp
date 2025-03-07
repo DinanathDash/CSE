@@ -17,3 +17,5 @@ int main() {
 }
 
 //Output - 1
+//::x refers to the global variable x, which is 1.
+//the local x variables (2 & 3) do  not affect ::x.

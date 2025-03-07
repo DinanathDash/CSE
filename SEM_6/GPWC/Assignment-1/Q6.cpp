@@ -14,3 +14,4 @@ int main() {
 }
 
 //Output - Value: 10
+//The constructor has a default parameter x=10.

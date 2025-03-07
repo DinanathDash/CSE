@@ -14,3 +14,4 @@ int main () {
 }
 
 //Output - 1 0
+//Function swap uses referenced parameters (int &a, int &b) meaning changes inside the function affect the original values.

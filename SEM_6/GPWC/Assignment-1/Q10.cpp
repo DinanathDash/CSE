@@ -14,3 +14,4 @@ int main() {
 }
 
 //Output - Constructor called
+//new Test() calls the constructor.

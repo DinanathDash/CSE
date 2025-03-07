@@ -13,3 +13,4 @@ int main() {
 }
 
 //Output - 64
+//Cube modifies y (passed by reference to y^3), i.e 4^3=64.
