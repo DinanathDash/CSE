@@ -63,7 +63,6 @@ class Dealer(Player):
     def should_hit(self):
         return self.hand_value() <= 16
 
-# Blackjack Game Class
 class BlackjackGame:
     def __init__(self, player_names):
         self.deck = Deck()
