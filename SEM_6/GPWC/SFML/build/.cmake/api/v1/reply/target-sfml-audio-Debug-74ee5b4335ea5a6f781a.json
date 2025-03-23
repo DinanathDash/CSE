@@ -1,0 +1,557 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/sfml-build/lib/libsfml-audio-d.dylib"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"sfml_add_library",
+			"install",
+			"target_link_libraries",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"build/_deps/sfml-src/cmake/Macros.cmake",
+			"build/_deps/sfml-src/src/SFML/Audio/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 80,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 61,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 197,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 84,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 93,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 204,
+				"parent" : 1
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 87,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fPIC -F/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/extlibs/libs-osx/Frameworks "
+				},
+				{
+					"fragment" : "-fvisibility=hidden"
+				},
+				{
+					"fragment" : " -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wdouble-promotion -Wformat=2 -Wnull-dereference -Wold-style-cast -Wpedantic -Wno-unknown-warning-option"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "FLAC__NO_DLL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "OV_EXCLUDE_STATIC_CALLBACKS"
+				},
+				{
+					"define" : "SFML_AUDIO_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 6,
+					"path" : "/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/include"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/src"
+				},
+				{
+					"backtrace" : 7,
+					"isSystem" : true,
+					"path" : "/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/extlibs/headers/minimp3"
+				},
+				{
+					"backtrace" : 4,
+					"isSystem" : true,
+					"path" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/OpenAL.framework/Headers"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/extlibs/headers"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				4,
+				7,
+				9,
+				11,
+				13,
+				15,
+				17,
+				19,
+				21,
+				23,
+				25,
+				27,
+				32,
+				34,
+				36,
+				38,
+				41,
+				43,
+				45
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "sfml-system::@8cb1db2982443611e568"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "SFML"
+	},
+	"id" : "sfml-audio::@a153e5727587c53fce98",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 3,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-F/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/extlibs/libs-osx/Frameworks",
+				"role" : "frameworkPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-src/extlibs/libs-osx/Frameworks -Wl,-rpath,/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/_deps/sfml-build/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "../../../../sfml-src/extlibs/libs-osx/Frameworks/OpenAL.framework/OpenAL",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../../lib/libsfml-system-d.2.6.2.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework vorbisenc",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework vorbisfile",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework vorbis",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework ogg",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework FLAC",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "sfml-audio",
+	"nameOnDisk" : "libsfml-audio-d.dylib",
+	"paths" : 
+	{
+		"build" : "_deps/sfml-build/src/SFML/Audio",
+		"source" : "build/_deps/sfml-src/src/SFML/Audio"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26
+			]
+		},
+		{
+			"name" : "codecs",
+			"sourceIndexes" : 
+			[
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				44,
+				45
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/ALCheck.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/ALCheck.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/AlResource.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/AlResource.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/AudioDevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/AudioDevice.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/Export.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/Listener.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/Listener.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/Music.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/Music.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/Sound.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/Sound.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundBuffer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundBuffer.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundBufferRecorder.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundBufferRecorder.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/InputSoundFile.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/InputSoundFile.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/OutputSoundFile.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/OutputSoundFile.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundRecorder.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundRecorder.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundSource.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundSource.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundStream.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundStream.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileFactory.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundFileFactory.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundFileFactory.inl",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundFileReader.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderFlac.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderFlac.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderMp3.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderMp3.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderOgg.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderOgg.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderWav.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileReaderWav.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/include/SFML/Audio/SoundFileWriter.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterFlac.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterFlac.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterOgg.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterOgg.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterWav.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/sfml-src/src/SFML/Audio/SoundFileWriterWav.cpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}
