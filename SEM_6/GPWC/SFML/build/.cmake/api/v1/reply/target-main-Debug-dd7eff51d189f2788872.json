@@ -104,19 +104,19 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "sfml-graphics::@98af38147d5fa7e70f61"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "sfml-audio::@a153e5727587c53fce98"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "sfml-system::@8cb1db2982443611e568"
 		},
 		{
 			"backtrace" : 2,
 			"id" : "sfml-window::@5730451e331e3690ae65"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "sfml-graphics::@98af38147d5fa7e70f61"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "sfml-audio::@a153e5727587c53fce98"
 		}
 	],
 	"id" : "main::@6890427a1f51a3e7e1df",

@@ -234,10 +234,10 @@ _deps/sfml-build/src/SFML/Window/clean: _deps/sfml-build/src/SFML/Window/CMakeFi
 # Target rules for target CMakeFiles/main.dir
 
 # All Build rule for target.
-CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
-CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/all
 CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
 CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
+CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
+CMakeFiles/main.dir/all: _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/build/CMakeFiles --progress-num=1 "Built target main"
