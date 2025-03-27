@@ -96,6 +96,7 @@ main_EXTERNAL_OBJECTS =
 bin/main: CMakeFiles/main.dir/main.cpp.o
 bin/main: CMakeFiles/main.dir/build.make
 bin/main: _deps/sfml-build/lib/libsfml-graphics-d.2.6.2.dylib
+bin/main: _deps/sfml-build/lib/libsfml-audio-d.2.6.2.dylib
 bin/main: _deps/sfml-build/lib/libsfml-window-d.2.6.2.dylib
 bin/main: _deps/sfml-build/lib/libsfml-system-d.2.6.2.dylib
 bin/main: CMakeFiles/main.dir/link.txt

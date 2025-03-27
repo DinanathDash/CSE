@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <sstream>
+#include <iostream>
 using namespace sf;
 
 void updateBranches(int seed);
@@ -11,7 +13,6 @@ enum class side {
 side branchPosition[NUM_BRANCHES];
 
 int main() {
-
     VideoMode vm(1920, 1080);
     RenderWindow window(vm, "Timber", Style::Fullscreen);
     View view(FloatRect(0, 0, 1920, 1080));
@@ -105,20 +106,20 @@ int main() {
 
     bool acceptInput = false;
 
-    // SoundBuffer chopBuffer;
-    // chopBuffer.loadFromFile("sound/chop.wav");
-    // Sound chop;
-    // chop.setBuffer(chopBuffer);
+    SoundBuffer chopBuffer;
+    chopBuffer.loadFromFile("/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/Timberman/sound/chop.wav");
+    Sound chop;
+    chop.setBuffer(chopBuffer);
 
-    // SoundBuffer deathBuffer;
-    // deathBuffer.loadFromFile("sound/death.wav");
-    // Sound death;
-    // death.setBuffer(deathBuffer);
+    SoundBuffer deathBuffer;
+    deathBuffer.loadFromFile("/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/Timberman/sound/death.wav");
+    Sound death;
+    death.setBuffer(deathBuffer);
 
-    // SoundBuffer ootBuffer;
-    // ootBuffer.loadFromFile("sound/out_of_time.wav");
-    // Sound outOfTime;
-    // outOfTime.setBuffer(ootBuffer);
+    SoundBuffer ootBuffer;
+    ootBuffer.loadFromFile("/Users/dinanathdash/Documents/CSE/SEM_6/GPWC/SFML/Timberman/sound/out_of_time.wav");
+    Sound outOfTime;
+    outOfTime.setBuffer(ootBuffer);
 
     Clock clock;
     //-------------- Timer code --------------
@@ -203,7 +204,7 @@ int main() {
                 logSpeedX = -5000;
                 logActive = true;
                 acceptInput = false;
-                // chop.play();
+                chop.play();
             }
             if (Keyboard::isKeyPressed(Keyboard::Left)) {
                 playerSide = side::LEFT;
@@ -216,7 +217,7 @@ int main() {
                 logSpeedX = 5000;
                 logActive = true;
                 acceptInput = false;
-                // chop.play();
+                chop.play();
             }
         }
 
@@ -233,7 +234,7 @@ int main() {
                 FloatRect textRect = messageText.getLocalBounds();
                 messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
                 messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
-                // outOfTime.play();
+                outOfTime.play();
             }
 
             // set up the bee
@@ -250,8 +251,7 @@ int main() {
             // move the bee
             else {
                 spriteBee.setPosition(spriteBee.getPosition().x - (beeSpeed * dt.asSeconds()), spriteBee.getPosition().y);
-                if (spriteBee.getPosition().x < -100)
-                {
+                if (spriteBee.getPosition().x < -100){
                     beeActive = false;
                 }
             }
@@ -265,8 +265,7 @@ int main() {
             }
             else {
                 spriteCloud1.move(cloud1Speed * dt.asSeconds(), 0); // Move cloud to the right
-                if (spriteCloud1.getPosition().x > 1920)
-                { // Reset cloud when it goes off-screen
+                if (spriteCloud1.getPosition().x > 1920){ // Reset cloud when it goes off-screen
                     cloud1Active = false;
                 }
             }
@@ -278,8 +277,7 @@ int main() {
             }
             else {
                 spriteCloud2.move(cloud2Speed * dt.asSeconds(), 0);
-                if (spriteCloud2.getPosition().x > 1920)
-                {
+                if (spriteCloud2.getPosition().x > 1920){
                     cloud2Active = false;
                 }
             }
@@ -291,8 +289,7 @@ int main() {
             }
             else {
                 spriteCloud3.move(cloud3Speed * dt.asSeconds(), 0);
-                if (spriteCloud3.getPosition().x > 1920)
-                {
+                if (spriteCloud3.getPosition().x > 1920){
                     cloud3Active = false;
                 }
             }
@@ -304,8 +301,7 @@ int main() {
             }
             else {
                 spriteCloud4.move(cloud4Speed * dt.asSeconds(), 0);
-                if (spriteCloud4.getPosition().x > 1920)
-                {
+                if (spriteCloud4.getPosition().x > 1920){
                     cloud4Active = false;
                 }
             }
@@ -330,8 +326,7 @@ int main() {
             }
             if (logActive) {
                 spriteLog.setPosition(spriteLog.getPosition().x + (logSpeedX * dt.asSeconds()), spriteLog.getPosition().y + (logSpeedY * dt.asSeconds()));
-                if (spriteLog.getPosition().x < -100 || spriteLog.getPosition().x > 2000)
-                {
+                if (spriteLog.getPosition().x < -100 || spriteLog.getPosition().x > 2000){
                     logActive = false;
                     spriteLog.setPosition(810, 720);
                 }
@@ -345,7 +340,7 @@ int main() {
                 FloatRect textRect = messageText.getLocalBounds();
                 messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
                 messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
-                // death.play();
+                death.play();
             }
         }
 

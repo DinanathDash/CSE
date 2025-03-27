@@ -11,4 +11,5 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(main main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
+target_link_libraries(main PRIVATE sfml-audio)
 target_compile_features(main PRIVATE cxx_std_17)
