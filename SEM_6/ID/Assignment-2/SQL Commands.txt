@@ -1,0 +1,79 @@
+-- (a) Display structure of all tables from Assignment 1
+SHOW TABLES;
+DESCRIBE faculty_info;
+DESCRIBE course;
+DESCRIBE department;
+DESCRIBE prerequired;
+
+-- (b) Display contents of all tables from Assignment 1
+SELECT * FROM faculty_info;
+SELECT * FROM course;
+SELECT * FROM department;
+SELECT * FROM prerequired;
+
+-- (c) Display name and department of each instructor
+SELECT name, department FROM faculty_info;
+
+-- (d) Display name and salary of Comp Sci. instructors
+SELECT name, salary FROM faculty_info WHERE department = 'Comp. Sci';
+
+-- (e) Display instructors from Physics department earning less than 90000
+SELECT * FROM faculty_info WHERE department = 'Physics' AND salary < 90000;
+
+-- (f) Display names of instructors not in Comp Sci Department
+SELECT name FROM faculty_info WHERE department <> 'Comp. Sci';
+
+-- (g) Display distinct department names from Faculty_Info table
+SELECT DISTINCT department FROM faculty_info;
+
+-- (h) Display Course IDs taught in Spring semester of 2009
+SELECT course_id FROM course WHERE semester = 'Spring' AND year = 2009;
+
+-- (i) Display course titles from Comp Sci Department not having 3 credits
+SELECT title FROM course WHERE department = 'Comp. Sci' AND credits <> 3;
+
+-- (j) Display all columns of Course table sorted by department names in descending order
+SELECT * FROM course ORDER BY department DESC;
+
+-- (k) Add a date_of_join column to Faculty_Info table
+ALTER TABLE faculty_info ADD date_of_join DATE;
+
+-- (l) Insert date values to existing rows in Faculty_Info table
+UPDATE faculty_info SET date_of_join = '2010-01-01' WHERE id = 10101;
+UPDATE faculty_info SET date_of_join = '2011-03-15' WHERE id = 12121;
+UPDATE faculty_info SET date_of_join = '2012-06-20' WHERE id = 15151;
+UPDATE faculty_info SET date_of_join = '2009-09-10' WHERE id = 22222;
+UPDATE faculty_info SET date_of_join = '2013-11-05' WHERE id = 32343;
+UPDATE faculty_info SET date_of_join = '2014-07-23' WHERE id = 33456;
+UPDATE faculty_info SET date_of_join = '2015-04-17' WHERE id = 45565;
+UPDATE faculty_info SET date_of_join = '2016-08-12' WHERE id = 58583;
+UPDATE faculty_info SET date_of_join = '2017-02-28' WHERE id = 76543;
+UPDATE faculty_info SET date_of_join = '2018-12-01' WHERE id = 76766;
+UPDATE faculty_info SET date_of_join = '2019-10-20' WHERE id = 83821;
+UPDATE faculty_info SET date_of_join = '2020-05-14' WHERE id = 98345;
+
+-- (m) Change dept_name to department in all tables
+ALTER TABLE faculty_info CHANGE dept_name department VARCHAR(20);
+ALTER TABLE course CHANGE dept_name department VARCHAR(20);
+ALTER TABLE department CHANGE dept_name department VARCHAR(20);
+
+-- (n) Rename "Prereq" table to "Prerequired"
+RENAME TABLE prereq TO prerequired;
+
+-- (o) Change course_id column name to sub_code
+ALTER TABLE course CHANGE course_id sub_code VARCHAR(10);
+
+-- (p) Change data type of name to VARCHAR(50)
+ALTER TABLE faculty_info MODIFY name VARCHAR(50);
+
+-- (q) Rename "Instructor" table to "Faculty_Info"
+RENAME TABLE instructor TO faculty_info;
+
+-- (r) Change column size of course_id in Course table from 10 to 8
+ALTER TABLE course MODIFY sub_code VARCHAR(8);
+
+-- (s) Delete content of Prerequired table along with its description
+DROP TABLE prerequired;
+
+-- (t) Rename "Building" column in Department table to "Builder"
+ALTER TABLE department CHANGE building builder VARCHAR(20);

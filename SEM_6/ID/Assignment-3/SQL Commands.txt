@@ -1,0 +1,203 @@
+-- 1. SQL Expressions using Suitable SQL Operators
+
+-- (a) display course_ids, titles, and credits for specified departments
+select sub_code as course_id, title, credits 
+from course 
+where department in ('physics', 'music', 'finance', 'biology');
+
+-- (b) display instructors with name starting with 'k' and salary > 65000
+select * 
+from faculty_info 
+where name like 'k%' and salary > 65000;
+
+-- (c) display name, department, gross salary, and net salary
+select name, department, 
+       salary + (salary * 0.105) + (salary * 0.20) as gross_salary,
+       (salary + (salary * 0.105) + (salary * 0.20)) - (salary * 0.30) as net_salary
+from faculty_info;
+
+-- (d) display instructors with salary between 60000 and 80000
+select * 
+from faculty_info 
+where salary between 60000 and 80000;
+
+-- (e) display instructors with second letter 'r' in their name
+select * 
+from faculty_info 
+where name like '_r%';
+
+-- (f) display comp.sci. instructors in descending order of salary
+select name 
+from faculty_info 
+where department = 'comp. sci.' 
+order by salary desc;
+
+-- (g) update all instructor records with a 15% salary hike
+update faculty_info
+set salary = salary * 1.15;
+
+-- (h) update comp.sci. instructors with salary < 70000 by 3%
+update faculty 
+set salary = salary * 1.03 
+where department = 'comp. sci.' and salary < 70000;
+
+-- (i) display annual salary of each instructor
+select name, salary * 12 as annual_salary 
+from faculty_info;
+
+-- (j) update course title 'game design' to 'game theory'
+update course 
+set title = 'game theory' 
+where title = 'game design';
+
+-- (k) delete instructor records of the history department
+delete from faculty_info 
+where department = 'history';
+
+-- (l) delete courses with course_id starting with 'bio'
+delete from course 
+where sub_code like 'bio%';
+
+-- 2. SQL Expressions using Suitable SQL Aggregate Functions
+
+-- (a) display the avg. salary of instructors of physics department
+select avg(salary) as avg_salary 
+from faculty_info 
+where department = 'physics';
+
+-- (b) display the dept_name and average salary paid to instructors of each department
+select department, avg(salary) as avg_salary 
+from faculty_info 
+group by department;
+
+-- (c) display the id, name & department of the instructor drawing the highest salary
+select id, name, department 
+from faculty_info 
+where salary = (select max(salary) from faculty);
+
+-- (d) display the number of instructors available in comp.sci. department
+select count(*) as instructor_count 
+from faculty_info
+where department = 'comp.sci.';
+
+-- (e) display the total credits of all courses offered in comp.sci. department
+select sum(credits) as total_credits 
+from course 
+where department = 'comp. sci.';
+
+-- (f) display the number of instructors and total salary drawn by physics and comp.sci. departments
+select department, count(*) as instructor_count, sum(salary) as total_salary 
+from faculty_info
+where department in ('physics', 'comp. sci.') 
+group by department;
+
+-- (g) display the total credits of comp.sci. and biology departments from course table
+select department, sum(credits) as total_credits 
+from course 
+where department in ('comp. sci.', 'biology') 
+group by department;
+
+-- (h) display building wise total budget values
+select builder, sum(budget) as total_budget 
+from department 
+group by builder;
+
+-- (i) display the number of instructors of each department
+select department, count(*) as instructor_count 
+from faculty_info 
+group by department;
+
+-- (j) display the number of instructors of each department sorted in high to low
+select department, count(*) as instructor_count 
+from faculty_info 
+group by department 
+order by instructor_count desc;
+
+-- (k) display the number of courses offered semester wise
+select semester, count(*) as course_count 
+from teaches 
+group by semester;
+
+-- (l) display the name of departments having number of instructors less than 2
+select department 
+from faculty_info 
+group by department 
+having count(*) < 2;
+
+-- (m) list the number of instructors of each department having 2 or more instructors except finance department, sorted in high to low order
+select department, count(*) as instructor_count 
+from faculty_info 
+where department != 'finance' 
+group by department 
+having count(*) >= 2 
+order by instructor_count desc;
+
+-- (n) display the dept_name that has paid total salary more than 50000
+select department 
+from faculty_info
+group by department 
+having sum(salary) > 50000;
+
+-- (o) display the total budget for the building built by watson
+select sum(budget) as total_budget 
+from department 
+where builder = 'watson';
+
+-- (p) display the highest salary of the instructor of comp.sci. department
+select max(salary) as highest_salary 
+from faculty_info 
+where department = 'comp.sci.';
+
+-- 3. SQL Expressions using Suitable SQL Scalar Functions
+
+-- (a) display your name with first letter being capital, where the entered name is in lower case
+select concat(upper(left('dinanath', 1)), lower(substring('dinanath', 2))) as name_with_capital;
+
+-- (b) display 2nd-6th characters of your name
+select substring('dinanath', 2, 5) as sub_name;
+
+-- (c) find length of your full university name
+select length('Siksha O Anusandhan') as university_name_length;
+
+-- (d) display all the instructor names with its first letter in upper case
+select concat(upper(left(name, 1)), lower(substring(name, 2))) as formatted_name 
+from faculty_info;
+
+-- (e) list the department name of each instructor as a three letter code
+select upper(left(department, 3)) as dept_code 
+from faculty_info;
+
+-- (f) display the month of the joining of each instructor
+select monthname(date_of_join) as joining_month 
+from faculty_info;
+
+-- (g) display the date of joining of each instructor in dd/mm/yy format
+select date_format(date_of_join, '%d/%m/%y') as formatted_join_date 
+from faculty_info;
+
+-- (h) display the experience of each instructor in terms of months
+select timestampdiff(month, date_of_join, curdate()) as experience_in_months 
+from faculty_info;
+
+-- (i) display the experience of each instructor in terms of years and months
+select concat(timestampdiff(year, date_of_join, curdate()), ' years, ', mod(timestampdiff(month, date_of_join, curdate()), 12), ' months') as experience 
+from faculty_info;
+
+-- (j) display the day of joining of each instructor
+select dayname(date_of_join) as joining_day 
+from faculty_info;
+
+-- (k) display the date corresponding to 15 days after today's date
+select curdate() + interval 15 day as future_date;
+
+-- (l) display the value 94204.27348 truncated up to 2 digits after decimal point
+select truncate(94204.27348, 2) as truncated_value;
+
+-- (m) display the value of the expression 5 + 89
+select 5 + 89 as result;
+
+-- (n) find out the square root of 6464312
+select sqrt(6464312) as square_root;
+
+-- (o) display the string “hello iter” in lower case with a column heading lower case
+select lower('HELLO ITER') as lower_case;
