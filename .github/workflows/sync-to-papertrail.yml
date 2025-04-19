@@ -1,0 +1,29 @@
+name: Sync Assignments to PaperTrail
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CSE/**'
+
+jobs:
+  sync-assignments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout CSE Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-email@example.com'
+
+      - name: Clone PaperTrail Repository
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/dinanathdash/paper-trail.git
+          cp -r CSE/SEM_* paper-trail/public/assignments/
+          cd paper-trail
+          git add .
+          git commit -m "Sync assignments from CSE"
+          git push
