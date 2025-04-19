@@ -1,0 +1,45 @@
+
+name: Sync Assignment Files
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CSE/**'
+
+jobs:
+  sync-assignments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Assignment Files
+        run: |
+          mkdir -p public/assignments
+          # Copy semester folders
+          for semester in CSE/SEM_*; do
+            semester_name=$(basename "$semester")
+            semester_target="public/assignments/${semester_name}"
+            mkdir -p "$semester_target"
+            
+            # Copy subject folders within each semester
+            for subject in "$semester"/*; do
+              subject_name=$(basename "$subject")
+              subject_target="${semester_target}/${subject_name}"
+              mkdir -p "$subject_target"
+              
+              # Copy all assignment files
+              cp -r "$subject"/* "$subject_target"
+            done
+          done
+
+      - name: Deploy to Production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npx vercel --token $VERCEL_TOKEN --prod
+
