@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#id1").click(function(){
+                $("#id1").css("color", "blue");
+            });
+            $("#id2").dblclick(function(){
+                $("#id2").css("color", "green");
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>This is a paragraph</p>
+    <p id="id1">Single click for blue</p>
+    <p id="id2">Double click for green</p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#signup-form").submit(function (event) {
+                event.preventDefault();
+                var username = $("#username").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                if (!username || !email || !password) {
+                    alert("Please fill in all fields.");
+                } else if (!isValidEmail(email)) {
+                    alert("Please enter a valid email address.");
+                } else {
+                    alert("Form submitted successfully!");
+                }
+            });
+
+            function isValidEmail(email) {
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                return emailPattern.test(email);
+            }
+        });
+    </script>
+</head>
+<body>
+    <form id="signup-form">
+        <h3>Sign Up</h3>
+        <div class="form-group">
+            <input type="text" id="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" placeholder=" Enter your password">
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>

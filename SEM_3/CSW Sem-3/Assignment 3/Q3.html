@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#id1").blur(function(){
+                $("p").html("Input field 1 has lost its focus.");
+            });
+            $("#id2").blur(function(){
+                $("p").html("Input field 2 has lost its focus.");
+            });
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" id="id1" value="Field1">
+        <input type="text" id="id2" value="Field2">
+        <p></p>
+    </form>
+</body>
+</html>

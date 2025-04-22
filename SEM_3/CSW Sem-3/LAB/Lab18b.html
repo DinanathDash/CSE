@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#check-button').click(function () {
+                var age = $('#age').val();
+                if (age >= 18) {
+                    $('#result').html('You are eligible to vote.');
+                    $('#age').css('border-color', 'limegreen');
+                } else {
+                    $('#result').html('You are not eligible to vote.');
+                    $('#age').css('border-color', 'crimson');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h3>Check Voting Eligibility</h3>
+    <form id="voting-form">
+        <label for="age">Enter your age:</label>
+        <input type="number" id="age" name="age">
+        <button type="button" id="check-button">Check Eligibility</button>
+    </form>
+    <div id="result"></div>
+</body>
+</html>

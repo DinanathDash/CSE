@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                alert($("#name").val());
+            });
+            $("#b2").click(function () {
+                alert($("#class").val());
+            });
+            $("#b3").click(function () {
+                alert($("p").html());
+            });
+            $("#b4").click(function () {
+                alert($("p").text());
+            });
+            $("#b5").click(function () {
+                alert($("a").attr("href"));
+            });
+            $("#b6").click(function () {
+                alert($("#a1").attr("href"));
+            });
+            $("#b7").click(function () {
+                $("#a1").attr("href", "https://mail.google.com");
+                alert("Changed attr: "+ $("#a1").attr("href"));
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>Name: <input type="text" id="name"></p>
+    <p>Class: <input type="text" id="class"></p>
+    <button id="b1">Get Name</button>
+    <button id="b2">Get Class</button>
+    <button id="b3">Get HTML</button>
+    <hr>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam explicabo labore accusamus perspiciatis laudantium corporis facilis. Nisi, consectetur reprehenderit eligendi voluptatum ducimus accusamus provident dolores? Iusto voluptatum nesciunt cumque rem!</p>
+    <button id="b4">Get Text</button>
+    <hr>
+    <a href="https://unsplash.com" target="_blank">Unsplash</a>
+    <button id="b5">Get Attribute</button>
+    <hr>
+    <a id="a1" href="https://google.com" target="_blank">Google</a>
+    <button id="b6">Get Attribute</button>
+    <button id="b7">Set Attribute</button>
+</body>
+
+</html>

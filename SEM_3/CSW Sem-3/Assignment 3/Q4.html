@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 200px;
+      background-color: whitesmoke;
+      border: 1px solid black;
+      padding: 20px;
+      display: none;
+    }
+  </style>
+  <script src="jquery-3.7.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#btn1").click(function () {
+        $("#popup").show();
+      });
+      $('#btn2').click(function () {
+        $("#popup").hide();
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <button id="btn1">Open Popup</button>
+  <div id="popup">
+    <h2>This is a Popup Box</h2>
+    <p>Here is some content for the popup box.</p>
+    <button id="btn2">Close Popup</button>
+  </div>
+</body>
+
+</html>

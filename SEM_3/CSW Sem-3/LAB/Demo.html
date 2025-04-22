@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .main * {
+            border: 2px solid black;
+            padding: 10px;
+            margin: 15px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function fun() {
+            $(document).ready(function () {
+                $("h4").parents().css({ "color": "blue", "border": "3px dashed blue" });
+            });
+        }  
+    </script>
+</head>
+
+<body class="main"> body
+    <div> div
+        <ul> ul
+            <h4> Heading h4
+                <p> Paragraph element </p>
+            </h4>
+        </ul>
+    </div>
+    <button onclick="fun()"> click me </button>
+</body>
+
+</html>

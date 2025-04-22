@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color:darkcyan ;
+        }
+        .navbar a {
+            float: left;
+            color: white;
+            padding: 15px 15px;
+            text-decoration: none;
+        }
+        .dropdown {
+            float: left;
+        }
+        .dropdown .dropbtn {
+            color: white;
+            padding: 15px 15px;
+            margin: 0;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color:darkgoldenrod ;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: whitesmoke;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color:gainsboro ;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        #l1{
+            font-size: small;
+            font-family: Arial;
+            color:coral ;
+        }
+        #l2{
+            font-size: medium;
+            font-family: 'Courier New';
+            color: crimson;
+        }
+        #l3{
+            font-size: larger;
+            font-family: 'Segoe UI';
+            color: fuchsia;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">News</a>
+        <div class="dropdown">
+            <div class="dropbtn">Dropdown</div>
+            <div class="dropdown-content">
+                <a id="l1" href="#">Link 1</a>
+                <a id="l2" href="#">Link 2</a>
+                <a id="l3" href="#">Link 3</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

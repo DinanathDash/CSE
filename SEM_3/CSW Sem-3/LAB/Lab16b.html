@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Form</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                alert("Name: " + $("#name").val() + "\nClass: " + $("#class").val() + "\nSection: " + $("#section").val());
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Simple Form</h1>
+    <form>
+        <input type="text" id="name" placeholder="Enter your name"><br>
+        <input type="text" id="class" placeholder="Enter your class"><br>
+        <input type="text" id="section" placeholder="Enter your section"><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

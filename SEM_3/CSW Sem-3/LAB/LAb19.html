@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $("#btn1").click(function () {
+            //     $("#p1").css({'background-color' : 'bisque'});
+            // });
+            // $("#btn2").click(function () {
+            //     $("#p1").css({'background-color' : 'dodgerblue'});
+            // });
+
+            // $("#btn3").click(function () {
+            //     $("#p3").toggleClass("main");
+            // });
+
+            // $("#btn4").click(function () {
+            //     $("#div5").parent().css({ "color": "blue", "border": "3px dashed dodgerblue"});
+            // })
+            // $("#btn5").click(function () {
+            //     $("#div4").parents().css({ "color": "limegreen", "border": "3px dashed lavender"});
+            // })
+            // $("#btn6").click(function () {
+            //     $("#div2").parentsUntil().css({ "color": "coral", "border": "3px dashed maroon"});
+            // }) 
+
+            $("#btn7").click(function () {
+                $("#div3").siblings().css({ "color": "blue", "border": "3px dashed dodgerblue"});
+            })
+        });
+    </script>
+    <style>
+        body * {
+            border: 2px solid black;
+            padding: 10px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <p id="p1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet necessitatibus totam sint doloribus temporibus itaque pariatur atque voluptatem. Hic, eligendi! Fuga molestias corporis ratione temporibus, fugiat cumque sed iure nihil.</p>
+    <button id="btn1">Add CSS_1</button>
+    <button id="btn2">Add CSS_2</button> -->
+
+    <!-- <p id="p3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, totam!</p>
+    <button id="btn3">Toggle Class</button> -->
+
+    body
+    <!-- <div id="div1"> great-great-grandparent
+        <div id="div2"> great-grandparent
+            <div id="div3">grandparent
+                <div id="div4">parent
+                    <div id="div5">
+                        div
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button id="btn4">Parent</button>
+    <button id="btn5">Parents</button>
+    <button id="btn6">ParentsUntil</button> -->
+
+    <div id="div1"> 
+        <div id="div2"> 
+            <div id="div3">
+                <div id="div4">
+                    <div id="div5">
+                        div
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="btn7">Siblings</button>
+</body>
+
+</html>

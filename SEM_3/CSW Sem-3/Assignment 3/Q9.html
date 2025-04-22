@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".choice").click(function () {
+                const playerChoice = $(this).attr("id");
+                const computerChoice = getRandomChoice();
+                const winner = getWinner(playerChoice, computerChoice);
+
+                displayResult(playerChoice, computerChoice, winner);
+            });
+
+            function getRandomChoice() {
+                const choices = ["rock", "paper", "scissors"];
+                const randomIndex = Math.floor(Math.random() * 3);
+                return choices[randomIndex];
+            }
+
+            function getWinner(player, computer) {
+                if (player === computer) return "draw";
+                if ((player === "rock" && computer === "scissors") || (player === "paper" && computer === "rock") || (player === "scissors" && computer === "paper")) {
+                    return "win";
+                } else {
+                    return "lose";
+                }
+            }
+
+            function displayResult(player, computer, winner) {
+                const resultText = `You chose ${player}. Computer chose ${computer}. You ${winner}!`;
+
+                if (winner === "win") {
+                    $(".result").css("color", "green");
+                } else if (winner === "lose") {
+                    $(".result").css("color", "red");
+                } else {
+                    $(".result").css("color", "black");
+                }
+
+                $(".result p").text(resultText);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Rock, Paper, Scissors</h1>
+        <div class="game">
+            <div class="choices">
+                <button class="choice" id="rock">Rock</button>
+                <button class="choice" id="paper">Paper</button>
+                <button class="choice" id="scissors">Scissors</button>
+            </div>
+            <div class="result">
+                <p>Choose your weapon!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

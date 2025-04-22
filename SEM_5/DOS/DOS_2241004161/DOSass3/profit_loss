@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Prompt user for cost price and selling price
+read -p "Enter the cost price of the item: " cost_price
+read -p "Enter the selling price of the item: " selling_price
+
+# Calculate profit or loss
+if (( $(echo "$selling_price > $cost_price" | bc -l) )); then
+    # Profit case
+    profit=$(echo "$selling_price - $cost_price" | bc)
+    echo "Profit made: $profit"
+elif (( $(echo "$cost_price > $selling_price" | bc -l) )); then
+    # Loss case
+    loss=$(echo "$cost_price - $selling_price" | bc)
+    echo "Loss incurred: $loss"
+else
+    # No profit, no loss case
+    echo "No profit, no loss."
+fi
+

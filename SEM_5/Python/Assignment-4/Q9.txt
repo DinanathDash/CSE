@@ -1,0 +1,85 @@
+Let’s go through each statement one by one, noting if it will execute successfully. If it does, we’ll provide the output. The given variables are:
+
+address = 'B-6,Lodhiroad,Delhi'
+list1 = [1, 2, 3]
+list2 = ['a', 1, 'z', 26, 'd', 4]
+tuple1 = ('a', 'e', 'i', 'o', 'u')
+tuple2 = ([2, 4, 6, 8], [3, 6, 9], [4, 8], 5)
+Statements Analysis
+list1[3] = 4
+
+Error: This will raise an IndexError because list1 only has indices 0, 1, and 2 (length of 3), so index 3 is out of range.
+print(list1 * 2)
+
+Output: [1, 2, 3, 1, 2, 3]
+Explanation: list1 * 2 repeats the list twice.
+print(min(list2))
+
+Error: This will raise a TypeError because list2 contains both strings and integers, which cannot be compared.
+print(max(list1))
+
+Output: 3
+Explanation: The maximum value in list1 ([1, 2, 3]) is 3.
+print(list(address))
+
+Output: ['B', '-', '6', ',', 'L', 'o', 'd', 'h', 'i', 'r', 'o', 'a', 'd', ',', 'D', 'e', 'l', 'h', 'i']
+Explanation: list(address) converts each character in the string address into an element in the list.
+list2.extend(['e', 5])
+
+Output: ['a', 1, 'z', 26, 'd', 4, 'e', 5]
+Explanation: extend() adds each element from the new list to the end of list2.
+list2.append(['e', 5])
+
+Output: ['a', 1, 'z', 26, 'd', 4, 'e', 5, ['e', 5]]
+Explanation: append() adds the entire list ['e', 5] as a single element at the end of list2.
+names = ['rohan', 'mohan', 'gita'] followed by names.sort(key=len) and print(names)
+
+Output: ['gita', 'rohan', 'mohan']
+Explanation: Sorting names by length rearranges it in ascending order of string length.
+list3 = [(x * 2) for x in range(1, 11)] and print(list3)
+
+Output: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+Explanation: The list comprehension generates multiples of 2 for x from 1 to 10.
+del list3[1:] and print(list3)
+
+Output: [2]
+Explanation: del list3[1:] deletes all elements from index 1 to the end, leaving only the first element.
+list4 = [x + y for x in range(1, 5) for y in range(1, 5)] and print(list4)
+
+Output: [2, 3, 4, 5, 3, 4, 5, 6, 4, 5, 6, 7, 5, 6, 7, 8]
+Explanation: The list comprehension creates a list where each element is the sum of every pair of x and y values from 1 to 4.
+tuple2[3] = 6
+
+Error: This raises a TypeError because tuples are immutable, so elements cannot be modified.
+tuple2.append(5)
+
+Error: This will raise an AttributeError because tuples do not have an append method.
+t1 = tuple2 + (5)
+
+Error: This will raise a TypeError because (5) is not recognized as a tuple (it’s just an integer). You need to use (5,) to create a single-element tuple.
+' ,'.join(tuple1)
+
+Output: 'a ,e ,i ,o ,u'
+Explanation: The join() method concatenates all elements in tuple1 separated by ,.
+list(zip(['apple', 'orange'], ('red', 'orange')))
+
+Output: [('apple', 'red'), ('orange', 'orange')]
+Explanation: zip() pairs elements from the two iterables position-wise.
+Summary of Results
+Statement	Outcome
+1	IndexError
+2	[1, 2, 3, 1, 2, 3]
+3	TypeError
+4	3
+5	['B', '-', '6', ',', 'L', 'o', 'd', 'h', 'i', 'r', 'o', 'a', 'd', ',', 'D', 'e', 'l', 'h', 'i']
+6	['a', 1, 'z', 26, 'd', 4, 'e', 5]
+7	['a', 1, 'z', 26, 'd', 4, 'e', 5, ['e', 5]]
+8	['gita', 'rohan', 'mohan']
+9	[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+10	[2]
+11	[2, 3, 4, 5, 3, 4, 5, 6, 4, 5, 6, 7, 5, 6, 7, 8]
+12	TypeError
+13	AttributeError
+14	TypeError
+15	'a ,e ,i ,o ,u'
+16	[('apple', 'red'), ('orange', 'orange')]

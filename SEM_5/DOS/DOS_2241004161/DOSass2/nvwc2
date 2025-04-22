@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Check if the argument (file) is provided
+if [ -z "$1" ]; then
+    echo "No file provided. Usage: ./nvwc2 <filename>"
+    exit 1
+fi
+
+# Check if the file exists
+if [ -f "$1" ]; then
+    # Store the counts using the wc (word count) command
+    line_count=$(wc -l < "$1")
+    word_count=$(wc -w < "$1")
+    char_count=$(wc -m < "$1")
+
+    # Display the header with equal spacing
+    printf "%-20s %-10s %-10s %-10s\n" "filename" "linecount" "wordcount" "charcount"
+
+    # Display the results with equal spacing
+    printf "%-20s %-10d %-10d %-10d\n" "$1" "$line_count" "$word_count" "$char_count"
+else
+    echo "File '$1' not found."
+fi

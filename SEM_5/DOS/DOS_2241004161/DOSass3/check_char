@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Prompt the user to enter a character
+read -p "Enter a character: " char
+
+# Check if more than one character was entered
+if [ ${#char} -ne 1 ]; then
+    echo "You have entered more than one character."
+    exit 1
+fi
+
+# Check the type of character entered
+if [[ $char =~ [a-z] ]]; then
+    echo "You entered a lower case alphabet."
+elif [[ $char =~ [A-Z] ]]; then
+    echo "You entered an upper case alphabet."
+elif [[ $char =~ [0-9] ]]; then
+    echo "You have entered a digit."
+else
+    echo "You have entered a special symbol."
+fi

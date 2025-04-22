@@ -1,0 +1,222 @@
+1. Number of File Descriptors (FDs) in the First Program
+Code:
+c
+Copy code
+int main(void) {
+    fprintf(stderr, "ITER\n");
+    while(1);
+    return 0;
+}
+Analysis:
+When a program starts, by default, three file descriptors are open:
+
+0 (STDIN)
+1 (STDOUT)
+2 (STDERR)
+Answer:
+
+Number of FDs: 3
+FD numbers: 0, 1, 2
+2. Number of FDs for Each Process in Fork Program
+Code:
+c
+Copy code
+int main(void) {
+    fork();
+    fork();
+    fprintf(stderr, "hello\n");
+    return 0;
+}
+Analysis:
+fork() duplicates the process, and each process will inherit its parent's FDs.
+Two fork() calls result in 
+2
+2
+=
+4
+2 
+2
+ =4 processes.
+Answer:
+
+Number of processes: 4
+FDs for each process: 3 (0, 1, 2)
+3. FDs Opened in Program with open()
+Code:
+c
+Copy code
+int main() {
+    int fd, i;
+    for (i = 0; i < 10; i++) {
+        fd = open("read.c", O_RDONLY);
+        if (fd == -1) {
+            perror("Open error");
+            return 1;
+        }
+        sleep(2);
+        printf("FD Number=%d\n", fd);
+    }
+    return 0;
+}
+Analysis:
+Each call to open() creates a new FD.
+Without closing, 10 FDs will be opened.
+Answer:
+
+FDs opened: 10
+Output: FD numbers from 3 to 12
+4. Modified open() Program
+Code:
+c
+Copy code
+int main() {
+    int fd, i;
+    for (i = 0; i < 10; i++) {
+        fd = open("read.c", O_RDONLY);
+        if (fd % 2 == 0)
+            printf("%d..\n", fd);
+    }
+    sleep(2);
+    return 0;
+}
+Analysis:
+Same as above, but only even-numbered FDs are printed.
+Answer:
+
+FDs opened: 10
+Output: Even-numbered FDs (4, 6, 8, ..., 12)
+5. Behavior of read() and write() with Input
+Code:
+c
+Copy code
+#define BLKSIZE 8
+int main(void) {
+    char buf[BLKSIZE];
+    read(STDIN_FILENO, buf, BLKSIZE);
+    write(STDOUT_FILENO, buf, BLKSIZE);
+    return 0;
+}
+Analysis:
+Reads up to 8 bytes and echoes the same bytes.
+Input	Output
+STUDENT\n (8 bytes)	STUDENT\n
+STUDENTS\n (9 bytes)	STUDENTS
+STUDENTSpwd\n (> 8 bytes)	STUDENT
+STUDENTSpwd;who\n (> 8 bytes)	STUDENT
+6. FDs Opened in Pipe Creation
+Code:
+c
+Copy code
+int fd[2], fs[2], fds[2];
+pipe(fd);
+pipe(fs);
+pipe(fds);
+Analysis:
+Each pipe() creates 2 FDs.
+Total FDs: 6
+Answer:
+
+Total FDs: 6
+FD numbers: 3 to 8
+7. Modified Pipe Creation
+Code:
+c
+Copy code
+int fd[2], fs[2], fds[2];
+if (pipe(fd) == -1 || pipe(fs) == -1 || pipe(fds) == -1) {
+    perror("Failed to create pipe");
+    return 1;
+}
+Answer:
+
+Total FDs: 6
+FD numbers: 3 to 8
+Verification possible: Yes
+8. Parent and Child Process FDs
+Code:
+c
+Copy code
+int fd[2], fs[2], fds[2];
+pid_t pid;
+pipe(fd);
+pid = fork();
+if (pid == 0) {
+    pipe(fs);
+    pipe(fds);
+} else {
+    wait(NULL);
+    printf("Parent waits\n");
+}
+Answer:
+
+Parent FDs: 3 (inherited) + 2 (from pipe(fd))
+Child FDs: 3 (inherited) + 2 (from pipe(fd)) + 4 (new pipes)
+9. Modified Parent and Child Process FDs
+Code:
+c
+Copy code
+int fd[2], fs[2], fds[2];
+pipe(fd);
+pid_t pid = fork();
+if (pid != 0) {
+    pipe(fs);
+    pipe(fds);
+} else {
+    wait(NULL);
+    printf("Parent waits\n");
+}
+Answer:
+
+Parent FDs: 3 + 6 (pipes)
+Child FDs: 3 + 2 (from pipe(fd))
+10. Single Process Communication via Pipe
+c
+Copy code
+int main() {
+    int fd[2];
+    char write_msg[] = "Hello";
+    char read_msg[10];
+    pipe(fd);
+    write(fd[1], write_msg, sizeof(write_msg));
+    read(fd[0], read_msg, sizeof(write_msg));
+    printf("Message: %s\n", read_msg);
+    return 0;
+}
+Input: None
+Output: Message: Hello
+
+11. Communication Between Parent and Child
+c
+Copy code
+int main() {
+    int fd[2];
+    char write_msg[] = "Hello";
+    char read_msg[10];
+    pipe(fd);
+    if (fork() == 0) {
+        write(fd[1], write_msg, sizeof(write_msg));
+    } else {
+        read(fd[0], read_msg, sizeof(write_msg));
+        printf("Message: %s\n", read_msg);
+    }
+    return 0;
+}
+Input: None
+Output: Message: Hello
+
+12. Communication Using FIFO
+CASE I (Parent-Child):
+c
+Copy code
+mkfifo("fifo_file", 0666);
+if (fork() == 0) {
+    write(fd, "Hello", 5);
+} else {
+    read(fd, buf, 5);
+    printf("Received: %s\n", buf);
+}
+CASE II (Independent):
+c
+Copy code
+mkfifo("fifo_file", 0666);
+fork(); // Separate processes use same FIFO

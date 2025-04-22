@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("img").hover(function () {
+                $("img").animate({ width: '500px' }, "slow");
+            });
+            $("img").hover(function () {
+                $("img").animate({ width: '200px' }, "slow");
+            });
+            // $("button").click(function () {
+            //     $("div").animate({ width: '500px' }, "slow");
+            // })
+            ;$("#bt1").click(function () {
+                $("img").stop({width: '200px'});
+            });
+        });
+    </script>
+    <style>
+        img {
+            position: relative;
+        }
+        /* div{
+            color: cadetblue;
+        } */
+    </style>
+</head>
+
+<body>
+    <button id="bt1">Stop</button>
+<br>
+    <img src="https://images.unsplash.com/photo-1696392837815-bf48c7529d77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" width="100px">
+    <!-- <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias necessitatibus deserunt autem praesentium quibusdam placeat similique eius tempore totam nisi aspernatur fugiat est molestiae iure repellat nemo repudiandae saepe iste nobis commodi perspiciatis odit, tempora quam. Debitis itaque nesciunt cumque nisi error ipsum! Nisi atque dicta inventore natus molestiae voluptates corporis sapiente. Vitae, aut? Odio deserunt facilis qui expedita, illo aliquam, illum, magnam maiores ratione facere praesentium! Ut hic eum laborum aspernatur nostrum, consequatur provident incidunt, eligendi fuga placeat sit repudiandae non doloremque cum sed eveniet id eos similique ipsam autem praesentium deleniti aliquam iste? Facere laborum ad eum et.</div> -->
+    <br>
+    <button>Click Here!</button>
+</body>
+
+</html>

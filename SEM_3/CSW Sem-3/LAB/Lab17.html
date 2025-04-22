@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code PlayGround</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#runbtn').click(function () {
+                var code = $('#code-input').val();
+                $('#output').html(code);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h4>Enter your Code below: </h4>
+    <div class="container">
+        <div class="editor">
+            <textarea id="code-input" placeholder="Write your code here..." cols="80" rows="30"></textarea>
+            <button id="runbtn">Run</button>
+        </div>
+        <div class="output" id="output">Code Output is shown below: </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your eCommerce Store</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: cornflowerblue;
+            color: aliceblue;
+            padding: 5px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: cornsilk;
+            text-align: center;
+            padding: 5px;
+        }
+
+        iframe {
+            margin-left: 380px;
+            padding: 20px;
+            border-radius: 30px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #div {
+            display: flex;
+            flex-direction: row;
+        }
+
+        div {
+            align-items: center;
+            padding: 20px;
+            margin-left: 100px;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        img{
+            justify-content: center;
+        }
+
+        button {
+            background-color: rgb(51, 164, 209);
+        }
+
+        #cart {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1em;
+            cursor: pointer;
+        }
+
+        #cart-container {
+            display: none;
+            position: fixed;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 1em;
+            max-width: 300px;
+        }
+
+        button {
+            border-radius: 5px;
+            border: 2px black solid;
+        }
+
+        footer {
+            background-color: slategrey;
+            color: floralwhite;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cart = [];
+            var $cartContainer = $('#cart-container');
+            var $cartItems = $('#cart-items');
+            var $cart = $('#cart');
+
+            $('.add-to-cart').click(function () {
+                var $product = $(this).closest('.product');
+                var productId = $product.data('id');
+                var productName = $product.data('name');
+                var productPrice = $product.data('price');
+
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice
+                });
+
+                updateCart();
+            });
+
+            $cart.click(function () {
+                $cartContainer.toggle();
+            });
+
+            function updateCart() {
+                $cartItems.empty();
+
+                var total = 0;
+                for (var i = 0; i < cart.length; i++) {
+                    var item = cart[i];
+                    $cartItems.append('<li>' + item.name + ' - &#x20B9; ' + item.price + '</li>');
+                    total += item.price;
+                }
+
+                $cartItems.append('<li><strong>Total: &#x20B9;' + total + '</strong></li>');
+                $cart.text('Cart (' + cart.length + ')');
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>EShoppee</h1>
+    </header>
+
+    <nav>
+        <a href="http://127.0.0.1:5500/CSW-1%20Sem-3/Lab31.html">Home</a> |
+        <a href="http://127.0.0.1:5500/CSW-1%20Sem-3/Lab20a.html" target="_blank">LogIn</a>
+    </nav>
+
+    <div id="cart">Cart (0)</div>
+
+    <div id="cart-container">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+    </div>
+    <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/jqyFJhCmwRc?si=14ACBvdBvnmhTYgu&loop=1&autoplay=1"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        
+    <h2>Featured Products</h2>
+    <section id="product">
+        
+        <div id="div">
+            <div class="product" data-id="1" data-name="Google Pixel 6a" data-price="29499">
+                <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/g/g/3/-original-imaggbrccwsnygar.jpeg?q=70"
+                    width="150px" alt="Product 1">
+                <h5><a
+                        href="https://www.flipkart.com/google-pixel-6a-chalk-128-gb/p/itme5ae89135d44e?pid=MOBGFWEZ5SKU84Z8&lid=LSTMOBGFWEZ5SKU84Z8FXPB45&marketplace=FLIPKART&sattr[]=color&st=color">Google
+                        Pixel 6a</a></h5>
+                <p>&#x20B9;29,499</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="2" data-name="Google 30W Adaptor" data-price="2199">
+                <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/battery-charger/m/d/p/-original-imaggz3gwggph75y.jpeg?q=70"
+                    width="150px" alt="Product 2">
+                <h5><a
+                        href="https://www.flipkart.com/google-30w-5a-usb-c-power-adaptor-devices/p/itm9e5b604d93b8b?pid=ACCGGBNTDETFNVVP">Google
+                        30W - 5A ,USB-C,Power Adaptor</a></h5>
+                <p>&#x20B9;2199</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="3" data-name="Google Pixel Buds Pro" data-price="15499">
+                <img src="https://rukminim2.flixcart.com/image/416/416/l5ld8y80/headphone/e/8/o/ga03201-google-original-imagg8d7bhxjduze.jpeg?q=70"
+                    width="100px" alt="Product 3">
+                <h5><a
+                        href="https://www.flipkart.com/google-pixel-buds-pro-active-noise-cancellation-bluetooth-headset/p/itmb3c2568b7166e?pid=ACCGG6BRAU6ZVYRT">Google
+                        Pixel Buds Pro</a></h5>
+                <p>&#x20B9;15,499</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2023 EShoppee
+    </footer>
+</body>
+
+</html>

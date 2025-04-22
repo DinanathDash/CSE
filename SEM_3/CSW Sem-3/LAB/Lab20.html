@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#div1").hover(function () {
+                $("#div1").css("background-color", "limegreen");
+            });
+            $("#div5").hover(function () {
+                $("#div5").css("background-color", "limegreen");
+            });
+            $("#btn1").click(function () {
+                var input = $('#id1').val();
+                if (input==2) {
+                    $("#div2").css("background-color", "forestgreen");
+                }
+                if (input==3) {
+                    $("#div3").css("background-color", "forestgreen");
+                }
+                if (input==4) {
+                    $("#div4").css("background-color", "forestgreen");
+                }
+            })
+        });
+    </script>
+    <style>
+        div {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel accusamus corrupti, similique ab eligendi dolor praesentium veritatis accusantium reprehenderit molestias. Molestias aliquid minima delectus veniam reprehenderit, maiores cupiditate eum saepe.</div>
+    <div id="div2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel accusamus corrupti, similique ab eligendi dolor praesentium veritatis accusantium reprehenderit molestias. Molestias aliquid minima delectus veniam reprehenderit, maiores cupiditate eum saepe.</div>
+    <div id="div3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel accusamus corrupti, similique ab eligendi dolor praesentium veritatis accusantium reprehenderit molestias. Molestias aliquid minima delectus veniam reprehenderit, maiores cupiditate eum saepe.</div>
+    <div id="div4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel accusamus corrupti, similique ab eligendi dolor praesentium veritatis accusantium reprehenderit molestias. Molestias aliquid minima delectus veniam reprehenderit, maiores cupiditate eum saepe.</div>
+    <div id="div5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel accusamus corrupti, similique ab eligendi dolor praesentium veritatis accusantium reprehenderit molestias. Molestias aliquid minima delectus veniam reprehenderit, maiores cupiditate eum saepe.</div>
+    <br>
+    <input type="text" name="text" id="id1">
+    <button id="btn1">Click here!</button>
+</body>
+</html>

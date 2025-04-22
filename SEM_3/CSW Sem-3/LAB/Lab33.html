@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlimited Text Zoom Example</title>
+    <script src="jquery-3.7.1.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #zoomed-text {
+            font-size: 16px;
+            transition: font-size 0.3s ease;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="zoomed-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+
+    <button onclick="zoomIn()">Zoom In</button>
+    <button onclick="zoomOut()">Zoom Out</button>
+
+    <script>
+        var currentFontSize = 16;
+
+        function zoomIn() {
+            currentFontSize += 2;
+            applyZoom();
+        }
+
+        function zoomOut() {
+            currentFontSize -= 2;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            $('#zoomed-text').css('font-size', currentFontSize + 'px');
+        }
+    </script>
+
+</body>
+
+</html>

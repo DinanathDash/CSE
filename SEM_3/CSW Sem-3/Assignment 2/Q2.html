@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Using Div</title>
+    <style>
+        .table-container {
+            display: table;
+            width: 300px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        .t-row {
+            display: table-row;
+        }
+        .t-cell {
+            display: table-cell;
+            padding: 5px 10px;
+            border: 1px solid gainsboro;
+        }
+        .t-row:nth-child(even) {
+            background-color: azure;
+        }
+        .t-cell:first-child {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <div class="t-row">
+            <div class="t-cell">Name:</div>
+            <div class="t-cell">Mayur Ramgir</div>
+        </div>
+        <div class="t-row">
+            <div class="t-cell">Address:</div>
+            <div class="t-cell">Boston, MA, USA</div>
+        </div>
+        <div class="t-row">
+            <div class="t-cell">Course:</div>
+            <div class="t-cell">MS Computational Science & Engineering</div>
+        </div>
+    </div>
+</body>
+</html>

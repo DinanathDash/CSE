@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#inp1").focusout(function () {
+                $("#id1").css({"width": "25%"});
+            });
+            $("#inp2").focusout(function () {
+                $("#id1").css("width","50%");
+            });
+            $("#inp3").focusout(function () {
+                $("#id1").css("width : 75%");
+            });
+            $("#inp4").focusout(function () {
+                $("#id1").css("width : 100%");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Dropdown Button</h2>
+    <div class="container">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">Home</button>
+            <button type="button" class="btn btn-primary">About</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    Contact
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Mail</a>
+                    <a href="#" class="dropdown-item">Phone</a>
+                    <a href="#" class="dropdown-item">Chat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Progress Bar</h2>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-bar" style="width: 50%;"></div>
+        </div>
+    </div>
+
+    <h2>Progress Bar with Height</h2>
+    <div class="container">
+        <div class="progress" style="height: 50px;">
+            <div class="progress-bar" style="width: 80%; height: 50px;">80%</div>
+        </div>
+        <br>
+        <div class="progress" style="height: 25px;">
+            <div class="progress-bar" style="width: 60%; height: 25px;">60%</div>
+        </div>
+        <br>
+        <div class="progress" style="height: 10px;">
+            <div class="progress-bar" style="width: 40%; height: 10px;">40%</div>
+        </div>
+    </div>
+
+    <form class="container">
+        <input id="inp1" type="text" placeholder="Enter Your Name">
+        <br>
+        <input id="inp2" type="text" placeholder="Enter Your Registration Number">
+        <br>
+        <input id="inp3" type="text" placeholder="Enter Your Section">
+        <br>
+        <input id="inp4" type="text" placeholder="Enter Your Branch">
+    </form>
+    <br>
+    <div class="container"></div>
+        <div class="progress">
+            <div id="id1" class="progress-bar"></div>
+        </div>
+    </div>
+    
+    <h2>Progress Bar with Color</h2>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-bar " style="width: 7%;">7%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-secondary" style="width: 14%;">14%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar  bg-success" style="width: 21%;">21%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-danger" style="width: 28%;">28%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-warning" style="width: 35%;">35%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-info" style="width: 42%;">42%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-light" style="width: 49%;">49%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar  bg-dark" style="width: 56%;">56%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-white" style="width: 63%;">63%</div>
+        </div>
+    </div>
+
+    <h2>Progress Bar with Stripes</h2>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped" style="width: 7%;">7%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-secondary progress-bar-striped" style="width: 14%;">14%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar  bg-success progress-bar-striped" style="width: 21%;">21%</div>
+        </div>
+    </div>
+
+    <h2>Live Progress Bar</h2>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 7%;">Loading 7%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" style="width: 14%;">Loading 14%</div>
+        </div>
+        <br>
+        <div class="progress">
+            <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated" style="width: 21%;">Loading 21%</div>
+        </div>
+    </div>
+</body>
+
+</html>

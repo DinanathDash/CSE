@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".member-details").hide();
+            
+            $("button").click(function () {
+                $(".member-details").toggle();
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>My Website</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:5500/Q10a.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5500/Q10b.html">About</a></li>
+            <li><a href="http://127.0.0.1:5500/Q10c.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>About Us</h2>
+        <div class="team-member">
+            <h3>Team Member 1</h3>
+            <p>Some information about Team Member 1.</p>
+            <button class="show-details">+</button>
+            <div class="member-details">Details about Team Member 1.
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita praesentium enim nemo quo omnis, aliquam provident maxime perspiciatis corrupti ipsam eum iusto non nesciunt qui consectetur laudantium in eaque soluta?</p>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <h3>Team Member 2</h3>
+            <p>Some information about Team Member 2.</p>
+            <button class="show-details">+</button>
+            <div class="member-details">Details about Team Member 2.
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, amet praesentium? Fugit tenetur assumenda eaque, doloremque saepe nam delectus, eligendi totam, voluptatibus modi nobis. Dicta nam quibusdam facilis ipsa dolorem?</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2023 My Website
+    </footer>
+</body>
+
+</html>

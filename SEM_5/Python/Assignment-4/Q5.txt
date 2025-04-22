@@ -1,0 +1,90 @@
+Let's go through each code snippet, identifying errors and expected outputs:
+
+a) day, high_temperature = ('Monday', 87, 65)
+Error: This line tries to unpack a tuple of three elements into two variables, which is incorrect.
+
+Output: ValueError: too many values to unpack (expected 2)
+
+b)
+numbers = [1, 2, 3, 4, 5]
+numbers[10]
+Error: This will raise an IndexError because index 10 is out of range for a list of length 5.
+
+Output: IndexError: list index out of range
+
+c)
+name = 'amanda'
+name[0] = 'A'
+Error: This will raise a TypeError because strings are immutable in Python, so you cannot change their characters directly.
+
+Output: TypeError: 'str' object does not support item assignment
+
+d)
+numbers = [1, 2, 3, 4, 5]
+numbers[3.4]
+Error: This will raise a TypeError because list indices must be integers, not floats.
+
+Output: TypeError: list indices must be integers or slices, not float
+
+e)
+student_tuple = ('Amanda', 'Blue', [98, 75, 87])
+student_tuple[0] = 'Ariana'
+Error: Tuples are immutable, so elements cannot be reassigned.
+
+Output: TypeError: 'tuple' object does not support item assignment
+
+f)
+('Monday', 87, 65) + 'Tuesday'
+Error: This will raise a TypeError because you cannot concatenate a tuple with a string directly.
+
+Correction:
+('Monday', 87, 65) + ('Tuesday',)
+Output (after correction): ('Monday', 87, 65, 'Tuesday')
+
+g)
+'A' += ('B', 'C')
+Error: This will raise a SyntaxError because you cannot use the += operator between a string and a tuple.
+
+Correction:
+result = 'A' + ''.join(('B', 'C'))
+Output (after correction): 'ABC'
+
+h)
+x = 7
+del x
+print(x)
+Error: This will raise a NameError because x is deleted and no longer defined when print(x) is called.
+
+Output: NameError: name 'x' is not defined
+
+i)
+numbers = [1, 2, 3, 4, 5]
+numbers.index(10)
+Error: This will raise a ValueError because 10 is not in the list.
+
+Output: ValueError: 10 is not in list
+
+j)
+numbers = [1, 2, 3, 4, 5]
+numbers.extend(6, 7, 8)
+Error: This will raise a TypeError because extend expects a single iterable argument, not multiple arguments.
+
+Correction:
+numbers.extend([6, 7, 8])
+Output (after correction): [1, 2, 3, 4, 5, 6, 7, 8]
+
+k)
+numbers = [1, 2, 3, 4, 5]
+numbers.remove(10)
+Error: This will raise a ValueError because 10 is not in the list.
+
+Output: ValueError: list.remove(x): x not in list
+
+l)
+values = []
+values.pop()
+Error: This will raise an IndexError because pop() is called on an empty list.
+
+Output: IndexError: pop from empty list
+
+These explanations provide the errors and the expected outcomes or corrections for each code snippet.

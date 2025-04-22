@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            background-image: url(https://tinyurl.com/3yyh9zk2);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 700px;
+        }
+        .registration-container {
+            background-color: whitesmoke;
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        }
+        .input-field {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid gainsboro;
+            border-radius: 5px;
+        }
+        .submit-button {
+            background-color: mediumblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <img src="https://tinyurl.com/4bd5862x" alt="SOA Logo" class="logo" width="100px">
+        <h2>Registration</h2>
+        <form>
+            <input type="text" class="input-field" placeholder="Full Name" required>
+            <input type="email" class="input-field" placeholder="Email" required>
+            <input type="password" class="input-field" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$" title="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number." required>
+            <input type="password" class="input-field" placeholder="Confirm Password" required>
+            <p class="error" id="password-error"></p>
+            <div>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="male" required> Male
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="female" required> Female
+                </label>
+            </div>
+            <select class="input-field" required>
+                <option value="" disabled selected>Select Country</option>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="india">India</option>
+            </select>
+            <br>
+            <button type="submit" class="submit-button">Register</button>
+        </form>
+    </div>
+</body>
+</html>

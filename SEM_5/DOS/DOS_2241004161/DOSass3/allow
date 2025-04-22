@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Prompt the user to enter internal marks and attendance percentage
+read -p "Enter internal marks: " internal_marks
+read -p "Enter attendance percentage: " attendance_percentage
+
+# Check if marks and attendance meet the requirements
+if (( internal_marks >= 20 && attendance_percentage >= 75 )); then
+    echo "Allowed for Semester"
+else
+    echo "Not allowed"
+fi

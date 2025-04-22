@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit').click(function (e) {
+                var name = $('#name').val();
+                var password = $('#password').val();
+
+                var name_regex = /^[a-zA-Z]+$/;
+                var pw_regex = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
+
+                if (!firstname.match(name_regex) || firstname.length == 0) {
+                    $('#name').text("* For your name please use alphabets only *");
+                    $("#name").focus();
+                    return false;
+                }
+                else if (!password.match(pw_regex) || email.length == 0) {
+                    $('#password').text("* Please enter a valid email address *");
+                    $("#password").focus();
+                    return false;
+                }
+            });
+        });
+
+    </script>
+    <style>
+        body {
+            background-image: url(https://images.squarespace-cdn.com/content/v1/57713a8e2994cae381dd86fe/1543925384526-GNBBO11VDMAKDWGOTDEJ/1-5.jpg?format=2500w);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 700px;
+        }
+
+        .registration-container {
+            background-color: whitesmoke;
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .input-field {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid gainsboro;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: mediumblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="registration-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/57713a8e2994cae381dd86fe/1510405002757-FP2W9HV8ZA0HP2IF3O6A/SOA-PNG.png"
+            alt="SOA Logo" class="logo" width="100px">
+        <h2>Registration</h2>
+        <form>
+            <input type="text" class="input-field" placeholder="Full Name" required id="name">
+            <input type="email" class="input-field" placeholder="Email" required id="email">
+            <input type="password" class="input-field" placeholder="Password"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                title="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number."
+                required id="password">
+            <p class="error" id="password-error"></p>
+            <div>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="male" required> Male
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="female" required> Female
+                </label>
+            </div>
+            <select class="input-field" required>
+                <option value="" disabled selected>Select Country</option>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="india">India</option>
+            </select>
+            <br>
+            <button type="submit" class="submit-button">Register</button>
+        </form>
+    </div>
+</body>
+
+</html>

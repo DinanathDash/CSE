@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $("#b1").click(function () {
+            //     $("#p1").append(" <b>Appended text</b>");
+            // });
+            // $("#b2").click(function () {
+            //     $("#p2").prepend("<b>Prepended text</b>");
+            // });
+            // $("#b3").click(function () {
+            //     $("#p3").after("<b>After text</b>");
+            // });
+            // $("#b4").click(function () {
+            //     $("#p4").before("<b>Before text</b>");
+            // });
+            // var count = 0; 
+            // $("#b5").click(function () {
+            //     count++;
+            //     if (count == 10) {
+                    
+            //     }
+            //     $("#p4").before("<b>Before text</b>");
+            // });
+            $("#b6").click(function () {
+                if (($("#age").val() >= 18)) {
+                    $("#age").after("<b>Your are eligible for voting</b>").addClass();
+                } else {
+                    $("#age").after("<b>Your are not eligible for voting</b>");
+                }
+            });
+        });
+    </script>
+    <style>
+        #age{
+            border-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <!-- <p id="p1">This is a paragraph 1.</p>
+    <button id="b1">Append </button><br>
+
+    <p id="p2">This is a paragraph 2.</p>
+    <button id="b2">Prepend </button><br>
+
+    <p id="p3">This is a paragraph 3.</p>
+    <button id="b3">After </button><br>
+
+    <p id="p4">This is a paragraph 4.</p>
+    <button id="b4">Before </button> -->
+    
+    <h3>Enter your age to get the eligibility for voting: </h3>
+    <input type="text" id="age" placeholder="Enter your age: "><br><br>
+    <button id="b6">Submit</button>
+</body>
+</html>

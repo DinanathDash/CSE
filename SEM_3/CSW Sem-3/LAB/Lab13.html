@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var t;
+            // show and hide-->
+            // $("button").click(function () {
+
+            //     if (t === "off") {
+            //         $(this).text("hide text");
+            //         t = "";
+            //         $("p").show();
+            //     } else {
+            //         $(this).text("show text");
+            //         t = "off";
+            //         $("p").hide();
+            //     }
+            // });
+
+            // mouseenter and mouseleave-->
+            // $("p").mouseenter(function () {
+            //     $("p").css("background-color", "blue");
+            // });
+            // $("p").mouseleave(function () {
+            //     $("p").css("background-color", "gray");
+            // });
+
+            // toggle-->
+            // $("button").click(function () {
+            //     $("p").toggle();
+            // });
+
+            // fadein and fadeout-->
+            // $("button").click(function () {
+            //     $("p").fadeOut(2000);
+            // });
+            // $("button").click(function () {
+            //     $("p").fadeIn(2000);
+            // });
+
+            // div with fadein and fadeout-->
+            $("button").click(function () {
+                $("p").fadeOut(2000);
+            });
+            $("button").click(function () {
+                $("p").fadeIn(2000);
+            });
+        });
+    </script>
+    <style>
+        #id1{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Buttons in jQuery</h2>
+    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, iure! Ipsa voluptates odio, veritatis impedit officiis sunt cupiditate neque aspernatur odit quae ipsam magnam quas corrupti distinctio laborum porro deleniti.</p> -->
+    <div id="id1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto architecto nulla aliquam aspernatur voluptatum numquam optio natus assumenda voluptatem id, quas sapiente, saepe atque vitae! Maxime consequatur soluta nihil tempore.</div>
+    <div id="id2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto architecto nulla aliquam aspernatur voluptatum numquam optio natus assumenda voluptatem id, quas sapiente, saepe atque vitae! Maxime consequatur soluta nihil tempore.</div>
+    <div id="id3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto architecto nulla aliquam aspernatur voluptatum numquam optio natus assumenda voluptatem id, quas sapiente, saepe atque vitae! Maxime consequatur soluta nihil tempore.</div>
+    <div id="id4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto architecto nulla aliquam aspernatur voluptatum numquam optio natus assumenda voluptatem id, quas sapiente, saepe atque vitae! Maxime consequatur soluta nihil tempore.</div>    
+    <button>Click Here</button>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your eCommerce Store</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                alert("Item added to your cart!!");
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: cornflowerblue;
+            color: aliceblue;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: cornsilk;
+            text-align: center;
+            padding: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #div {
+            display: flex;
+            flex-direction: row;
+        }
+
+        div {
+            align-items: center;
+            padding: 20px;
+            margin-left: 100px;
+        }
+
+        section {
+            padding: 10px;
+        }
+
+        button {
+            border-radius: 5px;
+            border: 2px black solid;
+        }
+
+        footer {
+            background-color: slategrey;
+            color: floralwhite;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>EShoppee</h1>
+    </header>
+
+    <nav>
+        <a href="http://127.0.0.1:5500/CSW-1%20Sem-3/Lab30.html">Home</a> |
+        <a href="#">Cart</a> |
+        <a href="http://127.0.0.1:5500/CSW-1%20Sem-3/Lab20a.html" target="_blank">LogIn</a>
+    </nav>
+
+    <section>
+        <h2>Featured Products</h2>
+
+        <div id="div">
+            <div>
+                <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/g/g/3/-original-imaggbrccwsnygar.jpeg?q=70"
+                    width="150px" alt="Product 1">
+                <h5><a
+                        href="https://www.flipkart.com/google-pixel-6a-chalk-128-gb/p/itme5ae89135d44e?pid=MOBGFWEZ5SKU84Z8&lid=LSTMOBGFWEZ5SKU84Z8FXPB45&marketplace=FLIPKART&sattr[]=color&st=color">Google
+                        Pixel 6a</a></h5>
+                <p>&#x20B9;29,499</p>
+                <button>Add to Cart</button>
+            </div>
+            <div>
+                <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/battery-charger/m/d/p/-original-imaggz3gwggph75y.jpeg?q=70"
+                    width="150px" alt="Product 2">
+                <h5><a
+                        href="https://www.flipkart.com/google-30w-5a-usb-c-power-adaptor-devices/p/itm9e5b604d93b8b?pid=ACCGGBNTDETFNVVP">Google
+                        30W - 5A ,USB-C,Power Adaptor</a></h5>
+                <p>&#x20B9;2199</p>
+                <button>Add to Cart</button>
+            </div>
+            <div>
+                <img src="https://rukminim2.flixcart.com/image/416/416/l5ld8y80/headphone/e/8/o/ga03201-google-original-imagg8d7bhxjduze.jpeg?q=70"
+                    width="100px" alt="Product 2">
+                <h5><a
+                        href="https://www.flipkart.com/google-pixel-buds-pro-active-noise-cancellation-bluetooth-headset/p/itmb3c2568b7166e?pid=ACCGG6BRAU6ZVYRT">Google
+                        Pixel Buds Pro</a></h5>
+                <p>&#x20B9;15,499</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2023 EShoppee
+    </footer>
+</body>
+
+</html>

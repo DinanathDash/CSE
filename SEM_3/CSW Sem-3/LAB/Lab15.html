@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".a1").hover(function () {
+                $(".a1").animate({ width: '500px' }, 3000);
+            });
+            $(".a2").hover(function () {
+                $(".a2").animate({ width: '200px' }, 4000, function () {
+                    alert("Animation Ended")
+                });
+            });
+            function greet() {
+                return "Hello, User!";
+            }
+            alert(greet());
+        });
+    </script>
+    <style>
+        .a1 {
+            border-color: aquamarine;
+            border-style: groove;
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .a2 {
+            border-color: goldenrod;
+            border-style: dashed;
+            border-radius: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+    <div class="a1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+    <div class="a1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+    <div class="a2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+    <div class="a2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+    <div class="a2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, corporis deserunt sunt obcaecati
+        delectus iure eum laudantium cum placeat mollitia voluptatibus porro totam quo perspiciatis molestiae aspernatur
+        dolorum reiciendis tenetur!</div>
+</body>
+
+</html>

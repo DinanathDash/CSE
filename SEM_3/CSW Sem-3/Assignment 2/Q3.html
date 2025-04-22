@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hovering</title>
+    <style>
+        .image-container {
+            display: block;
+            margin: auto;
+            width: 600px;
+            height: 400px;
+            background-image: url('https://tinyurl.com/yck59w5b');
+            background-size: cover;
+            transition: background-image 0.5s ease;
+        }
+        .image-container:hover {
+            background-image: url('https://tinyurl.com/24ndfk3n');
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="content">
+            <p>This is a div with a changing background image.</p>
+            <p>Hover over it to see the image change!</p>
+        </div>
+    </div>
+</body>
+</html>

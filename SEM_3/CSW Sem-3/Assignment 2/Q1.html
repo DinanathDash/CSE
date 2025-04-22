@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: cadetblue;
+            font-weight: bold;
+        }
+        tr:nth-child(odd) {
+            background-color: azure;
+        }
+        td, th {
+            padding: 10px;
+            border: 1px solid gainsboro;
+            text-align: left;
+        }
+        tr:hover {
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sample Table with CSS Styling</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>30</td>
+            <td>New York</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>25</td>
+            <td>Los Angeles</td>
+        </tr>
+        <tr>
+            <td>Bob Johnson</td>
+            <td>35</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>Alice Brown</td>
+            <td>28</td>
+            <td>Houston</td>
+        </tr>
+    </table>
+</body>
+</html>
