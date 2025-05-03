@@ -8,7 +8,6 @@ WHERE cust_no = (
     WHERE account_no = 'A0004'
 );
 
-
 -- (b) SELECT name
 FROM CUSTOMER
 WHERE cust_no NOT IN (
@@ -16,195 +15,175 @@ WHERE cust_no NOT IN (
     FROM LOAN
 );
 
+-- (c) SELECT A.ACCOUNT_NO, A.BALANCE
+FROM ACCOUNT A
+JOIN DEPOSITOR D ON A.ACCOUNT_NO = D.ACCOUNT_NO
+WHERE D.CUST_NO = 'C0010';
 
--- (c) display name, department, gross salary, and net salary
-select name, department, 
-       salary + (salary * 0.105) + (salary * 0.20) as gross_salary,
-       (salary + (salary * 0.105) + (salary * 0.20)) - (salary * 0.30) as net_salary
-from faculty_info;
+-- (d) SELECT B.BRANCH_CITY
+FROM BRANCH B
+WHERE B.BRANCH_CODE = (
+    SELECT L.BRANCH_CODE
+    FROM LOAN L
+    WHERE L.CUST_NO = (
+        SELECT CUST_NO FROM CUSTOMER WHERE NAME = 'ASLESHA TIWARI'
+    )
+);
 
--- (d) display instructors with salary between 60000 and 80000
-select * 
-from faculty_info 
-where salary between 60000 and 80000;
+-- (e) SELECT I.*
+FROM INSTALLMENT I
+WHERE I.LOAN_NO IN (
+    SELECT L.LOAN_NO
+    FROM LOAN L
+    WHERE L.CUST_NO = (
+        SELECT CUST_NO FROM CUSTOMER WHERE NAME = 'ANKITA SINGH'
+    )
+);
 
--- (e) display instructors with second letter 'r' in their name
-select * 
-from faculty_info 
-where name like '_r%';
+-- (f) SELECT B.BRANCH_NAME, B.BRANCH_CITY
+FROM BRANCH B
+WHERE B.BRANCH_CODE IN (
+    SELECT A.BRANCH_CODE
+    FROM ACCOUNT A
+    JOIN DEPOSITOR D ON A.ACCOUNT_NO = D.ACCOUNT_NO
+    WHERE D.CUST_NO = (
+        SELECT CUST_NO FROM CUSTOMER WHERE NAME = 'ABHIJIT MISHRA'
+    )
+);
 
--- (f) display comp.sci. instructors in descending order of salary
-select name 
-from faculty_info 
-where department = 'comp. sci.' 
-order by salary desc;
+-- (g) CREATE TABLE ACCOUNT_TYPE AS
+SELECT ACCOUNT_NO, TYPE
+FROM ACCOUNT
+WHERE 1=0;
 
--- (g) update all instructor records with a 15% salary hike
-update faculty_info
-set salary = salary * 1.15;
+-- (h) INSERT INTO ACCOUNT_TYPE (ACCOUNT_NO, TYPE)
+SELECT ACCOUNT_NO, TYPE
+FROM ACCOUNT
+WHERE BALANCE < 50000;
 
--- (h) update comp.sci. instructors with salary < 70000 by 3%
-update faculty 
-set salary = salary * 1.03 
-where department = 'comp. sci.' and salary < 70000;
+-- (i) UPDATE ACCOUNT_TYPE
+SET TYPE = 'FD'
+WHERE ACCOUNT_NO IN (
+    SELECT A.ACCOUNT_NO
+    FROM ACCOUNT A
+    JOIN DEPOSITOR D ON A.ACCOUNT_NO = D.ACCOUNT_NO
+    WHERE D.CUST_NO = 'C0007'
+);
 
--- (i) display annual salary of each instructor
-select name, salary * 12 as annual_salary 
-from faculty_info;
+-- (j) DELETE FROM ACCOUNT_TYPE
+WHERE ACCOUNT_NO IN (
+    SELECT ACCOUNT_NO
+    FROM ACCOUNT
+    WHERE BALANCE < 20000
+);
 
--- (j) update course title 'game design' to 'game theory'
-update course 
-set title = 'game theory' 
-where title = 'game design';
+-- (k) SELECT ACCOUNT_NO
+FROM ACCOUNT
+WHERE BALANCE > SOME (
+    SELECT BALANCE
+    FROM ACCOUNT
+    WHERE TYPE = 'FD'
+);
 
--- (k) delete instructor records of the history department
-delete from faculty_info 
-where department = 'history';
+-- (l) SELECT ACCOUNT_NO
+FROM ACCOUNT
+WHERE BALANCE > ALL (
+    SELECT BALANCE
+    FROM ACCOUNT
+    WHERE TYPE = 'FD'
+);
 
--- (l) delete courses with course_id starting with 'bio'
-delete from course 
-where sub_code like 'bio%';
+-- (m) SELECT *
+FROM BRANCH B
+WHERE EXISTS (
+    SELECT 1
+    FROM LOAN L
+    WHERE L.BRANCH_CODE = B.BRANCH_CODE
+);
+
+-- (n) SELECT *
+FROM LOAN L
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM INSTALLMENT I
+    WHERE I.LOAN_NO = L.LOAN_NO
+);
+
+-- (o) UPDATE ACCOUNT
+SET BALANCE = BALANCE + 
+  CASE 
+    WHEN BALANCE > 80000 THEN BALANCE * 0.06
+    ELSE BALANCE * 0.05
+  END;
 
 -- 2. SQL Expressions using Suitable SQL Aggregate Functions
 
--- (a) display the avg. salary of instructors of physics department
-select avg(salary) as avg_salary 
-from faculty_info 
-where department = 'physics';
+-- (a) SELECT L.LOAN_NO
+FROM LOAN L
+JOIN BRANCH B ON L.BRANCH_CODE = B.BRANCH_CODE
+WHERE B.BRANCH_CITY = 'MUMBAI';
 
--- (b) display the dept_name and average salary paid to instructors of each department
-select department, avg(salary) as avg_salary 
-from faculty_info 
-group by department;
+-- (b) SELECT DISTINCT A.TYPE
+FROM ACCOUNT A
+JOIN BRANCH B ON A.BRANCH_CODE = B.BRANCH_CODE
+WHERE B.BRANCH_CITY = 'DELHI';
 
--- (c) display the id, name & department of the instructor drawing the highest salary
-select id, name, department 
-from faculty_info 
-where salary = (select max(salary) from faculty);
+-- (c) SELECT DISTINCT C.NAME, C.PHONE_NO
+FROM CUSTOMER C
+JOIN DEPOSITOR D ON C.CUST_NO = D.CUST_NO
+JOIN ACCOUNT A ON D.ACCOUNT_NO = A.ACCOUNT_NO
+WHERE A.BALANCE > 100000;
 
--- (d) display the number of instructors available in comp.sci. department
-select count(*) as instructor_count 
-from faculty_info
-where department = 'comp.sci.';
+-- (d) SELECT I.INST_NO, I.INST_AMOUNT
+FROM INSTALLMENT I
+JOIN LOAN L ON I.LOAN_NO = L.LOAN_NO
+JOIN CUSTOMER C ON L.CUST_NO = C.CUST_NO
+WHERE C.NAME = 'RAJ ANAND SINGH';
 
--- (e) display the total credits of all courses offered in comp.sci. department
-select sum(credits) as total_credits 
-from course 
-where department = 'comp. sci.';
+-- (e) SELECT DISTINCT C.NAME
+FROM CUSTOMER C
+WHERE C.CUST_NO NOT IN (
+    SELECT D.CUST_NO
+    FROM DEPOSITOR D
+    JOIN ACCOUNT A ON D.ACCOUNT_NO = A.ACCOUNT_NO
+    WHERE A.TYPE = 'SB'
+);
 
--- (f) display the number of instructors and total salary drawn by physics and comp.sci. departments
-select department, count(*) as instructor_count, sum(salary) as total_salary 
-from faculty_info
-where department in ('physics', 'comp. sci.') 
-group by department;
+-- (f) SELECT DISTINCT C.NAME
+FROM CUSTOMER C
+JOIN LOAN L ON C.CUST_NO = L.CUST_NO
+JOIN INSTALLMENT I ON L.LOAN_NO = I.LOAN_NO
+WHERE I.INST_AMOUNT = 50000;
 
--- (g) display the total credits of comp.sci. and biology departments from course table
-select department, sum(credits) as total_credits 
-from course 
-where department in ('comp. sci.', 'biology') 
-group by department;
+-- (g) SELECT DISTINCT C.PHONE_NO
+FROM CUSTOMER C
+JOIN DEPOSITOR D ON C.CUST_NO = D.CUST_NO
+JOIN ACCOUNT A ON D.ACCOUNT_NO = A.ACCOUNT_NO
+JOIN BRANCH B ON A.BRANCH_CODE = B.BRANCH_CODE
+WHERE B.BRANCH_NAME = 'SALTLAKE BRANCH';
 
--- (h) display building wise total budget values
-select builder, sum(budget) as total_budget 
-from department 
-group by builder;
+-- (h) SELECT DISTINCT B.BRANCH_NAME, B.BRANCH_CITY
+FROM CUSTOMER C
+JOIN DEPOSITOR D ON C.CUST_NO = D.CUST_NO
+JOIN ACCOUNT A ON D.ACCOUNT_NO = A.ACCOUNT_NO
+JOIN BRANCH B ON A.BRANCH_CODE = B.BRANCH_CODE
+WHERE C.NAME = 'ABHIJIT MISHRA';
 
--- (i) display the number of instructors of each department
-select department, count(*) as instructor_count 
-from faculty_info 
-group by department;
+-- (i) SELECT A.TYPE, A.BALANCE
+FROM CUSTOMER C
+JOIN DEPOSITOR D ON C.CUST_NO = D.CUST_NO
+JOIN ACCOUNT A ON D.ACCOUNT_NO = A.ACCOUNT_NO
+WHERE C.NAME = 'SWAROOP RAY';
 
--- (j) display the number of instructors of each department sorted in high to low
-select department, count(*) as instructor_count 
-from faculty_info 
-group by department 
-order by instructor_count desc;
-
--- (k) display the number of courses offered semester wise
-select semester, count(*) as course_count 
-from teaches 
-group by semester;
-
--- (l) display the name of departments having number of instructors less than 2
-select department 
-from faculty_info 
-group by department 
-having count(*) < 2;
-
--- (m) list the number of instructors of each department having 2 or more instructors except finance department, sorted in high to low order
-select department, count(*) as instructor_count 
-from faculty_info 
-where department != 'finance' 
-group by department 
-having count(*) >= 2 
-order by instructor_count desc;
-
--- (n) display the dept_name that has paid total salary more than 50000
-select department 
-from faculty_info
-group by department 
-having sum(salary) > 50000;
-
--- (o) display the total budget for the building built by watson
-select sum(budget) as total_budget 
-from department 
-where builder = 'watson';
-
--- (p) display the highest salary of the instructor of comp.sci. department
-select max(salary) as highest_salary 
-from faculty_info 
-where department = 'comp.sci.';
-
--- 3. SQL Expressions using Suitable SQL Scalar Functions
-
--- (a) display your name with first letter being capital, where the entered name is in lower case
-select concat(upper(left('dinanath', 1)), lower(substring('dinanath', 2))) as name_with_capital;
-
--- (b) display 2nd-6th characters of your name
-select substring('dinanath', 2, 5) as sub_name;
-
--- (c) find length of your full university name
-select length('Siksha O Anusandhan') as university_name_length;
-
--- (d) display all the instructor names with its first letter in upper case
-select concat(upper(left(name, 1)), lower(substring(name, 2))) as formatted_name 
-from faculty_info;
-
--- (e) list the department name of each instructor as a three letter code
-select upper(left(department, 3)) as dept_code 
-from faculty_info;
-
--- (f) display the month of the joining of each instructor
-select monthname(date_of_join) as joining_month 
-from faculty_info;
-
--- (g) display the date of joining of each instructor in dd/mm/yy format
-select date_format(date_of_join, '%d/%m/%y') as formatted_join_date 
-from faculty_info;
-
--- (h) display the experience of each instructor in terms of months
-select timestampdiff(month, date_of_join, curdate()) as experience_in_months 
-from faculty_info;
-
--- (i) display the experience of each instructor in terms of years and months
-select concat(timestampdiff(year, date_of_join, curdate()), ' years, ', mod(timestampdiff(month, date_of_join, curdate()), 12), ' months') as experience 
-from faculty_info;
-
--- (j) display the day of joining of each instructor
-select dayname(date_of_join) as joining_day 
-from faculty_info;
-
--- (k) display the date corresponding to 15 days after today's date
-select curdate() + interval 15 day as future_date;
-
--- (l) display the value 94204.27348 truncated up to 2 digits after decimal point
-select truncate(94204.27348, 2) as truncated_value;
-
--- (m) display the value of the expression 5 + 89
-select 5 + 89 as result;
-
--- (n) find out the square root of 6464312
-select sqrt(6464312) as square_root;
-
--- (o) display the string “hello iter” in lower case with a column heading lower case
-select lower('HELLO ITER') as lower_case;
+-- (j) WITH branch_total AS (
+    SELECT BRANCH_CODE, SUM(BALANCE) AS total_balance
+    FROM ACCOUNT
+    GROUP BY BRANCH_CODE
+),
+avg_total AS (
+    SELECT AVG(total_balance) AS avg_bal
+    FROM branch_total
+)
+SELECT BRANCH_CODE
+FROM branch_total
+WHERE total_balance > (SELECT avg_bal FROM avg_total);
