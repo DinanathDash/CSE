@@ -10,8 +10,11 @@ public:
 
 int main() {
     MyClass obj;
+    obj.~MyClass();
     return 0;
 }
 
-//Output - My destructor
+//Output - 
+// My destructor
+// My destructor
 //The destructor ~MyClass() is called twice: once explicitly (obj ~MyClass()) and once when obj goes out of scope.
