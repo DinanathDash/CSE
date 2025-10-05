@@ -1,0 +1,274 @@
+﻿    • Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+A. Experiment-Specific
+1) Purpose of pinMode() and digitalWrite()
+    • pinMode(pin, mode): Configures a pin as either INPUT or OUTPUT.
+    • digitalWrite(pin, value): Sets an output pin to HIGH (5V) or LOW (0V).
+2) Use of delay() in LED blinking
+    • delay(ms) pauses the program for the specified time in milliseconds.
+    • Without delay(), the LED would blink so fast that it would appear always ON (because the human eye cannot perceive the rapid switching).
+3) Modifying code to blink twice as fast
+    • Halve the delay time. Example: if it’s delay(1000), change it to delay(500).
+4) Connecting multiple LEDs to blink alternately
+    • Use two LEDs on different pins.
+    • In the loop, turn one LED ON while the other is OFF, then swap them with a delay.
+5) Problem if LED is connected without resistor
+    • Excessive current flows through the LED and pin.
+    • This can burn out the LED and possibly damage the Arduino pin.
+
+B. Basics of Arduino UNO
+6) Function of ATmega328P
+    • It is the microcontroller that executes the uploaded program, processes inputs, and controls outputs.
+7) Role of digital and analog pins
+    • Digital pins (0–13): Read/write HIGH or LOW signals (0V or 5V).
+    • Analog pins (A0–A5): Read varying voltage levels (0–5V) and convert them into numeric values (0–1023).
+8) Maximum current per I/O pin
+    • Safe limit: 20 mA (absolute max 40 mA, but not recommended).
+9) Difference between USB upload and external power
+    • USB upload: Provides power (5V) and transfers code from the computer to Arduino.
+    • External power (adapter/battery): Only supplies power; no code transfer.
+10) Onboard LED (pin 13)
+    • A built-in LED for quick testing.
+    • Useful to check whether the board and uploaded code are working.
+
+C. Basics of Robotics
+11) Definition of a robot
+    • A robot is a programmable machine capable of sensing its environment, processing data, and acting accordingly.
+    • Unlike simple automation, robots adapt based on input, not just fixed sequences.
+12) Three main components
+    • Sensing: Sensors gather data from the environment (e.g., light, distance).
+    • Control: A microcontroller or processor makes decisions based on sensor input.
+    • Actuation: Motors/servos/LEDs perform physical actions.
+13) Importance of programmability
+    • Allows robots to adapt, change tasks, and handle different environments.
+    • Without programmability, it’s just a fixed machine.
+14) Examples of robots using blinking/lighting
+    • Autonomous vacuum cleaners: LED indicators for battery and status.
+    • Industrial robotic arms: Blinking lights for error warnings or operation signals.
+15) Use of LED indicators in debugging
+    • LEDs show if power, signals, or logic are working correctly.
+    • Example: An LED can confirm that a sensor triggered or a loop is running.
+
+// Codes
+// 2.1 Blink onboard LED without global variable (25% duty cycle, 2 sec period)
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500);        // ON time (25% of 2000ms)
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1500);       // OFF time
+}
+// 2.2 Blink onboard LED using global variable (25% duty cycle, 2 sec period)
+int onTime = 500;    // 25% of 2000ms
+int offTime = 1500;  // 75% of 2000ms
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(onTime);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(offTime);
+}
+Observation: The onboard LED blinks with a short ON (0.5s) and longer OFF (1.5s).
+Confirms control of duty cycle and timing using Arduino.
+
+// 3.1 External LED, 75% duty cycle, 1 sec period
+int led = 9;
+void setup() {
+  pinMode(led, OUTPUT);
+}
+void loop() {
+  digitalWrite(led, HIGH);
+  delay(750);        // ON time (75%)
+  digitalWrite(led, LOW);
+  delay(250);        // OFF time
+}
+Observaton: The LED stays ON most of the time (0.75s ON, 0.25s OFF).
+Demonstrates external circuit control with precise timing.
+
+// 4.1 Two LEDs without loop
+int red = 9;
+int blue = 10;
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(blue, OUTPUT);
+}
+void loop() {
+  // Red blinks 5 times
+  digitalWrite(red, HIGH); delay(200);
+  digitalWrite(red, LOW);  delay(200);
+  digitalWrite(red, HIGH); delay(200);
+  digitalWrite(red, LOW);  delay(200);
+  digitalWrite(red, HIGH); delay(200);
+  digitalWrite(red, LOW);  delay(200);
+  digitalWrite(red, HIGH); delay(200);
+  digitalWrite(red, LOW);  delay(200);
+  digitalWrite(red, HIGH); delay(200);
+  digitalWrite(red, LOW);  delay(200);
+
+  // Blue blinks 3 times
+  digitalWrite(blue, HIGH); delay(400);
+  digitalWrite(blue, LOW);  delay(1200);
+  digitalWrite(blue, HIGH); delay(400);
+  digitalWrite(blue, LOW);  delay(1200);
+  digitalWrite(blue, HIGH); delay(400);
+  digitalWrite(blue, LOW);  delay(1200);
+}
+// 4.2 Two LEDs with for loop
+int red = 9;
+int blue = 10;
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(blue, OUTPUT);
+}
+void loop() {
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(red, HIGH);
+    delay(200);
+    digitalWrite(red, LOW);
+    delay(200);
+  }
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(blue, HIGH);
+    delay(400);
+    digitalWrite(blue, LOW);
+    delay(1200);
+  }
+}
+// 4.3 Two LEDs with for loop + Serial monitor input (fixed blink counts)
+int red = 9;
+int blue = 10;
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(blue, OUTPUT);
+  Serial.begin(9600);
+}
+void loop() {
+  Serial.println("Red LED blinks 5 times, Blue LED blinks 3 times");
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(red, HIGH); delay(200);
+    digitalWrite(red, LOW);  delay(200);
+  }
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(blue, HIGH); delay(400);
+    digitalWrite(blue, LOW);  delay(1200);
+  }
+  delay(2000);
+}
+// 4.4 Two LEDs with user input from Serial monitor
+int red = 9;
+int blue = 10;
+int redCount = 0, blueCount = 0;
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(blue, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Enter Red count and Blue count (e.g., 5 3):");
+}
+void loop() {
+  if (Serial.available() > 0) {
+    redCount = Serial.parseInt();
+    blueCount = Serial.parseInt();
+    Serial.print("Red: "); Serial.println(redCount);
+    Serial.print("Blue: "); Serial.println(blueCount);
+
+    for (int i = 0; i < redCount; i++) {
+      digitalWrite(red, HIGH); delay(200);
+      digitalWrite(red, LOW);  delay(200);
+    }
+    for (int i = 0; i < blueCount; i++) {
+      digitalWrite(blue, HIGH); delay(400);
+      digitalWrite(blue, LOW);  delay(1200);
+    }
+  }
+}
+Observation: Without loops, code is repetitive; with loops, blinking is efficient.
+Serial monitor enables user input and makes LED control interactive.
+
+// 5.1 Basic 8-bit LED chaser (pins 2 to 9)
+int leds[] = {2,3,4,5,6,7,8,9};
+void setup() {
+  for (int i = 0; i < 8; i++) pinMode(leds[i], OUTPUT);
+}
+void loop() {
+  for (int i = 0; i < 8; i++) {
+    digitalWrite(leds[i], HIGH);
+    delay(200);
+    digitalWrite(leds[i], LOW);
+  }
+}
+// 5.2 Custom LED chaser patterns
+int leds[] = {2,3,4,5,6,7,8,9};
+int n = 8;
+void setup() {
+  for (int i = 0; i < n; i++) pinMode(leds[i], OUTPUT);
+}
+void loop() {
+  bouncingBall();
+  zigZag();
+  randomBlink();
+  knightRider();
+  runningLights();
+}
+void bouncingBall() {
+  for (int i = 0; i < n; i+=2) { digitalWrite(leds[i], HIGH); delay(150); }
+  for (int i = 0; i < n; i+=2) { digitalWrite(leds[i], LOW); delay(150); }
+}
+void zigZag() {
+  for (int i = 0; i < n; i++) { digitalWrite(leds[i], HIGH); delay(150); }
+  for (int i = 0; i < n; i++) { digitalWrite(leds[i], LOW); delay(random(100,400)); }
+}
+void randomBlink() {
+  for (int i = 0; i < n; i++) {
+    if (random(0,2)) digitalWrite(leds[i], HIGH);
+    else digitalWrite(leds[i], LOW);
+  }
+  delay(300);
+  for (int i = 0; i < n; i++) digitalWrite(leds[i], LOW);
+}
+void knightRider() {
+  for (int i = 0; i < n; i++) { digitalWrite(leds[i], HIGH); delay(100); digitalWrite(leds[i], LOW); }
+  for (int i = n-1; i >= 0; i--) { digitalWrite(leds[i], HIGH); delay(100); digitalWrite(leds[i], LOW); }
+}
+void runningLights() {
+  for (int i = 0; i < n; i++) {
+    digitalWrite(leds[i], HIGH);
+    delay(100);
+    digitalWrite(leds[i], LOW);
+  }
+}
+Observation: LEDs follow sequential and custom chase effects.
+Different patterns highlight creative use of loops, delays, and logic.
+
+// Conclusion
+The experiment demonstrated control of LEDs using Arduino through duty cycles, loops, and Serial communication.
+We learned how timing affects LED blinking and how code efficiency improves with loops.
+Serial input added interactivity, and multi-LED circuits showed advanced sequencing patterns.
+Overall, it built a strong foundation in Arduino programming and basic robotics concepts.
+
+// Precautions
+Always use a current-limiting resistor with LEDs to prevent damage.
+Check wiring connections carefully before powering the circuit.
+Avoid exceeding the current rating of Arduino I/O pins (20mA safe).
+Upload code only after ensuring the circuit is properly connected and safe.
+
+// Post-Lab Questionaire
+A. Experiment-Specific (LED Blinking & LED Patterns)
+1) With global variables, timing values are easier to reuse and modify; without them, values are hardcoded and less flexible.
+2) A lower duty cycle made the LED dimmer/shorter ON time, while a higher duty cycle made it brighter and ON longer.
+3) Without loops, code is repetitive; with loops, code is compact, easier to edit, and more efficient.
+4) Main challenge was synchronizing input reading (parseInt/Serial.available) and avoiding unexpected delays or misreads.
+5) Custom patterns required more logic (conditions, randomization, direction change) compared to the simple sequential chaser.
+B. Arduino & Hardware Concepts
+6) Resistors limit current to prevent LED and Arduino pin damage.
+7) Digital pins allow independent ON/OFF control of multiple LEDs at the same time.
+8) PWM rapidly switches the LED ON/OFF to simulate variable brightness; the same method can control motor speed.
+9) The sketch uses different functions/logic blocks (sequential loops vs. random values) to distinguish the patterns.
+C. Robotics & System Understanding
+10) Blinking LEDs are simple, visible, and help beginners understand timing, loops, and digital output.
+11) LED indicators show system status, errors, or signal flow, making debugging faster and easier.
+12) In real robots, LEDs can indicate power, mode selection, sensor triggers, or fault warnings.
