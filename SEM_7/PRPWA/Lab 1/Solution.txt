@@ -9,7 +9,7 @@ A. Experiment-Specific
     • delay(ms) pauses the program for the specified time in milliseconds.
     • Without delay(), the LED would blink so fast that it would appear always ON (because the human eye cannot perceive the rapid switching).
 3) Modifying code to blink twice as fast
-    • Halve the delay time. Example: if it’s delay(1000), change it to delay(500).
+    • Halve the delay time.Example: if it’s delay(1000), change it to delay(500).
 4) Connecting multiple LEDs to blink alternately
     • Use two LEDs on different pins.
     • In the loop, turn one LED ON while the other is OFF, then swap them with a delay.
