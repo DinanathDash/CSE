@@ -1,0 +1,35 @@
+1. What is the main difference between programming and software engineering?
+Ans: Programming is primarily concerned with writing code to solve a specific problem or perform a certain function. It focuses on the act of creating a working program that produces the desired output. Software engineering, however, is a broader discipline that involves applying engineering principles to the entire software development lifecycle — including planning, design, testing, deployment, and maintenance. While programming is one component, software engineering ensures that the product is reliable, maintainable, scalable, and efficient in the long term.
+
+2. What does the phrase “Hyrum’s Law” state in software engineering?
+Ans: Hyrum’s Law states that “with a sufficient number of users of an API, it does not matter what you promise in the contract — all observable behaviors of your system will be depended on by somebody.” In simpler terms, even if developers officially define how a system or API is supposed to work, users may still rely on undocumented or unintended behaviors. This makes changing or updating software components difficult because altering any small detail might break the systems that depend on those behaviors.
+
+3. Mention two reasons why long-term projects need continuous upgrades.
+Ans: Firstly, continuous upgrades are necessary to keep up with evolving technology. Software frameworks, operating systems, and hardware change over time, and without updates, a project may become incompatible or obsolete. Secondly, upgrades are needed for security and performance improvements. As vulnerabilities are discovered and new threats emerge, updates help ensure the software remains secure, efficient, and aligned with current user expectations.
+
+4. What is meant by the phrase “Shifting Left” in software development?
+Ans: “Shifting Left” refers to the practice of moving quality assurance, testing, and security activities earlier in the software development process — closer to the initial design and coding stages. Traditionally, testing and bug fixing occur at the end of development, but shifting left allows teams to detect and fix issues sooner, reducing costs and rework. For example, integrating automated testing and code reviews during the development phase helps catch defects early, improving software quality and delivery speed.
+
+5. What is trade-offs in engineering decisions?
+Ans: Trade-offs in engineering decisions refer to balancing competing factors such as cost, performance, time, and quality when making design or implementation choices. Every decision often has both benefits and drawbacks. For example, choosing a faster algorithm might increase performance but require more memory. Engineers must carefully evaluate these trade-offs to select the most appropriate solution based on project goals, resources, and constraints.
+
+6. Mention two challenges faced by software engineers when working in teams.
+Ans: One major challenge is communication — ensuring that all team members clearly understand project requirements, goals, and progress can be difficult, especially in large or remote teams. Another challenge is collaboration and code integration, where merging different parts of a project created by multiple developers may lead to conflicts, inconsistencies, or bugs if not properly managed through version control and coordination.
+
+7. How does knowledge sharing benefit teams?
+Ans: Knowledge sharing allows team members to learn from one another’s experiences, mistakes, and expertise. It reduces dependency on specific individuals and ensures that important technical and procedural knowledge is accessible to everyone. This improves productivity, helps solve problems faster, and builds a culture of collaboration and continuous learning within the team.
+
+8. Define the role of a team lead.
+Ans: A team lead is responsible for guiding the team toward achieving project goals by coordinating tasks, managing communication, and ensuring quality standards are met. They act as a bridge between the team and management, help resolve conflicts, and mentor members in technical and professional growth. A good team lead motivates the team, sets clear priorities, and ensures that everyone works effectively together.
+
+9. Why should team members admit mistakes openly?
+Ans: Openly admitting mistakes promotes a culture of trust and learning within a team. When individuals take responsibility for errors, the team can quickly identify issues, understand their root causes, and find effective solutions without wasting time on blame. This transparency prevents repeated mistakes and fosters continuous improvement, which ultimately strengthens team collaboration and software quality.
+
+10. How does knowledge sharing benefit teams?
+(Repeated question)
+
+11. Explain with example why a low Bus Factor is dangerous for software projects.
+Ans: The Bus Factor refers to the number of people who must be unavailable (for example, “hit by a bus”) before a project is seriously threatened. A low Bus Factor — typically one or two — means only a few people have critical knowledge about the project. If they leave, fall ill, or are otherwise unavailable, the project could stall or fail entirely. For example, if a single developer is the only one who understands a key module’s codebase, and they leave the company, no one else can maintain or fix it efficiently. Hence, teams aim for a high Bus Factor through documentation and knowledge sharing.
+
+12. Why is feedback culture important in software teams?
+Ans: Feedback culture is vital because it encourages open communication, continuous improvement, and personal growth. Constructive feedback helps individuals understand their strengths and areas for improvement, leading to higher performance and better teamwork. In software teams, timely feedback on code quality, design decisions, and collaboration ensures that issues are addressed early and that team members feel valued and engaged in their work.

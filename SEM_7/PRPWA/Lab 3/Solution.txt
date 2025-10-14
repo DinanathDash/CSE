@@ -1,0 +1,185 @@
+﻿• Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+1) A push button is a simple mechanical switch that temporarily makes or breaks an electrical connection when pressed. It is commonly used as an input device to send signals to microcontrollers like Arduino.
+
+2) Common types of push buttons include:
+    Momentary (normally open) – connects when pressed, disconnects when released.
+    Momentary (normally closed) – disconnects when pressed, connects when released.
+    Latching (toggle) – stays in one state until pressed again.
+    Illuminated push button – includes an LED indicator inside.
+
+3) Interfacing a push button with Arduino allows the user to provide input or control—for example, turning LEDs ON/OFF, changing modes, or controlling brightness. It helps the Arduino detect and respond to user actions.
+
+4)  Type        Connection                    Default State       Pressed State
+    Pull-up     Between input pin and +5V	        HIGH                LOW
+    Pull-down   Between input pin and GND	        LOW	                HIGH
+    A pull-up resistor keeps the input HIGH when the button is not pressed, while a pull-down resistor keeps it LOW when not pressed.
+5) Pull-up: Resistor connects between input pin and +5V, button between input pin and GND.
+    Pull-down: Resistor connects between input pin and GND, button between input pin and +5V.
+6) The external pull-up resistor ensures the input pin stays at a defined logic HIGH when the button is not pressed.
+    Without it, the pin could “float” and cause random HIGH/LOW readings. When the button is pressed, the pin is connected to GND, producing a stable LOW signal.
+7) Pulse Width Modulation (PWM) is a technique of rapidly switching a digital signal ON and OFF with varying duty cycles (percentage of ON time).
+    By changing the duty cycle, we control the average voltage sent to an LED, which adjusts its brightness — higher duty cycle = brighter LED.
+8) Yes, PWM can control the brightness of other dimmable lights, such as:
+    DC bulbs
+    Motors (for speed control)
+    Some dimmable LEDs or strips
+    However, it cannot directly control AC bulbs or non-dimmable lights without additional driver circuits, because they require AC phase control or specialized dimming hardware.
+
+// Codes
+//1.1 Read Analog Voltage from Voltage Divider
+int sensorPin = A0;
+float Vref = 5.0;
+int adcValue;
+float voltage;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  adcValue = analogRead(sensorPin);
+  voltage = (adcValue * Vref) / 1023.0;
+  Serial.print("ADC Value: ");
+  Serial.print(adcValue);
+  Serial.print("  Voltage: ");
+  Serial.println(voltage);
+  delay(500);
+}
+
+//1.2 Read Potentiometer Value
+int potPin = A0;
+int potValue;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  potValue = analogRead(potPin);
+  Serial.print("Potentiometer Value: ");
+  Serial.println(potValue);
+  delay(500);
+}
+
+//1.3 Convert Potentiometer Value to Voltage
+int potPin = A0;
+float Vref = 5.0;
+int potValue;
+float voltage;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  potValue = analogRead(potPin);
+  voltage = (potValue * Vref) / 1023.0;
+  Serial.print("ADC Value: ");
+  Serial.print(potValue);
+  Serial.print("  Voltage: ");
+  Serial.println(voltage);
+  delay(500);
+}
+
+//1.4.1 LED Brightness Control (without map)
+int potPin = A0;
+int ledPin = 9;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(potPin);
+  int brightness = potValue / 4;  // scale 0–1023 → 0–255
+  analogWrite(ledPin, brightness);
+  Serial.print("Potentiometer: ");
+  Serial.print(potValue);
+  Serial.print("  Brightness: ");
+  Serial.println(brightness);
+  delay(500);
+}
+
+//1.4.2 LED Brightness Control (with map)
+int potPin = A0;
+int ledPin = 9;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(potPin);
+  int brightness = map(potValue, 0, 1023, 0, 255);
+  analogWrite(ledPin, brightness);
+  Serial.print("Potentiometer: ");
+  Serial.print(potValue);
+  Serial.print("  Brightness: ");
+  Serial.println(brightness);
+  delay(500);
+}
+
+//1.5 Dual Potentiometer for LED + Speaker Volume
+int potLed = A0;
+int potSpeaker = A1;
+int ledPin = 9;
+int speakerPin = 10;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(speakerPin, OUTPUT);
+}
+
+void loop() {
+  int ledValue = analogRead(potLed);
+  int brightness = map(ledValue, 0, 1023, 0, 255);
+  analogWrite(ledPin, brightness);
+
+  int speakerValue = analogRead(potSpeaker);
+  int frequency = map(speakerValue, 0, 1023, 100, 1000); // Hz
+  tone(speakerPin, frequency);
+
+  Serial.print("LED Brightness: ");
+  Serial.print(brightness);
+  Serial.print("  Speaker Frequency: ");
+  Serial.println(frequency);
+  delay(200);
+}
+
+// Conclusion:
+This experiment successfully demonstrated how push buttons can be interfaced with an Arduino to control LEDs and adjust brightness using PWM. It covered the use of pull-up and pull-down resistors for stable input detection, toggle functionality for state switching, and PWM for brightness control. Overall, the experiment helped in understanding digital input handling and output modulation using Arduino.
+
+// Precautions:
+Ensure all connections are made correctly before powering the circuit.
+Use appropriate resistor values (10kΩ for pull-up/pull-down, 220Ω for LEDs).
+Avoid connecting components directly to 5V without current-limiting resistors.
+Debounce or delay button inputs to prevent false triggering.
+
+// Post-Lab Questionaire
+1) When the push button is pressed in a circuit with an external pull-up resistor (10kΩ), the input pin is connected to GND, so the state of the button will be LOW (0).
+
+2) If the pull-up resistor value changes to 4.7kΩ, the logic remains the same — when the button is pressed, it connects to GND, so the state will still be LOW (0).
+(Only current changes slightly; logic doesn’t.)
+
+3) With an internal pull-up resistor enabled, pressing the button connects the pin to GND, so the state of the button will be LOW (0).
+
+4) If the internal pull-up resistor is disabled, the input pin becomes floating when the button is not pressed. When pressed, the state becomes undefined or fluctuating, since there’s no resistor to pull it to a known logic level.
+
+5) With an external pull-down resistor (10kΩ), pressing the button connects the pin to +5V, so the state of the button will be HIGH (1).
+
+6) To find the maximum brightness (maximum current through LED):
+R = 220 ohms, Vsupply = 5V, Vf = 2V
+I = (Vsupply - Vf) / R
+I = (5 - 2) / 220
+I = 0.0136 A = 13.6 mA
+Maximum brightness current ≈ 13.6 mA (safe below the LED’s 20 mA limit).
+
+7) At 25% PWM duty cycle, average current = 25% of full current:
+Iavg = 0.25 × 13.6 mA
+Iavg = 3.4 mA
+Average current = 3.4 mA
