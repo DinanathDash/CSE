@@ -1,0 +1,135 @@
+1. What is Data Mining? Describe the steps involved in data mining when viewed as a process of knowledge discovery.
+Ans: Data Mining is the process of discovering useful patterns, relationships, or insights from large datasets using statistical, machine learning, and database techniques.
+Steps in Data Mining (as part of Knowledge Discovery in Databases – KDD):
+i. Data Cleaning: Remove noise, errors, duplicates, and missing values.
+ii. Data Integration: Combine data from multiple sources into a coherent data store.
+iii. Data Selection: Choose relevant data for analysis.
+iv. Data Transformation: Convert data into appropriate formats (e.g., normalization, aggregation).
+v. Data Mining: Apply algorithms to extract patterns (classification, clustering, association, etc.).
+vi. Pattern Evaluation: Identify truly interesting patterns using measures like support, confidence, or lift.
+vii. Knowledge Presentation: Visualize or report results for interpretation and decision-making.
+
+2. Define Predictive Analytics and explain its relationship with Data Mining.
+Ans: Predictive Analytics uses historical data, statistical models, and machine learning techniques to predict future outcomes.
+Relationship:
+i. Data Mining provides the patterns and models.
+ii. Predictive Analytics applies those models to forecast future events.
+
+3. For each of the following meetings, explain which phase in the CRISP-DM process is represented:
+a. Managers want to know by next week whether deployment will take place. Therefore, analysts meet to discuss how useful and accurate their model is.
+Ans: Phase: Evaluation (checking performance before deployment).
+
+b. The data mining project manager meets with the data warehousing manager to discuss how the data will be collected.
+Ans: Phase: Data Understanding (gathering and exploring data sources).
+
+c. The data mining consultant meets with the Vice President for Marketing, who says that he would like to move forward with customer relationship management.
+Ans: Phase: Business Understanding (defining objectives and success criteria).
+
+d. The data mining project manager meets with the production line supervisor, to discuss implementation of changes and improvements.
+Ans: Phase: Deployment (putting model into use).
+
+e. The analysts meet to discuss whether the neural network or decision tree models should be applied. 
+Ans: Phase: Modeling (selecting and building the appropriate model).
+
+4. What is an outlier? Why do we need to treat outliers carefully?
+Ans: Outlier: A data point significantly different from the rest of the dataset (too high or too low).
+Why handle carefully:
+i. They distort mean and standard deviation.
+ii. They mislead models, especially sensitive ones (like regression, clustering).
+iii. Sometimes, they indicate errors or rare but important events (fraud, defects).
+
+5. Use the following stock price data (in dollars) to compute mean, median, mode and standard deviation.
+Stock Price 10 7 20 12 75 15 9 18 4 12 8 14
+Ans: Data: 10, 7, 20, 12, 75, 15, 9, 18, 4, 12, 8, 14
+n = 12
+Step 1: Sort
+{4, 7, 8, 9, 10, 12, 12, 14, 15, 18, 20, 75}
+Mean (x̄):
+= (4+7+8+9+10+12+12+14+15+18+20+75)/12
+= 204 / 12 = 17
+Median:
+Middle = avg of 6th & 7th = (12 + 12)/2 = 12
+Mode:
+12 (repeats twice)
+Standard Deviation:
+Mean = 17
+Sum of (xi – mean)² = 3844
+Variance = 3844 / 12 = 320.33
+SD = √320.33 = 17.89
+Answer:
+Mean = 17, Median = 12, Mode = 12, SD = 17.89
+
+6. Use the following stock price data (in dollars) to answer the following questions.
+Stock Price 10 7 20 12 75 15 9 18 4 12 8 14
+Ans: Data: 4, 7, 8, 9, 10, 12, 12, 14, 15, 18, 20, 75
+Minimum = 4
+Maximum = 75
+Mean = 17
+Standard Deviation = 17.89
+a. Find the min-max normalized stock price for the stock worth $20
+Ans: X' = (X - Min) / (Max - Min)
+X' = (20 - 4) / (75 - 4) = 16 / 71 = 0.225 ≈ 0.23
+
+b. Compute the midrange stock price.
+Ans: Midrange = (Max + Min) / 2
+Midrange = (75 + 4) / 2 = 39.5
+
+c. Compute the z-score standardized stock price for the stock worth $20
+Ans: Z = (X - Mean) / SD
+Z = (20 - 17) / 17.89 = 0.168 ≈ 0.17
+
+d. Compute the decimal scaling stock price for the stock worth $20
+Ans: Maximum value = 75 → j = 2 (since 10^2 > 75)
+X' = X / 10^j = 20 / 100 = 0.20
+
+e. Compute the skewness for the stock price data
+Ans: Skewness = (Mean - Mode) / SD
+Skewness = (17 - 12) / 17.89 = 0.28 (Positively skewed)
+
+7. Use the given data set for the following questions: 1 1 1 3 3 7
+a. Bin the data into three bins of equal width (width = 3).
+Ans: Range = 7 - 1 = 6 → Width = 6/3 = 2
+Bins:
+1–3, 3–5, 5–7
+→ Bin1: 1,1,1
+→ Bin2: 3,3
+→ Bin3: 7
+b. Bin the data into three bins of two records each.
+Ans: Sorted: 1,1,1,3,3,7
+→ Bin1: 1,1
+→ Bin2: 1,3
+→ Bin3: 3,7
+
+8. Answer following questions: 
+a. What is the graphical counterpart of a contingency table?
+Ans: Mosaic Plot (or Stacked Bar Chart)
+
+b. What is the difference between taking row percentages and taking column percentages in a contingency table?
+Ans: Row %: Each row sums to 100%. Compares categories within a row.
+Column %: Each column sums to 100%. Compares categories within a column.
+
+9. For each of the following descriptive methods, state whether it may be applied to categorical data, continuous 
+numerical data, or both.
+Ans:
+Method	                Categorical	            Continuous           Both
+a. Bar charts               ✅                      ❌	
+b. Histograms	            ❌                      ✅	
+c. Summary statistics	    ❌                      ✅	
+d. Cross-tabulations        ✅                      ❌	
+e. Correlation analysis	    ❌                      ✅	
+f. Scatter plots	        ❌                      ✅	
+g. Web graphs               ✅                      ✅                  ✅
+h. Binning                  ❌                      ✅	
+
+10. Find Q1, Q2, and Q3 for the following data set, and draw a box-and-whisker plot. 
+{2,6,7,8,8,11,12,13,14,15,22,23}
+Ans: Q2 (Median): (6th + 7th)/2 = (11 + 12)/2 = 11.5
+Q1: Median of lower half (2,6,7,8,8,11) = (7+8)/2 = 7.5
+Q3: Median of upper half (12,13,14,15,22,23) = (14+15)/2 = 14.5
+Box Plot summary:
+Min = 2
+Q1 = 7.5
+Median = 11.5
+Q3 = 14.5
+Max = 23
+→ Slightly right-skewed (longer upper whisker due to 22, 23).
