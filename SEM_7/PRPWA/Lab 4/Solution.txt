@@ -1,0 +1,128 @@
+• Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+
+// Codes
+//2. Measure distance using HC-SR04 and show it on a 16x2 I2C LCD.
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+#define TRIG_PIN 9
+#define ECHO_PIN 10
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);  // change 0x27 to 0x3F if nothing displays
+
+void setup() {
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Distance Meter");
+  delay(1000);
+  lcd.clear();
+}
+
+void loop() {
+  long duration;
+  float distance;
+
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  duration = pulseIn(ECHO_PIN, HIGH);
+  distance = (duration * 0.0343) / 2;  // cm
+
+  lcd.setCursor(0, 0);
+  lcd.print("Distance: ");
+  lcd.setCursor(10, 0);
+  lcd.print(distance, 1);
+  lcd.print(" cm   ");
+
+  delay(500);
+}
+//Observation:
+
+//3. Detect an obstacle using an IR sensor and alert with an LED + buzzer.
+#define IR_PIN 8
+#define LED_PIN 7
+#define BUZZER_PIN 6
+
+void setup() {
+  pinMode(IR_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+}
+
+void loop() {
+  int obstacle = digitalRead(IR_PIN);
+
+  if (obstacle == LOW) {  // LOW means object detected on most IR modules
+    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(BUZZER_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(BUZZER_PIN, LOW);
+  }
+}
+//Observation:
+
+//4. Interface the HC-SR04 ultrasonic sensor with an Arduino UNO and use three LEDs to indicate the measured distance range (close, medium, far).
+#define TRIG_PIN 9
+#define ECHO_PIN 10
+#define RED_LED 2
+#define YELLOW_LED 3
+#define GREEN_LED 4
+
+void setup() {
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(RED_LED, OUTPUT);
+  pinMode(YELLOW_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+}
+
+void loop() {
+  long duration;
+  float distance;
+
+  // Trigger the ultrasonic pulse
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  // Measure echo pulse
+  duration = pulseIn(ECHO_PIN, HIGH);
+  distance = (duration * 0.0343) / 2;  // distance in cm
+
+  // Distance thresholds (adjust as needed)
+  if (distance <= 10) {             // Very close
+    digitalWrite(RED_LED, HIGH);
+    digitalWrite(YELLOW_LED, LOW);
+    digitalWrite(GREEN_LED, LOW);
+  } 
+  else if (distance > 10 && distance <= 25) {  // Medium range
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(YELLOW_LED, HIGH);
+    digitalWrite(GREEN_LED, LOW);
+  } 
+  else {                           // Far or no object
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(YELLOW_LED, LOW);
+    digitalWrite(GREEN_LED, HIGH);
+  }
+
+  delay(200);
+}
+//Observation:
+
+// Conclusion:
+
+// Precautions:
+
+// Post-Lab Questionaire
