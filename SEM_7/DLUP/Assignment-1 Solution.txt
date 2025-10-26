@@ -1,0 +1,47 @@
+1. The input to single input neuron is 2.0, its weight is 2.3 & bias is -3.
+    i) What is the net input to the transfer function?
+    ii) What’s the neuron output for the following transfer function using –
+        a) Sigmoid
+        b) Tanh
+        c) Relu
+Ans: Input (x) = 2.0, Weight (w) = 2.3, Bias (b) = -3
+i) Net input (net) = wx + b = 2.32.0 - 3 = 1.6
+ii) Outputs
+    a) Sigmoid = 1 / (1 + e^(-1.6)) = 0.8320
+    b) Tanh = tanh(1.6) = 0.9217
+    c) ReLU = max(0, 1.6) = 1.6000
+
+2. Given a 2-input neuron with the following parameters — b = 1.2, w = (3, 2) & input is [-5, 6]ᵀ. Calculate the neuron output for the following transfer function using bipolar sigmoidal function, tanh activation function & binary and sigmoidal function.
+Ans: Weights (w) = (3, 2), Bias (b) = 1.2, Input (x) = [-5, 6]^T
+Net input (net) = 3*(-5) + 2*(6) + 1.2 = -15 + 12 + 1.2 = -1.8
+Outputs:
+a) Sigmoid = 1 / (1 + e^(1.8)) = 0.1419
+b) Bipolar Sigmoid = 2*Sigmoid - 1 = -0.7163
+c) Tanh = tanh(-1.8) = -0.9468
+d) Binary Step = 0 (since net < 0)
+
+3. A single layer neuron network is having 6 inputs & 2 outputs, the outputs are to be limited to a continuous range over [0 to 1].
+i. What can you tell about the neuronal architecture specifically?
+ii. How many neurons are required?
+iii. What are the dimensions of the weight matrix? 
+iv. What kind of transfer function can be used?
+v. Is a bias required? 
+Ans: Inputs = 6, Outputs = 2, Output range = [0, 1]
+i. Architecture: a single fully-connected output layer that maps a 6-dimensional input vector to a 2-dimensional output vector (no hidden layers). Each output neuron receives all 6 inputs.
+ii. Number of neurons required: 2 (one per output dimension).
+iii. Weight matrix dimensions: using the usual convention 
+y = W.x + b with x ∈ R^6 and y ∈ R^2, W should be 2 × 6 (2 rows, 6 columns). Bias vector b is length 2.
+iv. Transfer function: to limit outputs to [0,1] use element-wise sigmoid (logistic).
+If the two outputs must form a probability distribution that sums to 1, use softmax instead. (Do not use ReLU — it’s not bounded to [0,1].)
+v. Is a bias required? Yes. A bias (size 2) is needed unless you deliberately want outputs forced through the origin — which almost never makes sense. Include biases.
+
+4. The final layer of network produces 3 logits for 3 classes. The given logits are z = [2.0, 1.0, 0.1]. True class is class 1. Use softmax activation function to get the probabilities pᵢ and cross entropy loss yₗ = -log(p_true). Compute the probabilities & the loss up to 4 decimal places. (Numerically stable softmax)
+Ans: Logits (z) = [2.0,1.0,0.1]. True class = class 1 (first element). Compute numerically-stable softmax by subtracting max logit (2.0):
+Shifted logits: [0, −1, −1.9]
+Exponentials: [e^0, e^−1, e^−1.9] = [1.0, 0.3678794412, 0.1495686192]
+Sum = 1.5174480604
+Probabilities (pᵢ) = e^(zᵢ​−max z) / ∑ e^(z_j​−max z)
+p1 = 1.0 / 1.5174 = 0.6590
+p2 = 0.3679 / 1.5174 = 0.2424
+p3 = 0.1496 / 1.5174 = 0.0986
+Cross-entropy loss for true class 1: L = −log(p_true​) = −log(0.6590011389) = 0.4170300163 → 0.4170
