@@ -1,0 +1,65 @@
+1.What does "equity" mean in the context of software engineering teams and why is it important in software engineering workplaces?
+Ans: Equity means everyone on the team has fair access to opportunities, resources, voice, and recognition based on need and context, not just identical treatment. It’s not equality (same for everyone) — it’s fairness (adjusting to make outcomes equitable).
+Why it matters -
+i. Better decisions: diverse viewpoints reduce blind spots and cognitive bias.
+ii. Talent retention: people who feel treated fairly stay and contribute more.
+iii. Product quality: diverse teams build products that serve a wider set of users and avoid harmful assumptions.
+iv. Risk reduction: avoids systemic bias that can become legal, PR, or ethical disasters (and technical debt).
+
+2.Why conducting blind hiring processes promotes equity in software engineering teams?
+Ans: Blind hiring removes or hides identity-linked signals (name, photo, gender, university, even city) during early screening. That forces reviewers to focus on measurable skills and work samples.
+Why it promotes equity
+i. Reduces unconscious bias (name/institution/gender/ethnicity).
+ii. Gives overlooked candidates (non-traditional paths, self-taught) a fair shot.
+iii. Makes hiring criteria more objective (test tasks, coding challenges, portfolios).
+iv. Caveat: blind hiring helps initial screening but must be paired with fair interviewing and onboarding — otherwise bias shifts later in the funnel.
+
+3.What was the main reason Google’s image recognition system made serious classification mistakes?
+Ans: The system was trained on biased datasets that reflected human and internet biases. It learned spurious correlations — e.g., associating certain objects or occupations with specific skin tones, backgrounds, or contexts — and thus misclassified or produced offensive outputs.
+
+4. Who discovered the mistakes in Google’s image recognition system? Why internal testing at Google failed to detect the bias?
+Ans: Who discovered: External researchers and journalists (and some external users) flagged high-profile failure cases. (Common pattern in ML history: outside audits + high-visibility testing surface the issues.)
+
+Why internal testing failed: internal datasets and evaluation metrics didn’t cover the real-world distribution and edge cases. Tests were narrow (focusing on accuracy on similar-distribution data) and lacked demographic-sensitive or adversarial evaluation. Also organizational incentives prioritized benchmark performance and speed over broad fairness testing.
+
+5.Explain haunting graveyard in code and why they are haunted?
+Ans: “Haunting graveyard” = a part of the codebase full of dead, abandoned, or fragile modules that are kept around (not removed) because of fear: fear of breaking things, poor tests, unclear ownership, or unknown external dependencies. They are “haunted” because:
+i. No one fully understands them.
+ii. They trigger regressions when touched.
+iii. They accumulate hacks, commented-out code, obsolete branches, or one-off fixes.
+iv. People avoid them — so they rot further.
+Why dangerous:
+i. High maintenance cost and risk.
+ii. Blocks refactoring and innovation (low confidence to change).
+iii. Often hides security bugs or performance traps.
+iv. Fixes: add tests, isolate with feature flags, document, assign ownership, and incrementally replace.
+
+6.Write short note on tribal knowledge.
+Ans: Tribal knowledge = information only a few team members know (how to deploy, hidden config, manual steps). It’s fragile: when those people leave or are unavailable, work stops.
+Problems: 
+i. Single points of failure.
+ii. Time wasted onboarding/re-discovering.
+iii. Inconsistent practices.
+Mitigation: 
+i. Document in code and ops runbooks.
+ii. Pairing and rotations.
+iii. Automate manual processes.
+iv. Keep lightweight, living docs (not a 300-page PDF no one reads).
+
+7.Explain Googleness in Software Development.
+Ans: Googliness (term used at Google) describes cultural/behavioral traits valued there: curiosity, bias to action, collaboration, humility, impact-driven thinking, and ethical consideration of product outcomes. In development terms, it means:
+i. Focus on measurable impact and scale.
+ii. Engineering rigor and testing.
+iii. Candid feedback and peer review culture.
+iv. Product empathy — thinking about users and long-term consequences.
+v. Willingness to challenge assumptions with data.
+You don’t need to be “Google” to use it — adopt the useful traits, not the bureaucracy.
+
+8.Low bus factor is a red flag for project continuity. Explain with real life example.
+Ans: Bus factor = number of people who need to be hit by a bus (i.e., absent) before the project fails.
+Why low bus factor is bad: 
+i. Knowledge concentration → single point of failure.
+ii. Slows maintenance, onboarding, and delivery when that person is unavailable.
+Real-life example (concrete):
+A startup’s payment system was maintained by one engineer. That engineer implemented many undocumented fixes and custom scripts for reconciliation. He took extended leave — the team couldn’t deploy updates, failed to process refunds correctly for several days, lost customers, and the company had to pay consultants to untangle the system. Cost: lost revenue, time, and morale.
+Fixes: Rotations, pairing, documentation, automated tests, runbooks, disaster drills, and cross-training.
