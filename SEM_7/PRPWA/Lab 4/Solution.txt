@@ -1,128 +1,109 @@
 • Disclaimer: Please re-verify the answers before writing, there may be some errors.
 
 //Pre-Lab Questions
+1) What is the working principle of the HC-SR04 ultrasonic sensor for distance measurement?
+Ans: The HC-SR04 works on the time-of-flight principle of sound waves. It emits an ultrasonic pulse (typically 40 kHz) through its transmitter; when the sound reflects off an object and returns to the receiver, the sensor measures the time taken for the echo to return. The Arduino then calculates the distance using the speed of sound in air.
 
-// Codes
-//2. Measure distance using HC-SR04 and show it on a 16x2 I2C LCD.
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+2) Mention the function of Trigger pin and Echo pin in the HC-SR04 sensor.
+Ans: i. Trigger pin: Sends a short (10 µs) HIGH pulse to initiate an ultrasonic burst.
+ii. Echo pin: Outputs a HIGH pulse whose duration corresponds to the time taken for the ultrasonic wave to travel to the object and back.
 
-#define TRIG_PIN 9
-#define ECHO_PIN 10
+3) Write the formula to calculate distance from the ultrasonic sensor using the speed of sound.
+Ans: Distance (cm)= ( Time (µs) × 0.0343 ) / 2
+Where 0.0343 cm/µs is the speed of sound in air (~343 m/s), and the division by 2 accounts for the round trip.
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);  // change 0x27 to 0x3F if nothing displays
+4) What is the typical range of distance measured by an HC-SR04 ultrasonic sensor?
+Ans: i. Minimum distance: ~2 cm
+ii. Maximum distance: ~400 cm (4 m)
+iii. Typical accuracy: ±3 mm under normal conditions.
 
-void setup() {
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  lcd.init();
-  lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("Distance Meter");
-  delay(1000);
-  lcd.clear();
-}
+5) What is the working principle of an Infrared (IR) sensor used for obstacle detection?
+Ans: An IR sensor uses infrared light reflection to detect obstacles. The emitter (IR LED) continuously sends infrared light; if an object is in front, the light reflects back to the photodiode or phototransistor receiver, changing its output voltage — which the Arduino interprets as an obstacle.
 
-void loop() {
-  long duration;
-  float distance;
+6) Differentiate between active IR sensor and passive IR sensor with examples.
+Ans: Active IR Sensor:
+- Has both an IR emitter (LED) and receiver (photodiode).
+- Works by sending IR light and detecting its reflection.
+- Example: IR obstacle detection sensor.
 
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
+Passive IR Sensor:
+- Has only a receiver that senses infrared radiation from objects.
+- Detects motion based on changes in heat patterns.
+- Example: PIR motion sensor.
 
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = (duration * 0.0343) / 2;  // cm
+7) State any two applications of ultrasonic sensors in real life.
+Ans: i. Parking assistance systems in vehicles for obstacle distance measurement.
+ii. Robotics for autonomous navigation and object avoidance.
 
-  lcd.setCursor(0, 0);
-  lcd.print("Distance: ");
-  lcd.setCursor(10, 0);
-  lcd.print(distance, 1);
-  lcd.print(" cm   ");
+8) Why is it necessary to use pinMode() and digitalWrite() functions in Arduino while interfacing sensors?
+Ans: i. pinMode() sets a pin as INPUT or OUTPUT to define its role in the circuit.
+ii. digitalWrite() controls the logic level (HIGH or LOW) of an output pin — e.g., to send a trigger pulse or turn an LED/buzzer ON or OFF.
+Without these, the Arduino wouldn’t know how to handle the electrical signals from the sensors.
 
-  delay(500);
-}
+9) How does an IR sensor distinguish between the presence and absence of an obstacle?
+Ans: When an obstacle is present, reflected IR light increases the receiver’s signal, changing the output (usually from HIGH → LOW). When no obstacle is present, minimal reflection keeps the output in the opposite state.
+
+10) Mention one key advantage and one limitation of ultrasonic sensors compared to IR sensors?
+Ans: Advantage:
+- Ultrasonic sensors can work in dark environments and detect any color or surface type.
+
+Limitation:
+- They have slower response and may give inaccurate readings on soft or angled surfaces that absorb sound.
+
 //Observation:
+// Objective 2: The HC-SR04 measures distance by transmitting an ultrasonic pulse and timing its echo. The Arduino converts this duration into distance using the speed of sound and displays it on the I2C LCD in real time.
 
-//3. Detect an obstacle using an IR sensor and alert with an LED + buzzer.
-#define IR_PIN 8
-#define LED_PIN 7
-#define BUZZER_PIN 6
+// Objective 3: The sensor’s output distance is categorized into defined ranges, activating LEDs to represent proximity levels. This confirms the accuracy of ultrasonic readings through visual indication.
 
-void setup() {
-  pinMode(IR_PIN, INPUT);
-  pinMode(LED_PIN, OUTPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
+// Objective 4: The IR sensor detects reflected infrared light from nearby objects. When an obstacle is sensed, the Arduino triggers both the LED and buzzer, indicating object presence through visual and audible signals.
+
+// Conclusion: The experiment successfully demonstrated distance and obstacle detection using the HC-SR04 ultrasonic sensor and IR sensor interfaced with Arduino UNO. The measured distances were displayed on an LCD and validated through LED indicators. The IR sensor effectively detected nearby obstacles, activating the buzzer and LED as alerts. Overall, the system proved reliable for short-range distance measurement and proximity detection applications.
+
+// Precautions: 
+i. Ensure all sensor modules are connected with correct polarity and secure wiring.
+ii. Avoid placing ultrasonic and IR sensors too close to reflective or heat-emitting surfaces.
+iii. Provide a stable 5V power supply to prevent signal fluctuations.
+iv. Test and calibrate sensor thresholds in a controlled environment before final observation.
+
+// Post-Lab Questionaire:
+1) What happens if the Trigger pin of the HC-SR04 ultrasonic sensor is not given a proper 10 µs pulse?
+Ans: If the Trigger pin doesn’t receive a proper 10 µs HIGH pulse, the sensor won’t emit a complete ultrasonic burst. As a result, the Echo pin won’t return a valid signal, and no distance will be measured or incorrect readings will appear.
+
+2) If the Echo pulse duration is measured as 2 ms, calculate the distance of the obstacle. (Speed of sound = 343 m/s)
+Ans: Given:
+Echo duration = 2 ms = 2000 µs
+Speed of sound = 0.0343 cm/µs
+Distance = ( 2000 × 0.0343 ) / 2 = 34.3 cm
+Distance = 34.3 cm
+
+3) Why do ultrasonic sensors measure distance more accurately than IR sensors in outdoor conditions?
+Ans: Ultrasonic sensors are unaffected by ambient light and color; they rely on sound reflection, not infrared intensity. IR sensors, however, are highly sensitive to sunlight and surface reflectivity, making ultrasonic sensors more accurate outdoors.
+
+4) What would be the effect of bright sunlight on the IR sensor’s performance?
+Ans: Bright sunlight emits strong infrared radiation that interferes with the IR receiver. This can cause false detections or make the sensor unable to distinguish reflected IR light from background IR noise.
+
+5) How can you modify the Arduino code to turn ON an LED when an obstacle is detected within 15 cm using the HC-SR04 sensor?
+Ans: Modify the Arduino code by adding a conditional check for distance ≤ 15 cm:
+if (distance <= 15) {
+  digitalWrite(LED_PIN, HIGH);
+} else {
+  digitalWrite(LED_PIN, LOW);
 }
+This turns ON the LED when an object is detected within 15 cm.
 
-void loop() {
-  int obstacle = digitalRead(IR_PIN);
+6) If the ultrasonic sensor reads 200 cm, what should be the approximate Echo pulse duration?
+Ans: For 200 cm:
+Time = ( 2 × Distance ) / Speed of sound = ( 2 × 200 ) / 0.0343 ≈ 11661.5 μs (≈11.66 ms)
+Echo duration ≈ 11.66 ms
 
-  if (obstacle == LOW) {  // LOW means object detected on most IR modules
-    digitalWrite(LED_PIN, HIGH);
-    digitalWrite(BUZZER_PIN, HIGH);
-  } else {
-    digitalWrite(LED_PIN, LOW);
-    digitalWrite(BUZZER_PIN, LOW);
-  }
-}
-//Observation:
+7) Why is it necessary to divide the total sound travel time by 2 in ultrasonic distance measurement?
+Ans: The sound wave travels from the sensor to the object and back. Dividing the total travel time by 2 gives the one-way time — required to calculate the actual distance to the object.
 
-//4. Interface the HC-SR04 ultrasonic sensor with an Arduino UNO and use three LEDs to indicate the measured distance range (close, medium, far).
-#define TRIG_PIN 9
-#define ECHO_PIN 10
-#define RED_LED 2
-#define YELLOW_LED 3
-#define GREEN_LED 4
+8) What logic output does the IR obstacle sensor provide when an object is detected?
+Ans: When an object is detected, the IR sensor output becomes LOW (0 V) on most modules. When no object is present, the output stays HIGH (5 V).
 
-void setup() {
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(RED_LED, OUTPUT);
-  pinMode(YELLOW_LED, OUTPUT);
-  pinMode(GREEN_LED, OUTPUT);
-}
+9) Mention one limitation of using only IR sensors for obstacle detection in mobile robots.
+Ans: IR sensors fail on dark, absorbent, or transparent surfaces and under bright sunlight, leading to unreliable obstacle detection in mobile robots.
 
-void loop() {
-  long duration;
-  float distance;
-
-  // Trigger the ultrasonic pulse
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // Measure echo pulse
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = (duration * 0.0343) / 2;  // distance in cm
-
-  // Distance thresholds (adjust as needed)
-  if (distance <= 10) {             // Very close
-    digitalWrite(RED_LED, HIGH);
-    digitalWrite(YELLOW_LED, LOW);
-    digitalWrite(GREEN_LED, LOW);
-  } 
-  else if (distance > 10 && distance <= 25) {  // Medium range
-    digitalWrite(RED_LED, LOW);
-    digitalWrite(YELLOW_LED, HIGH);
-    digitalWrite(GREEN_LED, LOW);
-  } 
-  else {                           // Far or no object
-    digitalWrite(RED_LED, LOW);
-    digitalWrite(YELLOW_LED, LOW);
-    digitalWrite(GREEN_LED, HIGH);
-  }
-
-  delay(200);
-}
-//Observation:
-
-// Conclusion:
-
-// Precautions:
-
-// Post-Lab Questionaire
+10) Suggest a practical application where both ultrasonic and IR sensors are used together for better performance.
+Ans: In autonomous robots and smart parking systems, both ultrasonic and IR sensors are used together — IR for quick short-range detection and ultrasonic for accurate distance measurement — improving reliability in mixed lighting and surface conditions.

@@ -1,0 +1,83 @@
+• Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+1) What is the WS2812B LED commonly called in Adafruit terminology?
+Ans: NeoPixel
+
+2) Which communication protocol is used by WS2812B LEDs?
+Ans: One-Wire (proprietary single-wire serial communication protocol)
+(It uses a single data line with strict timing for control signals.)
+
+3) Why is an external resistor (≈330–470 Ω) recommended on the data line of NeoPixels?
+Ans: To limit inrush current and reduce signal ringing or noise on the data line, protecting the first LED’s data input pin from voltage spikes.
+
+4) Why is a capacitor (≈1000 µF) recommended across the LED power supply?
+Ans: To smooth out power supply fluctuations and prevent voltage drops or surges when many LEDs turn on simultaneously.
+
+5) What Arduino library is most commonly used to control WS2812B LEDs?
+Ans: Adafruit_NeoPixel library
+
+6) Which Arduino UNO pin is commonly used as the data pin for NeoPixels in example codes?
+Ans: Digital Pin 6
+
+7) How many bytes are required to represent the color of one WS2812B LED?
+Ans: 3 bytes (1 byte each for Red, Green, and Blue)
+
+8) Why must we call pixels.begin() in the setup function?
+Ans: To initialize the NeoPixel object and allocate memory/control of the data pin before sending color data. Without it, LEDs won’t respond to setPixelColor() or show().
+
+9) What power supply voltage is typically needed for WS2812B LEDs?
+Ans: 5 Volts DC
+
+10) What is the typical maximum current consumption of one WS2812B LED at full brightness white?
+Ans: 60 milliamps (20 mA per color channel × 3)
+
+//Observation:
+// Objective 2: To understand how individual WS2812B LEDs can be addressed and controlled using the setPixelColor() function, allowing precise control of color and intensity for each pixel independently.
+
+// Objective 3: To explore brightness control in WS2812B NeoPixels using the setBrightness() function and implement user-controlled global brightness adjustment through a push button interface.
+
+// Objective 4: To develop code that displays static multi-color patterns on the WS2812B LED strip by assigning fixed color combinations to specific LEDs for visual design effects.
+
+// Objective 5: To create and analyze dynamic lighting effects such as rainbow, fading, and chasing animations, demonstrating color transitions and motion patterns using programmable LED control.
+
+// Conclusion: The experiment successfully demonstrated control over WS2812B NeoPixel LEDs using Arduino, covering pixel-level color control, global brightness adjustment, and dynamic animation effects. It helped in understanding how digital communication and timing precision influence LED behavior. The practical implementation showed how simple programming can produce complex lighting patterns and visual effects.
+
+// Precautions: 
+i. Always use a common ground between the LED strip and Arduino.
+ii. Include a 330–470 Ω resistor on the data line and a 1000 µF capacitor across the power supply.
+iii. Avoid powering too many LEDs directly from the Arduino 5V pin.
+iv .Ensure correct data pin connection and stable power to prevent flickering or LED damage.
+
+// Post-Lab Questionaire:
+1) What function is used to actually display the updated color values on the NeoPixel LEDs?
+Ans: pixels.show();
+This function transmits the color data from Arduino’s memory to the LED strip, updating the visible output.
+
+2) How do you set the brightness of all NeoPixels in the strip?
+Ans: Using pixels.setBrightness(value);
+This sets a global brightness level (0–255) that scales the intensity of all LEDs before the next show().
+
+3) Which function is used to assign an RGB color value to a particular pixel?
+Ans: pixels.setPixelColor(n, pixels.Color(r, g, b));
+It defines the red, green, and blue intensity for a specific pixel index n.
+
+4) What happens if you set pixel colors but forget to call pixels.show();?
+Ans: The LEDs will not update or change color.
+The color data stays in memory until show() is executed to send it to the LEDs.
+
+5) What was observed when brightness was set to maximum for multiple LEDs?
+Ans: The LEDs became extremely bright, and the current draw increased significantly.
+In some cases, insufficient power supply caused voltage drops, flickering, or Arduino resets.
+
+6) How can you create a color-changing rainbow animation on NeoPixels?
+Ans: By continuously cycling through hue values using the ColorHSV() function and displaying them in sequence with pixels.show();.
+Incrementing the hue across the strip in small steps creates a smooth, animated rainbow effect.
+
+7) What color order (RGB/GRB) did your NeoPixel strip use in the experiment?
+Ans: GRB (Green, Red, Blue)
+Most WS2812B strips follow the GRB order rather than the standard RGB.
+
+8) What practical limitation did you observe when using Arduino UNO for NeoPixel control?
+Ans: Limited SRAM and strict timing constraints.
+The UNO can handle only a modest number of LEDs before memory and processing limits cause delays or unreliable color updates.

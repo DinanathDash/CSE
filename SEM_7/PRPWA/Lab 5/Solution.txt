@@ -1,0 +1,75 @@
+• Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+1) What is the function of the Analog-to-Digital Converter (ADC) in Arduino Uno?
+Ans: The ADC converts the analog input voltage (continuous signal) into a digital value (discrete number) that the Arduino can process.
+
+2) What is the range of digital values that the analogRead() function can output in Arduino Uno?
+Ans: The output range is 0 to 1023, representing 10-bit resolution.
+
+3) What is the voltage range that can be read by the Arduino Uno’s ADC?
+Ans: The ADC can read voltages from 0V to 5V (when using the default reference voltage).
+
+4) How is the analog voltage from the LM35 sensor related to temperature in degrees Celsius?
+Ans: The LM35 outputs 10 mV per °C.
+That means 1°C = 0.01V, so voltage is directly proportional to temperature.
+
+5) Write the formula used to convert the ADC reading from the LM35 sensor into temperature.
+Ans: T(°C) = ( AnalogValue × 5.0 × 100 ) / 1024
+ 
+6) What type of signal does the DHT11 sensor provide to the Arduino — analog or digital?
+Ans: The DHT11 provides a digital signal.
+
+7) Which library is used in Arduino to read data from the DHT11 sensor?
+Ans: The “DHT” library by Adafruit is used to interface and read data from the DHT11.
+
+8) What parameters can be measured using the DHT11 sensor?
+Ans: The DHT11 measures temperature and relative humidity.
+
+9) Why might temperature readings from the LM35 and DHT11 sensors differ slightly?
+Ans: Due to differences in sensor accuracy, calibration, response time, and internal measurement methods.
+The LM35 is analog and more precise (±0.5°C), while DHT11 is digital and less accurate (±2°C).
+
+10) How can temperature readings from both LM35 and DHT11 be displayed on the Serial Monitor or LCD?
+Ans: By writing an Arduino program that:
+i. Reads analog data from the LM35 using analogRead(),
+ii. Reads digital data from the DHT11 using the DHT library,
+iii. And then displays both values on the Serial Monitor using Serial.print() or on an LCD using the LiquidCrystal_I2C library.
+
+//Observation:
+// Objective 1: The LM35 is a precision analog temperature sensor that produces a voltage directly proportional to temperature at a scale factor of 10 mV/°C. The Arduino’s ADC converts this analog voltage into a digital value, which is then used to calculate temperature in degrees Celsius.
+
+// Objective 2: The DHT11 is a digital sensor that measures both temperature and humidity and transmits data using a single-wire digital communication protocol. The Arduino reads this data through a digital input pin using the DHT library functions.
+
+// Objective 3: Temperature readings from both LM35 and DHT11 sensors are acquired simultaneously and displayed on the Serial Monitor or an LCD. This allows real-time observation and comparison of analog and digital sensor outputs.
+
+// Onjective 4: This objective analyzes and compares the performance of LM35 and DHT11 sensors under identical conditions. Differences in readings highlight variations in accuracy, response time, and sensing characteristics between analog and digital sensors.
+
+// Conclusion: The experiment successfully demonstrated temperature measurement using both analog (LM35) and digital (DHT11) sensors interfaced with Arduino Uno. The LM35 provided faster and more precise readings, while the DHT11 gave slightly delayed but consistent digital output. Comparing both showed minor variations due to sensor characteristics and accuracy limits. Overall, the setup effectively illustrated ADC conversion, sensor interfacing, and data visualization on the Serial Monitor/LCD.
+
+// Precautions: 
+i. Ensure all sensor connections are correct and secure before powering the circuit.
+ii. Avoid touching the sensors during operation, as body heat can affect readings.
+iii. Provide stable 5V supply to maintain accurate sensor output.
+iv. Keep sensors away from direct sunlight or heat sources during testing.
+v. Wait a few seconds between readings for the DHT11 to stabilize and update correctly.
+
+// Post-Lab Questionaire:
+1) What is the significance of resolution in an Analog-to-Digital Converter, and how does it affect measurement accuracy in Arduino?
+Ans: Resolution defines the smallest voltage change that an ADC can detect. The Arduino Uno uses a 10-bit ADC, giving 1024 discrete levels over a 0–5V range, meaning each step represents about 4.88 mV. Higher resolution provides finer measurement precision and more accurate analog-to-digital conversion.
+
+2) How does the reference voltage (Vref) influence the output of the ADC in Arduino Uno?
+Ans: The reference voltage determines the maximum input voltage corresponding to the ADC’s highest digital value (1023). Changing Vref alters the voltage range and step size of conversion—lower Vref increases sensitivity, while higher Vref allows measurement of larger voltages but with reduced precision.
+
+3) Explain the concept of sampling in ADCs and why sampling rate is important in data acquisition systems.
+Ans: Sampling is the process of periodically measuring an analog signal’s voltage at discrete time intervals. The sampling rate must be high enough (at least twice the highest signal frequency, as per Nyquist theorem) to accurately capture signal variations and avoid information loss or aliasing.
+
+4) What are the advantages and disadvantages of using analog sensors like LM35 compared to digital sensors like DHT11?
+Ans: i. Advantages of LM35: Higher accuracy, faster response, and continuous output.
+Disadvantages: Requires ADC conversion and is sensitive to noise.
+
+ii. Advantages of DHT11: Easy digital interface and provides both temperature and humidity.
+Disadvantages: Lower accuracy (±2°C), slower response, and limited update rate.
+
+5) How does noise affect analog readings in microcontroller-based systems, and what techniques can be used to reduce it?
+Ans: Electrical noise introduces unwanted fluctuations in analog readings, reducing measurement stability and accuracy. Noise can be minimized by using proper grounding, shielded cables, decoupling capacitors near sensors, averaging multiple readings in software, and keeping analog wiring short and away from digital or power lines.

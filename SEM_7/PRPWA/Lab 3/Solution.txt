@@ -1,16 +1,97 @@
 ﻿• Disclaimer: Please re-verify the answers before writing, there may be some errors.
 
 //Pre-Lab Questions
+1) What is the purpose of the "analogRead" command in Arduino?
+Ans: The analogRead() command is used to read the analog voltage (ranging from 0 V to 5 V) applied to an analog input pin (A0–A5). It converts this voltage into a digital value between 0 and 1023 using the Arduino’s 10-bit ADC (Analog-to-Digital Converter).
+
+2) How can you convert analog voltage to voltage reading in volts using Arduino?
+Ans: You can convert the analog reading to actual voltage using the formula:
+        V= ((analogRead value) × V_ref) / 1023
+where V_ref is the reference voltage (usually 5 V on most Arduino boards).
+
+3) Can you use the "analogRead" command to measure digital signals?
+Ans: No. The analogRead() command is meant for analog inputs only.
+To read digital signals (HIGH or LOW), you should use the digitalRead() command instead.
+
+4) What is the maximum analog voltage that can be read by the Arduino?
+Ans: The maximum readable analog voltage is 5 V (for standard Arduino Uno boards using 5 V reference).
+Applying more than 5 V may damage the input pin.
+
+5) What is the range of values that the "analogRead" command can output on the Arduino platform?
+Ans: The output range of analogRead() is 0 to 1023, representing 0 V to 5 V.
+0 → 0 V
+1023 → 5 V
+
+6) What is the function of the map() function in Arduino?
+Ans: The map() function is used to scale a number from one range to another.
+Example:
+        int brightness = map(sensorValue, 0, 1023, 0, 255);
+This converts an analog input (0–1023) to an output range suitable for PWM (0–255).
+
+7) What is the relationship between light intensity and the resistance of a photoresistor?
+Ans: The relationship is inversely proportional:
+When light intensity increases, the resistance decreases.
+When light intensity decreases, the resistance increases.
+
+8) How can a photoresistor be used to measure changes in light intensity?
+Ans: A photoresistor (LDR) is connected in a voltage divider circuit with a fixed resistor.
+As light intensity changes, the LDR’s resistance changes, which alters the output voltage.
+Arduino can then use analogRead() to measure this voltage and determine light levels.
+
+9) What is the resistance range of a typical photoresistor in bright light conditions?
+Ans: In bright light, a typical LDR has a low resistance, usually between 1 kΩ to 5 kΩ.
+In darkness, it can rise to 100 kΩ or more.
 
 //Observations
-//Obj 1
-//Obj 2
-//Obj 3
-//Obj 4
-//Obj 5
+//Obj 1: The analog voltage readings obtained through potentiometers demonstrated how varying resistance changes the voltage input to the Arduino. The observed data confirmed the proportional relationship between potentiometer position and analog voltage, allowing smooth control of LED brightness or other analog outputs.
 
-// Conclusion:
+//Obj 2: The LDR circuit showed that the analog voltage changes with varying light intensity. As light increased, resistance decreased and the voltage output changed accordingly, validating the inverse relationship between light intensity and photoresistor resistance.
 
-// Precautions:
+//Obj 3: The experiment illustrated that the buzzer’s tone frequency could be varied using analog input from the LDR. As ambient light levels changed, corresponding variations in tone were produced, showing the capability of Arduino to translate light data into sound.
+
+//Obj 4: RGB LED testing verified that varying PWM signals across red, green, and blue channels can produce a full spectrum of colors. Adjusting intensity levels allowed smooth color transitions and demonstrated precise analog control using Arduino PWM outputs.
+
+//Obj 5: RGB LED testing verified that varying PWM signals across red, green, and blue channels can produce a full spectrum of colors. Adjusting intensity levels allowed smooth color transitions and demonstrated precise analog control using Arduino PWM outputs.
+
+// Conclusion: The Light & Sound Show experiment demonstrated the effective use of Arduino’s analog and digital capabilities to create an intelligent lighting and audio system. By integrating sensors like potentiometers and photoresistors with actuators such as LEDs and buzzers, real-time control and adaptive behavior were achieved. The project validated concepts of analog voltage measurement, PWM control, and sensor-based automation, highlighting the versatility of Arduino in interactive applications.
+
+// Precautions: The Light & Sound Show experiment demonstrated the effective use of Arduino’s analog and digital capabilities to create an intelligent lighting and audio system. By integrating sensors like potentiometers and photoresistors with actuators such as LEDs and buzzers, real-time control and adaptive behavior were achieved. The project validated concepts of analog voltage measurement, PWM control, and sensor-based automation, highlighting the versatility of Arduino in interactive applications.
 
 // Post-Lab Questionaire
+1) If the "analogRead" command outputs a value of 512, what is the corresponding voltage reading in volts?
+Ans: V = ( 512 × 5 ) / 1023 = 2.5 V (approximately)
+
+2) How does the value of the analog voltage reading change as the resistance of the second resistor in the voltage divider circuit is increased?
+Ans: As the resistance of the second resistor increases, the voltage across it increases, resulting in a higher analog voltage reading on the Arduino.
+
+3) How do you calibrate a potentiometer reading in an Arduino sketch?
+Ans: You can calibrate a potentiometer by reading its analog value using analogRead(), mapping it to a specific range using map(), and adjusting the scaling or offset values until the readings match the desired physical range.
+
+4) If the analogRead() function on the Arduino returns a value of 1023, what is the corresponding voltage reading in volts assuming a 5V reference voltage?
+Ans: V = ( 1023 × 5 ) / 1023 = 5 V
+
+5) What is the maximum value of the ADC in Arduino?
+Ans: The maximum ADC value in Arduino is 1023, which corresponds to the reference voltage (usually 5 V).
+
+6) If the ADC value of a potentiometer is 256 and the reference voltage is 5V, what is the voltage reading in volts?
+Ans: V = ( 256 × 5 ) / 1023 ≈ 1.25 V
+
+7) If the reference voltage is changed to 3.3V, what is the voltage reading in volts for an ADC value of 750?
+Ans: V = ( 750 × 3.3 ) / 1023 ≈ 2.42 V
+
+8) If the ADC value of a potentiometer is 1023, what is the voltage reading in volts for a reference voltage of 5V?
+Ans: V = ( 1023 × 5 ) / 1023 = 5 V
+
+9) What is the formula to convert ADC value to voltage reading in volts?
+Ans: V= (( ADC Value ) × V_ref ) / 1023​	
+ 
+10) What is the resolution of the analog-to-digital converter (ADC) in the Arduino board?
+Ans: The Arduino Uno uses a 10-bit ADC, giving 1024 discrete levels (0–1023).
+
+11) How does the Arduino handle noisy analog signals?
+Ans:  can handle noisy signals by using techniques like averaging multiple readings, adding capacitors for filtering, or using software smoothing algorithms to stabilize the input values.
+
+12) How can you adjust the range of LED brightness values using the map() function?
+Ans: The map() function can convert the analog input range (0–1023) to a PWM output range (0–255), allowing proportional LED brightness control, e.g.:
+        int brightness = map(sensorValue, 0, 1023, 0, 255);
+        analogWrite(ledPin, brightness);
