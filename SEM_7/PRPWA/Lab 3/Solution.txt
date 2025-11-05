@@ -51,11 +51,11 @@ In darkness, it can rise to 100 kΩ or more.
 
 //Obj 4: RGB LED testing verified that varying PWM signals across red, green, and blue channels can produce a full spectrum of colors. Adjusting intensity levels allowed smooth color transitions and demonstrated precise analog control using Arduino PWM outputs.
 
-//Obj 5: RGB LED testing verified that varying PWM signals across red, green, and blue channels can produce a full spectrum of colors. Adjusting intensity levels allowed smooth color transitions and demonstrated precise analog control using Arduino PWM outputs.
+//Obj 5: The integrated system successfully responded to ambient light by dynamically adjusting LED color and buzzer tone. The button-controlled mechanism confirmed the ability to toggle interactive light and sound behavior, achieving adaptive environmental feedback through analog sensing.
 
 // Conclusion: The Light & Sound Show experiment demonstrated the effective use of Arduino’s analog and digital capabilities to create an intelligent lighting and audio system. By integrating sensors like potentiometers and photoresistors with actuators such as LEDs and buzzers, real-time control and adaptive behavior were achieved. The project validated concepts of analog voltage measurement, PWM control, and sensor-based automation, highlighting the versatility of Arduino in interactive applications.
 
-// Precautions: The Light & Sound Show experiment demonstrated the effective use of Arduino’s analog and digital capabilities to create an intelligent lighting and audio system. By integrating sensors like potentiometers and photoresistors with actuators such as LEDs and buzzers, real-time control and adaptive behavior were achieved. The project validated concepts of analog voltage measurement, PWM control, and sensor-based automation, highlighting the versatility of Arduino in interactive applications.
+// Precautions: Ensure all circuit connections are correct and components are properly grounded before powering the Arduino. Avoid applying voltages higher than 5V to analog pins to prevent damage. Handle the LDR and RGB LED carefully to avoid overheating. Always disconnect power while modifying the circuit and verify code logic before uploading to the board.
 
 // Post-Lab Questionaire
 1) If the "analogRead" command outputs a value of 512, what is the corresponding voltage reading in volts?
