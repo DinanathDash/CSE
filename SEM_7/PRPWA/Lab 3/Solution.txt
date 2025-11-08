@@ -89,7 +89,7 @@ Ans: V= (( ADC Value ) × V_ref ) / 1023​
 Ans: The Arduino Uno uses a 10-bit ADC, giving 1024 discrete levels (0–1023).
 
 11) How does the Arduino handle noisy analog signals?
-Ans:  can handle noisy signals by using techniques like averaging multiple readings, adding capacitors for filtering, or using software smoothing algorithms to stabilize the input values.
+Ans: Arduino can handle noisy signals by using techniques like averaging multiple readings, adding capacitors for filtering, or using software smoothing algorithms to stabilize the input values.
 
 12) How can you adjust the range of LED brightness values using the map() function?
 Ans: The map() function can convert the analog input range (0–1023) to a PWM output range (0–255), allowing proportional LED brightness control, e.g.:
