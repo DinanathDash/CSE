@@ -2,20 +2,20 @@
 Ans: Primary purpose of ESP8266 ESP-01 when interfaced with Arduino UNO:
 To enable Wi-Fi connectivity for Arduino, allowing it to connect to wireless networks and send/receive data over the internet using TCP/IP protocols.
 
-2. What is the primary purpose of the ESP8266 ESP-01 module when interfaced with an Arduino UNO?
+2. Why does the ESP-01 module operate at 3.3V instead of 5V, and what could happen if connected directly to 5V?
 Ans: The ESP8266’s internal circuitry is designed for 3.3 V logic. Connecting it to 5 V directly can permanently damage its GPIO and power circuits due to overvoltage.
 
-3. What is the primary purpose of the ESP8266 ESP-01 module when interfaced with an Arduino UNO?
+3. List all 8 pins of the ESP-01 module and briefly describe the function of each.
 Ans: Eight pins of ESP-01 and their functions:
         Pin	                        Function
-        VCC             	        Power supply (3.3 V)
+        VCC             	          Power supply (3.3 V)
         GND	                        Ground
         TX	                        Serial data transmit
         RX	                        Serial data receive
         CH_PD / EN	                Chip enable (must be HIGH to activate)
         RST	                        Reset (active LOW)
-        GPIO0	                    Used for programming or general I/O
-        GPIO2	                    General I/O pin
+        GPIO0	                      Used for programming or general I/O
+        GPIO2	                      General I/O pin
         
 4. What is the default baud rate of the ESP-01 module, and why is it important to match it with the Arduino serial communication settings?
 Ans: Default baud rate and importance:
