@@ -1,0 +1,119 @@
+• Disclaimer: Please re-verify the answers before writing, there may be some errors.
+
+//Pre-Lab Questions
+1) Name all the pins of the HC-05/HC-06 module and their functions.
+Ans: VCC – Power input (typically 5V on breakout boards).
+GND – Ground.
+TXD – Transmit pin (Bluetooth → Arduino).
+RXD – Receive pin (Arduino → Bluetooth).
+STATE – Indicates connection status (HIGH when connected).
+EN / KEY – Enables AT command mode when pulled HIGH before power-up.
+
+2) Why is a voltage divider required between Arduino TX and HC RX?
+Ans: Because Arduino TX outputs 5V, but the HC-05/HC-06 RX pin is 3.3V logic only.
+Feeding 5V directly risks damaging the module.
+A simple resistor divider drops 5V → ~3.3V safely.
+
+3) What is the default baud rate of the HC-05/HC-06 module?
+Ans: HC-05 (Normal mode): 9600
+HC-05 (AT mode): 38400
+HC-06: 9600
+
+4) Explain the difference between HC-05 and HC-06 modules.
+Ans: HC-05: Full-featured, supports master + slave roles, supports extensive AT commands.
+HC-06: Simpler, works only as slave, limited AT commands.
+HC-05 has a KEY/EN pin specifically for entering AT mode; HC-06 enters AT mode automatically when unpaired (with limitations).
+
+5) What is Software Serial in Arduino, and why is it used in this experiment?
+Ans: SoftwareSerial is a library that creates a software-based UART on any digital pins.
+You use it because:
+i. The Arduino UNO has only one hardware serial port, already used for USB communication with the Serial Monitor.
+ii. The Bluetooth module needs a separate RX/TX pair.
+SoftwareSerial gives you a second serial port for the HC-05/HC-06.
+
+6) What is the purpose of pairing a Bluetooth device before communication?
+Ans: Pairing creates a trusted, authenticated link between the phone and the module.
+Without pairing:
+i. No SPP connection
+ii .No serial data exchange
+iii. No commands received by Arduino
+Pairing verifies PIN and opens the serial channel.
+
+7) How does Arduino interpret commands sent from a smartphone?
+Ans: i. The phone sends characters via Bluetooth → HC-05/HC-06 → Arduino SoftwareSerial RX.
+ii. Arduino reads the incoming bytes using:
+        if (bt.available()) {
+            char c = bt.read();
+        }
+iii. Code compares the character ('1', '0', etc.) and triggers actions like turning an LED on/off.
+
+8) How can you verify if the HC-05/HC-06 module is powered and ready for pairing?
+Ans: The onboard LED blinking pattern:
+i. Fast blinking (about 2–3 times per sec): Powered & waiting for pairing.
+ii. Slow blinking (1 blink per 2 sec): Successfully connected.
+If no LED is blinking, the module is not powered.
+
+9) List the factors that can affect Bluetooth communication range.
+Ans: i. Physical obstacles (walls, furniture, metal objects).
+ii. Electrical interference (Wi-Fi routers, microwaves, motors).
+iii. Antenna quality/design of the Bluetooth module.
+iv. Power supply quality.
+v. Device orientation and placement.
+vi. Environmental noise and RF congestion.
+
+10) Explain the role of the Serial Monitor in this experiment.
+Ans: It allows you to:
+i. See what the Arduino receives from Bluetooth.
+ii. Verify if commands ('1', '0', etc.) are reaching the MCU.
+iii. Debug the Bluetooth communication by printing messages.
+iv. Confirm the LED commands were processed (e.g., “LED ON”, “LED OFF”).
+It’s your real-time debugging output.
+
+//Observation:
+// Objective 1: The HC-05 Bluetooth module was connected to the Arduino UNO for serial communication using the SoftwareSerial pins. The module was powered through the Arduino’s 5V supply. The TX pin of the HC-05 was connected directly to Arduino digital pin 10 (SoftwareSerial RX). The Arduino TX pin (digital pin 11) was connected to the HC-05 RX pin through a two-resistor voltage divider to safely reduce the 5V signal to 3.3V. A common ground connection was shared between the Arduino and the module. The wiring ensured proper bidirectional communication between the Arduino UNO and the HC-05 module.
+
+// Objective 2: The HC-05 module was paired with a smartphone using a Bluetooth terminal app, confirming stable wireless connectivity. After pairing, the Arduino UNO communicated through SoftwareSerial, allowing data exchange between the phone and the module. Characters sent from the smartphone appeared on the Arduino Serial Monitor, verifying successful two-way transmission. The Bluetooth indicator LED changed from fast blink to slow blink, confirming an active connection.
+
+// Objective 3: An LED was connected to Arduino digital pin 6 through a current-limiting resistor, and the Arduino code was modified to interpret received Bluetooth commands. When the smartphone sent ‘1’, the Arduino turned the LED ON and returned an acknowledgment message. Sending ‘0’ turned the LED OFF with a similar confirmation. The responses received on the terminal app verified that bidirectional communication and remote LED control were functioning correctly.
+
+// Objective 4: The communication range of the HC-05 module was tested by gradually increasing the distance between the smartphone and the Arduino setup while sending commands. Reliable response was observed at close and mid-range distances, with delays increasing slightly as distance grew. Beyond a certain point, the commands showed intermittent response, indicating the limit of effective range. Response latency was measured by timing the interval between sending a command and the LED changing state, showing consistent low-delay performance under stable signal conditions.
+
+// Conclusion: The experiment successfully demonstrated wireless serial communication between the Arduino UNO and the HC-05 Bluetooth module using SoftwareSerial. A stable connection with a smartphone was established, allowing bidirectional data transfer and remote LED control through simple character commands. Communication range and latency tests showed consistent performance within typical Bluetooth limits. Overall, the experiment validated reliable wireless control and data exchange using classic Bluetooth SPP with Arduino.
+
+// Precautions: 
+i. Ensure a proper 5V power supply and common ground between Arduino and the Bluetooth module.
+ii. Use a voltage divider when connecting Arduino TX to the module’s RX to avoid damaging the HC-05/HC-06.
+iii. Avoid placing the Bluetooth module near metal objects or interference sources during range testing.
+iv. Verify correct TX/RX wiring before powering the circuit to prevent communication failure.
+v. Keep the connection distance within the module’s rated range for stable performance.
+
+// Post-Lab Questionaire:
+Post Experiment Questionnaire:
+1)How did you establish bidirectional communication between Arduino and a smartphone?
+Ans: Bidirectional communication was established by pairing the smartphone with the HC-05 module and using a Bluetooth terminal app to exchange serial data. The Arduino used SoftwareSerial on pins 10 and 11 to read incoming characters and send responses back to the phone. This allowed both devices to send and receive data through the same Bluetooth link.
+
+2)Describe the steps to control an LED using Bluetooth commands.
+Ans: The LED was connected to Arduino pin 6, and the code was programmed to monitor incoming Bluetooth characters. When the phone sent '1', the Arduino set pin 6 HIGH to turn the LED ON; when '0' was received, it set pin 6 LOW. Acknowledgment messages (“LED ON” / “LED OFF”) were sent back to the smartphone to confirm the action.
+
+3)What was the maximum reliable communication range achieved during the experiment?
+Ans: The reliable range depends on your specific measurements, but HC-05 modules typically maintain stable communication up to 8–12 meters indoors and 15–20 meters outdoors line-of-sight.
+
+4)How did you implement forwarding between Serial Monitor and Bluetooth?
+Ans: Forwarding was handled in the loop using two checks:
+i. If Bluetooth had data (bt.available()), the Arduino sent it to the Serial Monitor (Serial.print()), and
+ii. If the Serial Monitor had data (Serial.available()), the Arduino wrote it to Bluetooth (bt.write()), creating a transparent bridge between both interfaces.
+
+5)What challenges did you face while pairing the HC-05/HC-06 module?
+Ans: Common issues included incorrect pairing PIN, previously stored pairings on the phone, and the module not entering discoverable mode. In some cases, unstable power or wiring mistakes (especially TX/RX swapped) prevented the module from advertising itself properly.
+
+6)Explain how the Arduino code processes different commands (1 = ON, 0 = OFF).
+Ans: The code reads incoming characters using bt.read(). It then uses conditional checks:
+i. If the character is '1', it sets the LED pin HIGH and sends “LED ON”.
+ii. If the character is '0', it sets the LED pin LOW and sends “LED OFF”.
+Unknown characters are simply echoed back. This simple command-mapping logic enables remote LED control.
+
+7)How would you modify the setup to control multiple LEDs with different commands?
+Ans: Assign each LED to a different digital pin and expand the command handler. For example, 'A' could turn LED1 ON, 'B' turn it OFF, 'C' control LED2, and so on. The code would include additional if/else or switch-case logic to map each command to a specific LED pin.
+
+8)Compare the observed LED behavior when using Serial Monitor vs. smartphone commands.
+Ans: Using the Serial Monitor triggers the same logic but communicates directly via USB, so responses are immediate and independent of Bluetooth range or signal strength. Smartphone commands go through Bluetooth, so while the behavior is the same, slight delays can occur due to wireless latency, and LED response may vary when the Bluetooth connection weakens.
