@@ -1,0 +1,109 @@
+1. Write the various techniques used for particulate material removal from air and explain mechanism of settling chamber to separate particulate matter from air with a schematic diagram.
+Ans: Techniques:
+• Gravitational settling chamber
+• Cyclone separator
+• Fabric filters (baghouse)
+• Electrostatic precipitator
+• Wet scrubbers
+Settling chamber mechanism:
+Air velocity is reduced → particles lose momentum → heavier particles settle by gravity at the chamber bottom → cleaned air exits.
+
+2. What is air quality index? Discuss its calculation criteria.
+Ans: AQI: A numerical scale representing air pollution level and its health impact.
+Calculation:
+• Pollutants measured: PM10, PM2.5, SO₂, NO₂, O₃, CO
+• Individual pollutant sub-index is computed
+• Highest sub-index = AQI
+
+3. Determine the equivalent sound power level from combining the four sound levels of 56, 68, 70, and 48 dB.
+Ans: Given: 56, 68, 70, 48 dB
+Formula:
+L_total = 10 log₁₀(Σ 10^(Li/10))
+Calculation (compressed):
+= 10 log₁₀( 10^5.6 + 10^6.8 + 10^7.0 + 10^4.8 )
+= 10 log₁₀( ~1.58×10⁷ )
+≈ 72 dB
+
+4. Discuss municipal solid waste management technique with a suitable schematic diagram.
+Ans: Steps:
+• Generation
+• Storage
+• Collection
+• Transport
+• Segregation
+• Processing (composting, RDF, recycling)
+• Final disposal (landfill)
+
+5. Discuss the major natural and anthropogenic causes of global warming.
+Ans: Natural:
+• Volcanic eruptions
+• Solar radiation variation
+• Natural GHG cycles
+Anthropogenic:
+• Fossil fuel burning
+• Deforestation
+• Industrial emissions
+• Agriculture (methane)
+• Urbanization, transport
+
+6. Explain the mechanism of O3 layer depletion and suggest the remedial measures for minimizing O3 depletion.
+Ans: Mechanism:
+CFCs → release Cl radicals under UV →
+Cl + O₃ → ClO + O₂
+ClO + O → Cl + O₂
+→ Continuous destruction of O₃.
+Remedial:
+• Ban CFCs (Montreal Protocol)
+• Use HCFC/HFC alternatives
+• Reduce NOx emissions
+• Strict industrial regulation
+
+7. Differentiate industrial and photochemical smog. Explain mechanism of photochemical smog with a suitable schematic diagram.
+Ans: Industrial (London type):
+• SO₂ + smoke
+• Cold, humid conditions
+• Reducing smog
+Photochemical (Los Angeles type):
+• NOx + hydrocarbons + sunlight
+• Warm, dry cities
+• Oxidizing smog
+Mechanism schematic (text-based):
+NOx + VOCs + Sunlight → O3 + PAN + aldehydes → Photochemical smog
+
+8. Define sustainable development; discuss various strategies of rainwater harvesting and watershed management.
+Ans: Sustainable development: Meeting present needs without harming future needs.
+Rainwater harvesting strategies:
+• Rooftop collection
+• Surface runoff collection
+• Recharge pits
+• Percolation tanks
+• Check dams
+Watershed management:
+• Contour bunding
+• Gully plugging
+• Afforestation
+• Soil conservation
+• Water storage structures
+
+9. Discuss the objective and function of environmental protection act 1986.
+Ans: Objectives:
+• Environmental protection and improvement
+• Control of pollution
+• Establish environmental standards
+Functions:
+• Set emission and discharge limits
+• Regulate hazardous substances
+• Inspection and enforcement
+• Manage environmental emergencies
+
+10. What is EIA? Discuss the EIA approval process of a newly proposed project with a suitable schematic diagram.
+Ans: EIA: Study predicting environmental impact of a proposed project.
+Approval process:
+• Screening
+• Scoping
+• Baseline data
+• Impact assessment
+• Mitigation plan
+• Public hearing
+• Review by authority
+• Final approval
