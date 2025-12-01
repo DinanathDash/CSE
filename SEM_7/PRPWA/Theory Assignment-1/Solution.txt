@@ -51,87 +51,24 @@ Using a voltage divider or logic shifter prevents overvoltage damage to the ESP-
 Ans: Purpose of AT+CWJAP="SSID","PASSWORD":
 To connect the ESP-01 to a specific Wi-Fi network by providing the router’s SSID and password credentials.
 
-11. Using the ESP8266 ESP-01 Wi-Fi module and Arduino UNO, demonstrate how to configure the module in Station (STA) mode to connect to an existing Wi-Fi network.
-(a)Draw the circuit diagram showing the connection between Arduino UNO and ESP-01 module for Station mode configuration.
-(b)Perform a Simulation-based Configuration to connect ESP-01 to a Wi-Fi network and record your observations.
-(c)Perform Hardware-based Configuration to connect ESP-01 to a Wi-Fi network and capture the serial monitor output.
-Ans: STA Mode configuration (Demonstration)
-Circuit:
-Arduino 3.3 V → VCC (ESP-01)
-GND → GND
-TX → RX (via voltage divider)
-RX → TX
-CH_PD → 3.3 V
-RST → Push-button or Arduino pin
-Simulation/Hardware steps:
-Power ESP-01 with 3.3 V.
-Use serial monitor (115200 bps).
-Send commands:
-AT
-AT+RST
-AT+CWMODE=1
-AT+CWJAP="SSID","PASSWORD"
-Observe “WIFI CONNECTED” and “OK” in monitor.
-Observation:
-ESP-01 connects successfully to the Wi-Fi router; IP address assigned.
-
 12. Using the ESP8266 ESP-01 Wi-Fi module and Arduino Uno, demonstrate how to wirelessly transmit sensor data from Arduino to a remote server or monitor through both simulation and hardware implementation.
-(a)Draw the circuit diagram showing the connection between Arduino UNO, ESP-01 module, and a sensor for wireless data transmission.
-(b)Write a short Arduino code snippet to send temperature or humidity data from a DHT11/LM35 sensor through ESP-01 to a remote server.
-(c)Perform Simulation-based implementation to wirelessly transmit sensor data and record your observations.
-(d)Perform Hardware-based implementation to demonstrate actual data transmission and capture the serial monitor output or server response.
 (e)Conclude your observations by discussing how reliable data transmission can be achieved using ESP-01 in IoT applications.
-Ans: Wireless transmission of sensor data
-Circuit:
-ESP-01 ↔ Arduino as above
-LM35 or DHT11 sensor → analog/digital pin of Arduino
-Sample Code:
-#include <DHT.h>
-#define DHTPIN 2
-#define DHTTYPE DHT11
-DHT dht(DHTPIN, DHTTYPE);
-
-void setup() {
-  Serial.begin(115200);
-  dht.begin();
-}
-
-void loop() {
-  float t = dht.readTemperature();
-  float h = dht.readHumidity();
-  Serial.print("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80\r\n");
-  delay(1000);
-  Serial.print("AT+CIPSEND=50\r\n");
-  delay(1000);
-  Serial.print("GET /update?api_key=XXXX&field1=");
-  Serial.print(t);
-  Serial.print("&field2=");
-  Serial.println(h);
-  delay(20000);
-}
-Observation:
-Sensor data (temperature/humidity) transmitted wirelessly and received on the server (e.g., ThingSpeak).
-Conclusion:
-Reliable IoT data transmission achieved via TCP/IP over Wi-Fi.
+Ans: Reliable ESP-01 data transmission depends mainly on **clean power, stable Wi-Fi, and correct UART communication**. A dedicated 3.3 V regulator with capacitors prevents brownouts that otherwise cause random resets. Keeping GPIO0/CH_PD/RST correctly pulled up ensures consistent booting. Using proper level-shifting and a fixed, low-error baud rate avoids corrupted AT responses. Finally, adding retries, acknowledgments, and keeping the Wi-Fi connection persistent makes the system robust for real IoT use.
 
 13. Using the ESP8266 ESP-01 Wi-Fi module and Arduino UNO, demonstrate how to implement TCP/IP protocols for client-server communication through hardware-based development
 (a)How can you configure the ESP-01 module as a TCP client to connect with a remote server?
+Ans: You configure the ESP-01 as a TCP client by putting it in **Station mode**, connecting it to your Wi-Fi network, and then opening a TCP socket to the server’s IP and port using AT commands. After joining the AP with `AT+CWJAP`, you switch to single-connection mode (`AT+CIPMUX=0`) and create the TCP client link using `AT+CIPSTART="TCP","<server_ip>",<port>`. Once connected, the ESP-01 can send payload bytes using `AT+CIPSEND`.
+
 (b)Write the AT commands sequence for establishing a TCP connection and transmitting data.
-(c)Draw the circuit diagram showing the setup for client-server communication between Arduino UNO and ESP-01.
-(d)Perform Hardware-based development to implement TCP/IP communication and record the serial monitor output.
-Ans: TCP/IP Client-Server Implementation
-Configuration:
-Set ESP-01 as TCP client using AT commands:
-AT
+Ans: AT
 AT+RST
 AT+CWMODE=1
-AT+CWJAP="SSID","PASSWORD"
-AT+CIPSTART="TCP","192.168.1.100",8080
-AT+CIPSEND=20
-Hello from Arduino!
-Circuit: same as above.
-Observation: Successful “SEND OK” indicates data delivered to server.
-Conclusion: Arduino can exchange real-time data with server via TCP/IP, verifying IoT client-server communication.
+AT+CWJAP="YourSSID","YourPassword"
+AT+CIPMUX=0
+AT+CIPSTART="TCP","<SERVER_IP>",<PORT>
+AT+CIPSEND=<LENGTH>
+<your payload bytes>
+AT+CIPCLOSE
 
 14. Explain how ESP-01 Wi-Fi communication contributes to the development of smart IoT systems with an example
 Ans: ESP-01’s contribution to smart IoT systems (with example)
