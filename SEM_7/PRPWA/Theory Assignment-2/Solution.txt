@@ -1,0 +1,357 @@
+1. What principle allows a two-wheel robot to balance itself? Explain.
+Ans: A two-wheel robot balances using the **inverted pendulum principle** with **feedback control**.
+It senses its tilt using an IMU (gyro + accelerometer) and constantly checks if it’s falling forward or backward.
+A PID controller then moves the wheels in the direction of the fall to “catch” the robot.
+By correcting the tilt hundreds of times per second, it stays upright instead of tipping over.
+
+2. What is the function of the MPU6050 sensor? What type of motors are used in the robot?
+Ans: MPU6050 Function:
+It measures tilt, motion, and rotation using a 3-axis accelerometer and 3-axis gyroscope, allowing the robot to detect its balance and orientation.
+Motors Used:
+Self-balancing robots typically use DC geared motors with encoders (or simple BO geared motors in basic builds) to provide controlled, precise wheel movement.
+
+3. Draw or describe the wiring connections between Arduino UNO and MPU6050 (include SDA, SCL, VCC, GND, and INT pins).
+Ans: Wiring Between Arduino UNO and MPU6050:
+VCC → 5V on Arduino
+GND → GND
+SDA → A4 (I²C data line)
+SCL → A5 (I²C clock line)
+INT → Digital Pin 2 (interrupt signal for faster readings)
+This is the standard I²C connection for MPU6050 with Arduino UNO.
+
+4. A.Which Arduino libraries are commonly used to interface MPU6050 ?
+Ans: Common Arduino Libraries for MPU6050
+Wire.h (I²C communication)
+MPU6050.h (Jeff Rowberg’s library – the standard one)
+I2Cdev.h (supports MPU6050 functions)
+
+B.Write an Arduino code snippet to initialize the MPU6050 and verify its connection through the Serial Monitor.
+Ans: #include <Wire.h>
+#include <MPU6050.h>
+
+MPU6050 mpu;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+
+  Serial.println("Initializing MPU6050...");
+  mpu.initialize();
+
+  if (mpu.testConnection())
+    Serial.println("MPU6050 connected successfully!");
+  else
+    Serial.println("MPU6050 connection failed!");
+}
+
+void loop() {
+}
+
+C.Explain the role of the Digital Motion Processor (DMP) in the MPU6050.
+Ans: The DMP is an internal processor inside the MPU6050 that handles complex motion calculations.
+It filters, fuses, and processes accelerometer + gyroscope data to give stable orientation values (like pitch, roll, yaw) without loading the Arduino.
+Basically, it reduces noise and improves accuracy.
+
+D.What is the difference between raw data output and DMP-processed data output from the MPU6050?
+Ans: Raw Data vs DMP-Processed Data
+Raw Data:
+Direct unfiltered values from accelerometer and gyroscope. Noisy, unstable, needs heavy processing and filtering.
+DMP-Processed Data:
+Clean, filtered, fused output (angle values) computed inside the MPU6050 itself. Much smoother and easier for balance control.
+
+5. A.Why can’t the Arduino UNO drive DC motors directly without a driver like the L293D?
+Ans: Because the UNO’s pins can supply only 5V and ~20–40mA, while DC motors need much higher current and generate back-EMF that can damage the microcontroller.
+A motor driver like L293D handles high current and protects the Arduino.
+
+B.What is the maximum voltage and current rating for each motor channel in L293D?
+Ans: Max Voltage & Current Rating of L293D (per channel)
+Voltage: up to 36V
+Current: 600 mA per channel (peak up to ~1.2A for short bursts)
+
+C.What is the purpose of the Enable pins (EN1, EN2) in L293D, and how do they affect motor operation?
+Ans: Enable pins turn the motor channels ON or OFF.
+When EN = HIGH, the corresponding motor driver channel is active.
+When EN = LOW, the motor is disabled regardless of input pins.
+They also allow PWM speed control when connected to Arduino PWM pins.
+
+D.Write an Arduino code snippet to rotate a motor forward and reverse using digitalWrite() and delay().
+Ans: int IN1 = 5;
+int IN2 = 6;
+
+void setup() {
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+}
+
+void loop() {
+  // Forward
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  delay(2000);
+
+  // Reverse
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  delay(2000);
+
+  // Stop
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  delay(1000);
+}
+
+6. Write an Arduino sketch to read raw accelerometer and gyroscope data from the MPU6050 and observe how values change when you tilt the sensor. What does this reveal about its axes?
+Ans: #include <Wire.h>
+#include <MPU6050.h>
+
+MPU6050 mpu;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+
+  mpu.initialize();
+  Serial.println("Reading raw MPU6050 data...");
+}
+
+void loop() {
+  int16_t ax, ay, az, gx, gy, gz;
+
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+  Serial.print("Acc: ");
+  Serial.print(ax); Serial.print(" ");
+  Serial.print(ay); Serial.print(" ");
+  Serial.print(az);
+
+  Serial.print("   Gyro: ");
+  Serial.print(gx); Serial.print(" ");
+  Serial.print(gy); Serial.print(" ");
+  Serial.println(gz);
+
+  delay(300);
+}
+What the Changing Values Reveal About Axes
+When you tilt the sensor:
+a. Accelerometer axes (X, Y, Z) change based on the direction of gravity.
+        Tilt forward → X changes
+        Tilt sideways → Y changes
+        Lift or drop → Z changes
+b. Gyroscope axes (X, Y, Z) change based on rotational movement.
+        Rotate left/right → Z gyro changes
+        Tilt forward/back → X gyro changes
+        Tilt sideways → Y gyro changes
+
+7. Define the variables for PID (Kp, Ki, Kd, Input, Output, Setpoint). Write the Arduino code snippet that computes PID output. Explain how each term (P, I, D) influences balancing.
+Ans: PID Variable Definitions
+Kp (Proportional Gain): Controls how strongly the robot reacts to the current error.
+Ki (Integral Gain): Corrects accumulated past error (drift).
+Kd (Derivative Gain): Reacts to the rate of change—helps prevent overshooting.
+Input: The measured value (robot tilt angle).
+Setpoint: The target value (usually 0° — perfectly upright).
+Output: The correction applied to the motors.
+
+Arduino PID Computation Snippet
+double Kp = 20.0, Ki = 0.8, Kd = 1.5;
+double Input, Output, Setpoint = 0;
+
+double lastError = 0, integral = 0;
+
+void computePID() {
+  double error = Setpoint - Input;
+
+  integral += error;
+  double derivative = error - lastError;
+
+  Output = Kp * error + Ki * integral + Kd * derivative;
+
+  lastError = error;
+}
+
+How P, I, D Influence Balancing
+P (Proportional): Gives an immediate push to correct the current tilt. Too high → robot shakes; too low → sluggish.
+I (Integral): Fixes long-term drift (robot leaning slowly forward/back). Too high → oscillation.
+D (Derivative): Predicts movement by sensing how fast the tilt is changing. It stabilizes the robot and reduces overshoot.
+
+8. Construct the full circuit of Arduino UNO, MPU6050, and L298N motor driver. Label all connections clearly. How do SDA and SCL pins differ from digital I/O pins?
+Ans: Full Circuit Connections (Arduino UNO + MPU6050 + L298N + Motors)
+1. MPU6050 → Arduino UNO
+        VCC → 5V
+        GND → GND
+        SDA → A4
+        SCL → A5
+        INT → D2
+2. L298N Motor Driver → Arduino UNO
+        Left Motor (OUT1, OUT2)
+                Motor Left Wire 1 → OUT1
+                Motor Left Wire 2 → OUT2
+        Right Motor (OUT3, OUT4)
+                Motor Right Wire 1 → OUT3
+                Motor Right Wire 2 → OUT4
+        Control Pins
+                IN1 → D5
+                IN2 → D6
+                IN3 → D9
+                IN4 → D10
+        Enable Pins
+                ENA → D3 (PWM)
+                ENB → D11 (PWM)
+        Power Connections
+                12V / Battery + → L298N +12V
+                Battery Ground → L298N GND
+                L298N GND → Arduino GND (common ground is mandatory)
+                L298N 5V → Arduino 5V only if the regulator is enabled (jumper installed)
+3. Power Switch and Battery
+        Battery + → Switch → L298N +12V
+        Battery – → L298N GND
+        L298N GND → Arduino GND
+        MPU6050 GND → same GND
+
+B. How SDA and SCL differ from Digital I/O pins
+SDA (A4) and SCL (A5) are I²C communication pins, not normal digital pins.
+Key differences:
+        i. Purpose:
+                SDA = Serial Data
+                SCL = Serial Clock
+                They form a 2-wire communication bus for sensors like MPU6050.
+        ii. Shared Bus: Multiple I²C devices can share the same SDA/SCL lines.
+        iii. Automatic Protocol Handling: Arduino handles start/stop bits, ACK, addressing, etc. using Wire.h, not digitalWrite().
+        iv. Digital Pins: 
+                Used for general HIGH/LOW control.
+                No communication protocol built in.
+
+9. Write a simple sketch to rotate both DC motors forward, backward, left, and right using PWM signals. Measure the actual motor speed at different PWM values using a tachometer or estimation method.
+Ans: Measure Motor Speed
+Option 1: Using a Tachometer (Exact Method)
+i. Stick a white tape on the motor shaft/wheel.
+ii. Point the tachometer at it.
+iii. Run the motor at different PWM values (e.g., 80, 120, 180, 255).
+iv. Record RPM readings.
+Option 2: Estimation Method (If No Tachometer)
+i. Use a ruler + timer (basic but acceptable in assignments):
+ii. Mark a distance (e.g., 1 meter).
+iii. Run the robot at PWM values 100, 150, 200, 255.
+iv. Measure time taken to travel 1m.
+Compute speed:
+        Speed = Distance / Time
+This gives a rough estimate of how PWM affects motor speed.
+
+Example:
+1m in 1.2s → ~0.83 m/s
+1m in 0.8s → 1.25 m/s
+Higher PWM → faster wheel RPM → faster robot.
+
+10. Write and explain the Arduino statement that maps the PID output (angle correction) to motor PWM values. Why is the map() function used, and how can incorrect mapping affect performance?
+Ans: Arduino Statement to Map PID Output to Motor PWM -> int pwm = map(Output, -300, 300, -255, 255);
+
+Explanation
+i. Output = PID correction value (positive or negative).
+ii. PID ranges like –300 to +300 are too large to be sent directly to the motor.
+iii. Motors accept only 0–255 PWM (or –255 to +255 if you handle direction separately).
+iv. map() converts the PID output into a usable PWM range for the motors.
+
+Why map() is used?
+Because the PID output is not naturally scaled to the motor’s usable limits.
+map() ensures:
+i. Small tilt → small PWM
+ii. Large tilt → stronger correction
+iii. Direction is preserved (negative = reverse)
+Without mapping, the robot will either not move enough or overshoot wildly.
+
+How incorrect mapping affects performance
+i. Too small PWM range: robot reacts weakly → falls down.
+ii. Too large PWM range: robot jerks, oscillates, and becomes unstable.
+iii. Wrong sign mapping: robot corrects in the wrong direction → instant crash.
+iv. Uneven scaling: one motor becomes stronger → robot drifts or spirals.
+
+11. A. The MPU6050 DMP sends data using interrupts. Describe how interrupts improve sensor reading efficiency. Write the ISR (Interrupt Service Routine) function prototype used in the main sketch.
+Ans: With interrupts, the MPU6050 notifies the Arduino the moment new DMP data is ready. This avoids wasteful constant polling.
+Benefits:
+i. Fast response — readings arrive exactly when updated.
+ii. No missed samples — DMP signals every frame.
+iii. Lower CPU load — Arduino can run balancing code instead of waiting.
+iv. More stable PID loop — consistent timing = smoother control.
+
+ISR Function Prototype (used in most MPU6050 sketches)
+volatile bool mpuInterrupt = false;
+
+void dmpDataReady() {
+  mpuInterrupt = true;
+}
+This ISR fires whenever the MPU6050 INT pin goes HIGH.
+
+B. Add Serial printing of pitch angle and PID output values. Observe and plot the values over time (using Excel or Serial Plotter). What pattern indicates a stable system?
+Ans: Code Snippet
+        Serial.print("Pitch: ");
+        Serial.print(pitch);
+        Serial.print("   PID: ");
+        Serial.println(Output);
+You put this inside loop() right after computing the PID.
+
+Plotting & What Indicates a Stable System
+When you plot pitch and PID output over time (Serial Plotter or Excel), a stable self-balancing robot shows:
+a. Stable System Pattern
+i. Pitch angle stays near 0°, small oscillations only
+ii. PID output waveform is smooth, not spiking
+iii. Oscillations gradually settle, not grow
+iv. No sudden jumps or increasing amplitude
+b. Unstable System Pattern
+i. Pitch swings grow over time
+ii. PID values spike sharply
+iii. Robot overcorrects or jitters → noisy graph
+
+12. A. Discuss how the physical design of your robot (wheel size, chassis weight, battery placement, sensor position) influenced its ability to balance. Explain what changes you made to improve stability and why they worked.
+Ans: Effect of Physical Design on Balancing
+i. Wheel Size: Larger wheels gave smoother movement but slower correction; smaller wheels gave faster response.
+ii. Chassis Weight: Too heavy → motors couldn’t react fast; too light → oversensitive. I balanced weight to a moderate level.
+iii. Battery Placement: Moving the battery lower dropped the center of gravity, making the robot less wobbly.
+iv. Sensor Position: Centering the MPU6050 reduced vibration and gave cleaner angle readings.
+Changes that helped: lowering battery, tightening chassis, and moving the MPU6050 to the center — all reduced noise and improved balance.
+
+B. Describe at least five major problems you encountered while building the robot (hardware or coding) and explain how you solved each one. Examples may include sensor drift, wrong motor wiring, unstable PID output, dead zones in PWM, incorrect interrupts, etc.
+Ans: Five Major Problems & Solutions
+i. Sensor Drift: Fixed by using DMP + calibration at startup.
+ii. Wrong Motor Wiring: Motors moved opposite directions → corrected IN1–IN4 wiring.
+iii. Unstable PID: Tuned Kp, Ki, Kd; reduced Ki to remove oscillation.
+iv. PWM Dead Zone: Motors didn’t move below ~70 PWM → added minimum PWM threshold.
+v. Interrupt Not Triggering: INT pin not wired to D2 → reconnected properly and the DMP started sending data.
+
+13. A. Explain how battery voltage affected the robot’s performance.
+Ans: Higher voltage gave the motors more torque and faster response, so the robot corrected its tilt quickly.
+When the voltage was lower, the motors reacted slowly, the PID output felt weak, and balancing accuracy dropped.
+
+B. Discuss what happened when voltage dropped, how motor torque changed, and why balancing became unstable.
+Ans: i. Motor torque decreased.
+ii. PWM commands that normally worked became too weak.
+iii. The robot couldn’t catch itself during tilt corrections.
+iv. It started wobbling, over-leaning, or falling because the motors couldn’t deliver the needed force.
+
+C. What steps did you take to manage power issues?
+Ans: i. Used fresh/fully charged batteries.
+ii. Added a proper power distribution with common ground.
+iii. Ensured the L298N received stable supply voltage.
+iv. Avoided running motors and Arduino from a sagging source.
+v. Set a minimum PWM value to overcome low-voltage dead zones.
+
+14. A. Describe how the motor driver converts Arduino signals into motor movement, including direction control and PWM speed control.
+Ans: The L298N takes the Arduino’s low-power signals and uses them to switch high-current motor lines.
+a. Direction Control:
+i. IN1 = HIGH + IN2 = LOW → motor spins forward
+ii. IN1 = LOW + IN2 = HIGH → motor spins backward
+These signals control the H-bridge inside the driver.
+b. Speed Control (PWM):
+i. Arduino sends PWM to ENA/ENB.
+ii. 
+Higher PWM → faster motor; lower PWM → slower.
+The driver amplifies the PWM into actual motor current.
+
+B. Explain how you tested motor direction, calibrated both motors to rotate equally, and what problems you faced if one motor moved faster or slower.
+Ans: i. I tested direction by running each motor alone with simple HIGH/LOW signals to confirm forward/reverse.
+ii. Then I used fixed PWM values (like 150) on both motors to check speed difference.
+iii. I increased or decreased PWM on one motor until both rolled at the same speed.
+
+Problems if speeds weren’t equal:
+i. Robot drifted to one side.
+ii. Turns became uneven.
+iii. Balancing became unstable because unequal motors caused unwanted rotation.
+Calibrating both motors to match solved these issues.
