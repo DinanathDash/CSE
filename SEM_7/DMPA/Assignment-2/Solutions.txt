@@ -1,0 +1,247 @@
+1. Answer following questions:
+a. What do you mean by hypothesis testing for some parameter in a population?
+Ans: Hypothesis testing is a procedure used to decide whether a claim about a population parameter (such as mean or proportion) is supported by sample data.
+You set up a null hypothesis (H₀) representing the assumed value of the parameter and an alternative hypothesis (H₁) representing the competing claim.
+Using sample statistics, you calculate a test statistic and determine whether the evidence is strong enough to reject H₀ at a chosen significance level.
+
+b. How can we use a confidence interval to conduct hypothesis testing of the population parameters?
+Ans: A confidence interval gives a range of plausible values for a population parameter.
+To test a hypothesis, compare the null hypothesis value with the confidence interval:
+i. If the null value lies inside the interval → we fail to reject H₀.
+ii. If the null value lies outside the interval → we reject H₀.
+A 95% confidence interval corresponds to a two-tailed test at the 5% significance level.
+
+2. The duration of customer service calls to an insurance company is normally distributed, with mean 20 minutes, and standard deviation 5 minutes. For the following sample sizes, construct a 95% confidence interval for the population mean duration of customer service calls. (Refer to the attached table for the critical t-values.)
+a. n = 25,
+b. n = 100,
+c. n = 200.
+Ans: Given:
+Mean = 20 minutes
+Standard deviation = 5 minutes
+Confidence level = 95%
+Use t(0.025, df) from the table
+Formula: CI = x̄ ± t * (s / √n)
+a) n = 25
+df = 24
+t(0.025, 24) = 2.064
+SE = 5 / √25 = 1
+CI = 20 ± 2.064 × 1
+CI = (17.936, 22.064)
+b) n = 100
+df = 99
+t(0.025, 99) = 1.984
+SE = 5 / √100 = 0.5
+CI = 20 ± 1.984 × 0.5
+CI = (19.008, 20.992)
+c) n = 200
+df = 199
+t(0.025, 199) = 1.972
+SE = 5 / √200 ≈ 0.354
+CI = 20 ± 1.972 × 0.354
+CI ≈ (19.302, 20.698)
+
+3. Of 1000 customers who received promotional materials for a marketing campaign, 100 responded to the promotion. For each of the following confidence levels, construct a confidence interval for the population proportion who would respond to the promotion. (Given the standard normal variate Z satisfies the followings: 𝑃(𝑍 < 1. 645 ) = 0. 95, 𝑃(𝑍 < 1. 96) = 0. 975, 𝑃(𝑍 < 2. 576) = 0. 995).
+a. 90%,
+b. 95%,
+c. 99%.
+Ans: Given:
+n = 1000
+x = 100 responses
+Sample proportion: p̂ = 100 / 1000 = 0.10
+Standard error: SE = √( p̂(1 − p̂) / n )
+SE = √(0.10 × 0.90 / 1000)
+SE = √(0.09 / 1000)
+SE = √0.00009
+SE = 0.0094868 (approx.)
+Formula:
+CI = p̂ ± Z × SE
+a) 90% confidence
+Z = 1.645
+CI = 0.10 ± 1.645 × 0.0094868
+Margin = 0.0156 (approx.)
+CI = (0.0844, 0.1156)
+b) 95% confidence
+Z = 1.96
+CI = 0.10 ± 1.96 × 0.0094868
+Margin = 0.0186 (approx.)
+CI = (0.0814, 0.1186)
+c) 99% confidence
+Z = 2.576
+CI = 0.10 ± 2.576 × 0.0094868
+Margin = 0.0244 (approx.)
+CI = (0.0756, 0.1244)
+
+4. Discuss about Type I and Type II errors in the context of hypothesis testing with an example.
+Ans: Type I and Type II Errors
+In hypothesis testing, two kinds of decision errors can occur because we base conclusions on sample data.
+Type I Error: Rejecting the null hypothesis when it is actually true.
+Probability of this error = α.
+Type II Error: Failing to reject the null hypothesis when it is actually false.
+Probability of this error = β.
+Example:
+Let H₀: A machine produces items with mean weight = 50 g.
+H₁: Mean weight ≠ 50 g.
+i. Type I Error: Concluding the machine is not producing 50 g items when it actually is.
+ii. Type II Error: Concluding the machine is producing 50 g items when it actually isn’t.
+
+5. In the churn problem discussed in Chapter 3, recall that 483 of 3333 customers in the sample had churned the company. Using level of significance α = 0. 10, test whether the population proportion π differs from 0.15 by computing the p-value from the 𝑍𝑑𝑎𝑡𝑎. (Given the standard normal variate Z satisfies the followings:  𝑃(𝑍 < 1. 645 ) = 0. 95, 𝑃(𝑍 < 1. 96) = 0. 975, 𝑃(𝑍 > 0. 8246) = 0. 2048).
+Ans: Given:
+n = 3333
+x = 483
+Sample proportion: p̂ = 483 / 3333 = 0.1449 (approx.)
+Test population proportion: π₀ = 0.15
+Significance level: α = 0.10
+Two-tailed test because we test “differs from 0.15”.
+Step 1: Compute test statistic Z
+Formula:
+Z = (p̂ − π₀) / √(π₀(1 − π₀) / n)
+Compute standard error:
+SE = √(0.15 × 0.85 / 3333)
+SE = √(0.1275 / 3333)
+SE = √0.00003826
+SE = 0.006185 (approx.)
+Now compute Z:
+Z = (0.1449 − 0.15) / 0.006185
+Z = −0.0051 / 0.006185
+Z = −0.8246 (approx.)
+Step 2: Compute p-value
+Two-tailed p-value = 2 × P(Z > |Zdata|)
+Given: P(Z > 0.8246) = 0.2048
+So,
+p-value = 2 × 0.2048
+p-value = 0.4096
+Step 3: Decision
+Compare p-value with α = 0.10:
+p-value = 0.4096 > 0.10
+→ Fail to reject H₀.
+Conclusion
+There is no significant evidence at α = 0.10 to conclude that the population proportion of churn differs from 0.15.
+
+6. A sample of 100 donors to a charity has a mean donation amount of $55 with a sample standard deviation of $25. Test using 𝛼 = 0.05 whether the population mean donation amount exceeds $50. (Refer to the attached table for the critical t-values.)
+a. Define the null hypothesis and the alternative hypothesis on 𝜇.
+b. What is the rejection rule?
+c. What is the meaning of the test statistic 𝑇?
+d. What are the values of the test statistic 𝑇𝑑𝑎𝑡𝑎 and the p-value in this example?
+e. What is our conclusion after comparing the p-value with the level of significance?
+f. Interpret our conclusion so that a non-specialist could understand it.
+Ans: Given: n = 100, sample mean = 55, sample standard deviation = 25, alpha = 0.05. We test whether the population mean exceeds 50.
+a) Null and alternative hypotheses
+H0: mu = 50
+H1: mu > 50
+b) Rejection rule
+Reject H0 if T_data > t_critical.
+From the t table: t_critical (df = 99, one-tailed, alpha = 0.05) = 1.660.
+c) Meaning of the test statistic T
+T measures how many standard errors the sample mean is above the hypothesized mean. A large positive T indicates evidence that the true mean is greater than 50.
+d) Test statistic T_data and p-value
+Standard error = 25 / sqrt(100) = 2.5
+T_data = (55 - 50) / 2.5 = 2.00
+From the t distribution, one-tailed p-value for T = 2.00 with 99 df is approximately 0.024.
+e) Decision
+p-value = 0.024 which is less than alpha = 0.05.
+Therefore, we reject H0.
+f) Interpretation in simple language
+Based on the sample, there is strong evidence that the average donation amount in the population is greater than 50 dollars. The observed average of 55 dollars is unlikely to occur if the true average were only 50 dollars.
+
+7. The following table contains information on the mean duration of customer service calls between a training and a test data set. Test whether the partition is valid for this variable, using 𝛼 = 0.10. (Given the T variate satisfies the followings: 𝑃(𝑇 > 0. 4322 ) = 0. 3328.)
+Ans: Given:
+Training set: x1 = 20.5, s1 = 5.2, n1 = 2000
+Test set: x2 = 20.4, s2 = 4.9, n2 = 600
+We test whether the partition is valid, meaning whether the two population means are equal.
+Significance level: alpha = 0.10
+Given: P(T > 0.4322) = 0.3328
+Hypotheses
+H0: mu1 = mu2
+H1: mu1 ≠ mu2 (two-sided test)
+Test statistic formula
+T_data = (x1 - x2) / sqrt( (s1^2 / n1) + (s2^2 / n2) )
+Compute the value
+Difference in means = 20.5 - 20.4 = 0.1
+Compute variance terms:
+s1^2 / n1 = (5.2^2) / 2000 = 27.04 / 2000 = 0.01352
+s2^2 / n2 = (4.9^2) / 600 = 24.01 / 600 = 0.0400167
+Sum of variances = 0.01352 + 0.0400167 = 0.0535367
+Standard error = sqrt(0.0535367) = 0.2314 approx.
+Now compute T_data:
+T_data = 0.1 / 0.2314 = 0.4322 approx.
+(This matches the value used in the problem statement.)
+Compute p-value
+Given: P(T > 0.4322) = 0.3328
+Because this is a two-sided test,
+p-value = 2 × 0.3328 = 0.6656
+Compare p-value with alpha
+p-value = 0.6656
+alpha = 0.10
+Since p-value > alpha, we fail to reject H0.
+Conclusion
+There is no statistical evidence that the training and test sets have different mean call durations.
+The partition appears valid for this variable.
+
+8. The multinomial variable payment preference takes the values credit card, debit card, and cheque. Now, suppose we know that 50% of the customers in our population prefer to pay by credit card, 20% prefer debit card, and 30% prefer to pay by cheque. We have taken a sample from our population, and would like to determine whether it is representative of the population. The sample of size 200 shows 125 customers preferring to pay by credit card, 25 by debit card, and 50 by cheque. Test whether the sample is representative of the population, using 𝛼 = 0.05. Given that 𝑃(χ^2 > 38. 82) = 10^−6.
+Ans: Given: population proportions: credit card = 0.50, debit card = 0.20, cheque = 0.30.
+Sample size n = 200 with observed counts: credit 125, debit 25, cheque 50.
+Significance level α = 0.05. Use chi-square goodness-of-fit.
+Expected counts:
+E_credit = 0.50 × 200 = 100
+E_debit = 0.20 × 200 = 40
+E_cheque = 0.30 × 200 = 60
+Chi-square statistic:
+χ² = Σ (O − E)² / E
+= (125 − 100)² / 100 + (25 − 40)² / 40 + (50 − 60)² / 60
+= 625/100 + 225/40 + 100/60
+= 6.25 + 5.625 + 1.6667
+χ² ≈ 13.5417
+Degrees of freedom = k − 1 = 3 − 1 = 2.
+p-value: for df = 2, P(χ² > x) = exp(−x/2).
+p-value ≈ exp(−13.5417 / 2) ≈ exp(−6.77085) ≈ 0.00115.
+Decision: compare p-value with α = 0.05.
+p-value ≈ 0.00115 < 0.05 → Reject H0.
+Conclusion (plain language):
+The sample proportions differ significantly from the stated population proportions. The sample is not representative of the population payment preferences at the 5% level.
+
+9. Suppose a multinomial variable “movie choices” has the following values {‘romantic’, ‘science fiction’}. We have a set of 1000 males and a set of 250 females with the following frequencies
+Ans: Given (observed counts):
+Males: romantic = 350, science fiction = 650, total = 1000
+Females: romantic = 175, science fiction = 75, total = 250
+Column totals: romantic = 525, science fiction = 725, grand total = 1250
+Test: chi-square test of independence (or homogeneity) to see if movie-choice proportions differ by gender.
+Expected counts (E = row total × column total / grand total)
+E[male, romantic] = 1000 × 525 / 1250 = 420
+E[male, sci-fi] = 1000 × 725 / 1250 = 580
+E[female, romantic] = 250 × 525 / 1250 = 105
+E[female, sci-fi] = 250 × 725 / 1250 = 145
+Compute chi-square statistic χ² = Σ (O − E)² / E
+(male, romantic): (350 − 420)² / 420 = 4900 / 420 = 11.6667
+(male, sci-fi) : (650 − 580)² / 580 = 4900 / 580 = 8.4483
+(female, romantic): (175 − 105)² / 105 = 4900 / 105 = 46.6667
+(female, sci-fi) : (75 − 145)² / 145 = 4900 / 145 = 33.7931
+Sum: χ² ≈ 11.6667 + 8.4483 + 46.6667 + 33.7931 = 100.5748
+Degrees of freedom = (rows − 1) × (cols − 1) = 1
+p-value
+For df = 1, χ² = 100.5748 corresponds to sqrt(χ²) ≈ 10.03 for the equivalent normal deviate, so the upper-tail probability is astronomically small. Numerically, p-value ≈ 6.6 × 10^−24 (practically 0).
+(You were given P(χ² < 102.17) = 0.9999, so P(χ² > 102.17) = 0.0001; our χ² = 100.57 is slightly below 102.17, hence the true p-value is on the same extreme order of magnitude — effectively 0 for any usual α.)
+Decision (use typical α = 0.05)
+p-value ≪ 0.05 → Reject H0.
+Conclusion (plain language)
+There is extremely strong statistical evidence that the distribution of movie choices differs between males and females. The gender groups do not have the same proportions of preference for romantic vs science-fiction movies.
+
+10. Describe the differences between the training set, test set, and validation set.
+Ans: Training set: This is the data used to fit or “learn” the model. The model adjusts its parameters based on the patterns it finds in the training set. It is the core data on which the model is built.
+
+Validation set: This data is not used for training. Instead, it is used to tune model choices—such as hyperparameters, model architecture, or stopping criteria. It helps decide which version of the model performs best before final testing. It prevents overfitting to the training set.
+
+Test set: This is completely unseen data used only at the end to evaluate final model performance. It provides an unbiased estimate of how well the trained and tuned model will perform on new, real-world data.
+
+11. How is the bias–variance trade-off related to the issue of overfitting and underfitting? Is high bias associated with overfitting and underfitting, and why?
+Ans: The bias–variance trade-off explains why models underfit or overfit.
+High bias means the model is too simple and makes strong assumptions.
+It cannot capture the true patterns in the data.
+This leads to underfitting: both training error and test error are high because the model is not flexible enough.
+High variance means the model is too complex and reacts too strongly to the noise in the training data.
+It fits the training data extremely well, but performs poorly on new data.
+This leads to overfitting: training error is low, but test error is high.
+So:
+High bias → underfitting
+High variance → overfitting
+High bias is not associated with overfitting. Overfitting happens when variance is high, not bias.
+The trade-off is that reducing bias usually increases variance (more complex models), and reducing variance usually increases bias (simpler models). A good model balances both.
