@@ -1,0 +1,349 @@
+1. What is the prerequisite for deep learning? Explain in details, how these concepts are helpful to build Deep learning models.
+Ans: Prerequisites for Deep Learning (and why they matter)
+i. Linear Algebra - Needed because neural networks are just matrix multiplications. Weights, inputs, outputs, and layers are all vectors and matrices.
+ii. Calculus - Used to train models. Backpropagation and gradient descent rely on derivatives to update weights and minimize loss.
+iii. Probability & Statistics - Helps models handle uncertainty. Loss functions, predictions, and evaluation metrics are probability-based.
+iv. Optimization Techniques - Training is optimization. Algorithms like SGD and Adam decide how efficiently and stably a model learns.
+v. Programming (Python + Libraries) - Required to implement models, run training loops, preprocess data, and debug errors.
+vi. Data Preprocessing - Models learn from data quality. Scaling, cleaning, and splitting data directly affect performance.
+vii. Basic Machine Learning Concepts - Needed to understand overfitting, underfitting, bias–variance trade-off, and model evaluation.
+
+2. Given perceptron weights w1=1, w2=-1, b=-0.2. Write the equation of the decision boundary and classify the points (0.5,0.5) and (0.8,0.2).
+Ans: Given
+Perceptron parameters:
+w1=1, w2=-1, b=-0.2
+Perceptron decision function: z=w1​x1​+w2​x2​+b
+1. Decision Boundary Equation
+Decision boundary is where z=0:
+=> 1⋅x1​+(−1)⋅x2​−0.2=0
+=> x1−x2−0.2=0
+or
+x1​−x2​=0.2
+That’s the decision boundary line.
+2. Classification Rule
+If z≥0 → Class +1
+If z<0 → Class −1
+(Standard perceptron assumption.)
+3. Classify the Points
+Point (0.5, 0.5)
+z=(1)(0.5)+(−1)(0.5)−0.
+z=0−0.2=−0.2
+Classification: −1
+Point (0.8, 0.2)
+z=(1)(0.8)+(−1)(0.2)−0.2
+z=0.6−0.2=0.4
+Classification: +1
+
+3. 3.Explain the role of the following layers in CNN:
+Convolution layer
+Pooling layer
+Fully connected layer
+Ans: Role of Layers in a CNN
+1. Convolution Layer
+Purpose: Feature extraction
+Applies learnable filters (kernels) over the input image.
+Detects local patterns like edges, corners, textures.
+Preserves spatial relationships (unlike fully connected layers).
+Deeper conv layers learn higher-level features (shapes, objects).
+Bottom line:
+This layer learns what to look for in the image.
+2. Pooling Layer
+Purpose: Downsampling and robustness
+Reduces spatial dimensions (width & height).
+Common types: Max pooling, Average pooling.
+Lowers computation and memory usage.
+Makes features more translation-invariant.
+Bottom line:
+This layer keeps important information and throws away noise.
+3. Fully Connected Layer
+Purpose: Decision making
+Flattens extracted features into a vector.
+Learns global combinations of features.
+Used at the end for classification or regression.
+Bottom line:
+This layer decides the final output based on extracted features.
+
+4. Draw the CNN architecture with the following information given in Table.1 for image classification. The input image size is 128×128×3. Find the total no. of learnable parameters in the network.
+Ans: Given
+Input image: 128 × 128 × 3
+Convolution: valid padding (padding = 0)
+Pooling: 2×2, stride 2
+Bias included in all conv and dense layers.
+Step 1: Architecture with Output Sizes
+1. Conv1 (5×5, stride 1, 6 filters)
+Input: 128×128×3
+Output size: (128−5+1)=124
+→ 124 × 124 × 6
+Parameters: (5×5×3)×6+6=456
+2. MaxPool1 (2×2, stride 2)
+→ 62 × 62 × 6
+(No parameters)
+3. Conv2 (5×5, stride 1, 16 filters)
+Input: 62×62×6
+(62−5+1)=58
+→ 58 × 58 × 16
+Parameters: (5×5×6)×16+16=2416
+4. MaxPool2 (2×2, stride 2)
+→ 29 × 29 × 16
+5. Conv3 (5×5, stride 1, 32 filters)
+Input: 29×29×16
+(29−5+1)=25
+→ 25 × 25 × 32
+Parameters:
+(5×5×16)×32+32=12,832
+6. MaxPool3 (2×2, stride 2)
+→ 12 × 12 × 32
+7. Flatten
+12×12×32=4608
+8. Dense Layer (120 neurons)
+Parameters:
+4608×120+120=553,080
+9. Output Layer (10 classes)
+Parameters:
+120×10+10=1210
+Step 2: Total Learnable Parameters
+| Layer       | Parameters  |
+| ----------- | ----------- |
+| Conv1       | 456         |
+| Conv2       | 2,416       |
+| Conv3       | 12,832      |
+| Dense (120) | 553,080     |
+| Output (10) | 1,210       |
+| Total       | 569,994     |
+
+5. State batch normalization. Discuss the limitations of batch normalization and how layer and group normalization overcomes it with example.
+Ans: Batch Normalization (BN)
+Normalizes activations using mean and variance of the mini-batch, then scales and shifts them.
+Why used: faster training, stable gradients, higher learning rates.
+Limitations of Batch Normalization
+Depends on batch size → unstable with small batches
+Training–inference mismatch (batch stats vs running stats)
+Poor for RNNs / Transformers
+Hard in distributed training (sync overhead)
+Layer Normalization (LN)
+Normalizes features within a single sample (no batch dependency).
+Fixes BN issues:
+Works with batch size = 1
+Same behavior in training and inference
+Example: Transformers (BERT, GPT)
+Group Normalization (GN)
+Normalizes groups of channels, not batches.
+Fixes BN issues in CNNs:
+Stable for small batches
+No batch dependency
+Example: Object detection models (Mask R-CNN)
+
+6. Draw a RNN network with input(2) →hidden(2) →output(1), calculate the Y predicted for the following given parameter values in Table.2 with input x1=[1, 0], x2=[0, 1], h0=[0,0].
+Ans: Given
+Inputs:
+x1 =[1,0], 
+x2 =[0,1]
+Initial hidden state:
+h0 =[0,0]
+Weights → Wxh​=[0.5 ​0.8, −0.3 0.2​], Whh​=[0.1 ​−0.4, 0.2 0.3​], bh​=[0.0, 0.1]
+Why​=[1.0, −1.0], by​=0
+Time step 1 (t = 1)
+h1​=tanh(Wxh​x1​+Whh​h0​+bh​)
+Wxh​x1​=[0.5, −0.3]
+h1​=tanh([0.5, −0.2])≈[0.462, −0.197]
+
+Time step 2 (t = 2)
+h2​=tanh(Wxh​x2​+Whh​h1​+bh​)
+Wxh​x2​=[0.8, 0.2]
+Whh​h1​≈[0.125, 0.033]
+h2​=tanh([0.925, 0.333])≈[0.728, 0.321]
+
+Output (Final Prediction)
+y=Why​h2​+by​
+y=(1.0)(0.728)+(−1.0)(0.321)
+y≈0.407
+
+7. What is autoencoder? How does it work? What are the loss functions used in autoencoder, elaborate?
+Ans: Autoencoder
+An autoencoder is a neural network that learns to reconstruct its input by compressing it into a lower-dimensional representation.
+Structure:
+Encoder → Latent (bottleneck) → Decoder
+
+How it Works
+i. Encoder maps input x to latent code z
+ii. Decoder reconstructs x^ from z
+iii. Training minimizes the difference between x and x^
+
+Loss Functions Used
+MSE: For continuous data (images, signals)
+MAE: Less sensitive to outliers
+Binary Cross-Entropy: For binary or normalized data [0,1]
+KL Divergence: Used in Variational Autoencoders to regularize latent space
+
+8.Answer the followings
+What is a Generative Adversarial Network (GAN)?
+Name the two main components of a GAN and state their roles.
+What is meant by adversarial training?
+Define generator loss and discriminator loss.
+Ans: What is a GAN?
+A Generative Adversarial Network (GAN) is a framework where a model learns to generate realistic data by competing against another model that tries to detect fake data.
+Two Main Components and Their Roles
+Generator (G)
+Creates fake data from random noise
+Goal: fool the discriminator
+Discriminator (D)
+Classifies data as real or fake
+Goal: catch the generator’s fakes
+What is Adversarial Training?
+A training process where:
+Generator improves by trying to deceive the discriminator
+Discriminator improves by trying to detect fake samples
+Both networks improve by competing against each other.
+Generator Loss and Discriminator Loss
+Generator Loss:
+Measures how well the generator fools the discriminator
+(low loss → generated data looks real)
+Discriminator Loss:
+Measures how accurately the discriminator distinguishes real from fake data
+(low loss → better classification)
+
+9.Implement a feedforward neural network with backpropagation using PyTorch to learn the XOR logic function for the following network architecture.
+Input layer: 2 neurons, Hidden layer: 2 neurons, Output layer: 1 neuron, Activation function: Sigmoid, Loss function: Mean Squared Error (MSE), Learning rate: 0.1.
+Ans: import torch
+import torch.nn as nn
+import torch.optim as optim
+
+# XOR dataset
+X = torch.tensor([[0.,0.],
+                  [0.,1.],
+                  [1.,0.],
+                  [1.,1.]])
+
+y = torch.tensor([[0.],
+                  [1.],
+                  [1.],
+                  [0.]])
+
+# Neural Network
+class XORNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(2, 2)
+        self.fc2 = nn.Linear(2, 1)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        x = self.sigmoid(self.fc1(x))
+        x = self.sigmoid(self.fc2(x))
+        return x
+
+model = XORNet()
+
+# Loss and optimizer
+criterion = nn.MSELoss()
+optimizer = optim.SGD(model.parameters(), lr=0.1)
+
+# Training
+for epoch in range(5000):
+    optimizer.zero_grad()
+    output = model(X)
+    loss = criterion(output, y)
+    loss.backward()
+    optimizer.step()
+
+# Test
+with torch.no_grad():
+    predictions = model(X)
+    print(predictions.round())
+
+10.Implement a Convolutional Neural Network (CNN) using PyTorch to classify images from the MNIST handwritten digits dataset. Display training and testing outcome in-terms of confusion matrix, accuracy, precision, recall and F1-score.
+
+Dataset:
+MNIST (Image size: 28 × 28 pixels, Color channels: 1 (grayscale), Number of classes: 10 (digits 0–9), Training samples: 60,000, Testing samples: 10,000)
+Architecture details:
+Input Layer: Input shape (28, 28, 1)
+Convolution Layer 1: Number of filters: 32 Kernel size: 3 × 3 Stride: 1 Padding: valid
+Activation function: ReLU
+Max Pooling Layer 1: Pool size: 2 × 2 Stride: 2
+Convolution Layer 2: Number of filters: 64 Kernel size: 3 × 3 Activation function: ReLUMax Pooling Layer 2: Pool size: 2 × 2
+Fully Connected Layer: Number of neurons: 128 Activation function: ReLU Output Layer: Number of neurons: 10 Activation function: Softmax
+Ans: import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchvision import datasets, transforms
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+import numpy as np
+
+# Device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Data
+transform = transforms.Compose([
+    transforms.ToTensor(),
+])
+
+train_data = datasets.MNIST(root="./data", train=True, transform=transform, download=True)
+test_data  = datasets.MNIST(root="./data", train=False, transform=transform, download=True)
+
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=64, shuffle=True)
+test_loader  = torch.utils.data.DataLoader(test_data, batch_size=64, shuffle=False)
+
+# CNN Model
+class CNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 32, 3)
+        self.conv2 = nn.Conv2d(32, 64, 3)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(64 * 5 * 5, 128)
+        self.fc2 = nn.Linear(128, 10)
+        self.relu = nn.ReLU()
+
+    def forward(self, x):
+        x = self.relu(self.conv1(x))
+        x = self.pool(x)
+        x = self.relu(self.conv2(x))
+        x = self.pool(x)
+        x = x.view(x.size(0), -1)
+        x = self.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
+
+model = CNN().to(device)
+
+# Loss & Optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# Training
+epochs = 5
+model.train()
+for epoch in range(epochs):
+    for images, labels in train_loader:
+        images, labels = images.to(device), labels.to(device)
+        optimizer.zero_grad()
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+# Testing
+model.eval()
+y_true = []
+y_pred = []
+
+with torch.no_grad():
+    for images, labels in test_loader:
+        images = images.to(device)
+        outputs = model(images)
+        _, predicted = torch.max(outputs, 1)
+        y_true.extend(labels.numpy())
+        y_pred.extend(predicted.cpu().numpy())
+
+# Metrics
+cm = confusion_matrix(y_true, y_pred)
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred, average="macro")
+recall = recall_score(y_true, y_pred, average="macro")
+f1 = f1_score(y_true, y_pred, average="macro")
+
+print("Confusion Matrix:\n", cm)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1)
