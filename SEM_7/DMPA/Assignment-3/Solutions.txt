@@ -1,0 +1,170 @@
+1. Differentiate between simple linear regression and multiple linear regression.
+Ans: 
+| Aspect                              | Simple Linear Regression                         | Multiple Linear Regression                                                      |
+| ----------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Number of independent variables     | One predictor (X)                                | Two or more predictors (X₁, X₂, …, Xₙ)                                          |
+| Equation.                           | ( Y = \beta_0 + \beta_1 X + \varepsilon )        | ( Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_n X_n + \varepsilon ) |
+| Relationship modeled                | Linear relationship between Y and a **single** X | Linear relationship between Y and **multiple** Xs                               |
+| Geometric interpretation            | Straight line (2D plane)                         | Hyperplane (multi-dimensional space)                                            |
+| Complexity                          | Simple, easy to interpret                        | More complex, interpretation needs care                                         |
+| Risk factors                        | Low risk of overfitting                          | Higher risk of overfitting, multicollinearity                                   |
+| Use case.                           | When one variable largely explains Y             | When Y depends on several factors                                               |
+| Example                             | Salary vs years of experience                    | Salary vs experience, education, location                                       |
+
+2. Sam found how many hours of sunshine vs how many ice creams were sold at the shop from Monday to Friday. Find equation of regression line for the given data using the “Least Squares Estimates” method.
+Ans: Let:
+x = Hours of sunshine
+y = Ice creams sold
+Data:
+x: 2, 3, 5, 7, 9
+y: 4, 5, 7, 10, 15
+Number of observations:
+n = 5
+Step 1: Calculate required sums
+Sum of x = 2 + 3 + 5 + 7 + 9 = 26
+Sum of y = 4 + 5 + 7 + 10 + 15 = 41
+Sum of x^2 = 4 + 9 + 25 + 49 + 81 = 168
+Sum of xy = (2×4) + (3×5) + (5×7) + (7×10) + (9×15)
+= 8 + 15 + 35 + 70 + 135
+= 263
+Step 2: Least Squares formulas
+Slope (b) = [ nΣxy − (Σx)(Σy) ] / [ nΣx² − (Σx)² ]
+Intercept (a) = [ Σy − bΣx ] / n
+Step 3: Calculate slope (b)
+b = [ 5×263 − 26×41 ] / [ 5×168 − 26² ]
+b = (1315 − 1066) / (840 − 676)
+b = 249 / 164
+b ≈ 1.52
+Step 4: Calculate intercept (a)
+a = (41 − 1.52×26) / 5
+a = (41 − 39.52) / 5
+a = 1.48 / 5
+a ≈ 0.30
+Final regression equation:
+y = 0.30 + 1.52x
+
+3. Consider following dataset that shows the number of hours studied by six different students along with their final exam scores. Here “Exam Score” is dependent variable whereas “Hours Studied” is independent variable.
+Ans: Given data:
+Hours studied (x): 1, 2, 2, 3, 4, 5
+Exam score (y): 68, 77, 81, 82, 88, 90
+Number of observations:
+n = 6
+Step 1: Required values
+Mean of x:
+x̄ = (1+2+2+3+4+5)/6 = 17/6 = 2.833
+Mean of y:
+ȳ = (68+77+81+82+88+90)/6 = 486/6 = 81
+a) Regression line (Least Squares)
+Slope (b):
+b = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²
+b ≈ 5.08
+Intercept (a):
+a = ȳ − b x̄
+a ≈ 66.62
+Regression equation:
+y = 66.62 + 5.08x
+b) Sum of Squares Error (SSE)
+SSE = Σ(y − ŷ)²
+SSE ≈ 36.77
+c) Sum of Squares Regression (SSR)
+SSR = Σ(ŷ − ȳ)²
+SSR ≈ 279.23
+d) Sum of Squares Total (SST)
+SST = Σ(y − ȳ)²
+SST = 316
+(Check: SST = SSR + SSE → 279.23 + 36.77 = 316 ✔)
+e) Coefficient of Determination (r²)
+r² = SSR / SST
+r² ≈ 0.884
+Interpretation:
+About 88.4% of the variation in exam scores is explained by hours studied.
+f) Mean Square Error (MSE) and standard error (s)
+Degrees of freedom = n − 2 = 4
+MSE = SSE / (n − 2)
+MSE ≈ 9.19
+Standard error:
+s = √MSE
+s ≈ 3.03
+Final Answers (compact)
+Regression line:
+y = 66.62 + 5.08x
+SSE = 36.77
+SSR = 279.23
+SST = 316
+r² = 0.884
+MSE = 9.19
+Standard error (s) = 3.03
+
+4. Given the following data for two variables, X and Y, calculate the Pearson correlation coefficient.
+Ans: Given data:
+X = 1, 2, 3, 4, 5
+Y = 2, 3, 5, 7, 8
+n = 5
+Mean of X:
+x̄ = (1+2+3+4+5)/5 = 3
+Mean of Y:
+ȳ = (2+3+5+7+8)/5 = 5
+Pearson correlation coefficient formula:
+r = Σ(x − x̄)(y − ȳ) / √[ Σ(x − x̄)² Σ(y − ȳ)² ]
+Calculations:
+Σ(x − x̄)(y − ȳ) = 16
+Σ(x − x̄)² = 10
+Σ(y − ȳ)² = 26
+r = 16 / √(10 × 26)
+r = 16 / √260
+r ≈ 0.991
+
+5. Ans: Given data:
+Age = [22, 33, 28, 51, 25, 39, 54, 55, 50, 66]
+Income = [4.6, 2.4, 2.8, 2.3, 4.7, 3.3, 2.8, 4.9, 4.6, 3.6]
+Min–max normalization formula:
+(x − min) / (max − min)
+Age: min = 22, max = 66
+Income: min = 2.3, max = 4.9
+Normalized values:
+Record 1: (0.000 , 0.885)
+Record 2: (0.250 , 0.038)
+Record 3: (0.136 , 0.192)
+Record 4: (0.659 , 0.000)
+Record 5: (0.068 , 0.923)
+Record 6: (0.386 , 0.385)
+Record 7: (0.727 , 0.192)
+Record 8: (0.750 , 1.000)
+Record 9: (0.636 , 0.885)
+Record 10: (1.000 , 0.500)
+Euclidean distance formula:
+d = √[(x₁ − x₂)² + (y₁ − y₂)²]
+Distances from record 10:
+Record 1 = 1.071
+Record 2 = 0.881
+Record 3 = 0.917
+Record 4 = 0.605
+Record 5 = 1.023
+Record 6 = 0.624
+Record 7 = 0.411
+Record 8 = 0.559
+Record 9 = 0.529
+Nearest neighbours for k = 3:
+Record 7, Record 9, Record 8
+
+6. Discuss the advantages and drawbacks of using a small value versus a large value for k in k-Nearest Neighbor classifier.
+Ans: Effect of choosing k in k-Nearest Neighbor (k-NN)
+The value of k directly controls the bias–variance tradeoff in the k-NN classifier. Choosing it poorly breaks the model.
+Using a small value of k (e.g., k = 1 or 3)
+Advantages:
+Very low bias: model closely fits training data.
+Can capture local patterns and complex class boundaries.
+Works well when data is clean and well separated.
+Drawbacks:
+High variance: extremely sensitive to noise and outliers.
+One mislabeled data point can change the prediction.
+Leads to overfitting.
+Using a large value of k (e.g., k = 15 or 25)
+Advantages:
+Low variance: predictions are more stable.
+Less sensitive to noise and outliers.
+Produces smoother decision boundaries.
+Drawbacks:
+High bias: ignores local structure.
+May misclassify minority or boundary points.
+Leads to underfitting if k is too large.
