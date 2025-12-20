@@ -6,15 +6,19 @@
 int enableRightMotor = 10;
 int rightMotorPin2 = 4;
 int rightMotorPin1 = 5;
-float rightScale = 0.33; // adjust as needed
+float rightScale = 0.33; 
 
 // Left motor
 int enableLeftMotor = 11;
 int leftMotorPin2 = 6;
 int leftMotorPin1 = 7;
 
-// WiFi control
-bool robotEnabled = false;
+// Robot Modes
+enum Mode { STOPPED, AUTO, MANUAL };
+Mode currentMode = STOPPED;
+
+// Manual Direction State
+char manualDirection = 'S'; 
 
 void setup()
 {
@@ -41,30 +45,18 @@ void loop()
 {
   handleWiFi();
 
-  if (!robotEnabled) {
-    rotateMotor(0, 0);
-    return;
-  }
+  switch (currentMode) {
+    case STOPPED:
+      rotateMotor(0, 0);
+      break;
 
-  int rightIRSensorValue = digitalRead(IR_SENSOR_RIGHT);
-  int leftIRSensorValue = digitalRead(IR_SENSOR_LEFT);
+    case AUTO:
+      runLineFollower();
+      break;
 
-  // LINE FOLLOWING LOGIC
-  if (rightIRSensorValue == LOW && leftIRSensorValue == LOW)
-  {
-    rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
-  }
-  else if (rightIRSensorValue == HIGH && leftIRSensorValue == LOW)
-  {
-    rotateMotor(-MOTOR_SPEED, MOTOR_SPEED);
-  }
-  else if (rightIRSensorValue == LOW && leftIRSensorValue == HIGH)
-  {
-    rotateMotor(MOTOR_SPEED, -MOTOR_SPEED);
-  }
-  else
-  {
-    rotateMotor(0, 0);
+    case MANUAL:
+      runManualControl();
+      break;
   }
 }
 
@@ -73,13 +65,51 @@ void handleWiFi() {
     String cmd = Serial.readStringUntil('\n');
     cmd.trim();
 
-    if (cmd == "START") {
-      robotEnabled = true;
+    if (cmd == "AUTO") {
+      currentMode = AUTO;
+    }
+    else if (cmd == "MANUAL") {
+      currentMode = MANUAL;
+      manualDirection = 'S';
     }
     else if (cmd == "STOP") {
-      robotEnabled = false;
+      currentMode = STOPPED;
+    }
+    else if (currentMode == MANUAL) {
+      if (cmd == "F") manualDirection = 'F';
+      else if (cmd == "B") manualDirection = 'B';
+      else if (cmd == "L") manualDirection = 'L';
+      else if (cmd == "R") manualDirection = 'R';
+      else if (cmd == "S") manualDirection = 'S';
     }
   }
+}
+
+void runLineFollower() {
+  int rightIRSensorValue = digitalRead(IR_SENSOR_RIGHT);
+  int leftIRSensorValue = digitalRead(IR_SENSOR_LEFT);
+
+  if (rightIRSensorValue == LOW && leftIRSensorValue == LOW) {
+    rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
+  }
+  else if (rightIRSensorValue == HIGH && leftIRSensorValue == LOW) {
+    rotateMotor(-MOTOR_SPEED, MOTOR_SPEED);
+  }
+  else if (rightIRSensorValue == LOW && leftIRSensorValue == HIGH) {
+    rotateMotor(MOTOR_SPEED, -MOTOR_SPEED);
+  }
+  else {
+    rotateMotor(0, 0);
+  }
+}
+
+void runManualControl() {
+  // FIXED: Logic for L and R swapped to match your wiring
+  if (manualDirection == 'F')      rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
+  else if (manualDirection == 'B') rotateMotor(-MOTOR_SPEED, -MOTOR_SPEED);
+  else if (manualDirection == 'L') rotateMotor(MOTOR_SPEED, -MOTOR_SPEED); 
+  else if (manualDirection == 'R') rotateMotor(-MOTOR_SPEED, MOTOR_SPEED);
+  else                             rotateMotor(0, 0);
 }
 
 void rotateMotor(int rightMotorSpeed, int leftMotorSpeed)
@@ -98,7 +128,7 @@ void rotateMotor(int rightMotorSpeed, int leftMotorSpeed)
 
   int leftPWM = abs(leftMotorSpeed);
 
-  // ----- APPLY RIGHT MOTOR (INVERTED POLARITY) -----
+  // ----- APPLY RIGHT MOTOR -----
   if (rightDirection == -1) {
     digitalWrite(rightMotorPin1, HIGH);
     digitalWrite(rightMotorPin2, LOW);
