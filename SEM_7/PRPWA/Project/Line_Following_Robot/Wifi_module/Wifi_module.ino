@@ -3,6 +3,8 @@
 
 ESP8266WebServer server(80);
 
+unsigned long lastCheckTime = 0;
+
 void handleRoot() {
   String page = R"rawliteral(
 <!DOCTYPE html>
@@ -95,7 +97,7 @@ void handleRoot() {
 void handleCommand() {
   if (server.hasArg("val")) {
     String val = server.arg("val");
-    Serial.println(val); // Send command to Arduino
+    Serial.println(val);  // Send command to Arduino
     server.send(200, "text/plain", "OK");
   } else {
     server.send(400, "text/plain", "Bad Request");
@@ -104,7 +106,7 @@ void handleCommand() {
 
 void setup() {
   Serial.begin(9600);
-  
+
   // Create Access Point
   WiFi.mode(WIFI_AP);
   WiFi.softAP("Robot-Control", "12345678");
@@ -117,4 +119,15 @@ void setup() {
 
 void loop() {
   server.handleClient();
+
+  // --- SAFETY WATCHDOG ---
+  // Every 200 milliseconds, check if the phone is still connected
+  if (millis() - lastCheckTime > 200) {
+    lastCheckTime = millis();
+
+    // If NO device is connected (0 stations), force a STOP
+    if (WiFi.softAPgetStationNum() == 0) {
+      Serial.println("STOP");  // Tell Arduino to stop
+    }
+  }
 }

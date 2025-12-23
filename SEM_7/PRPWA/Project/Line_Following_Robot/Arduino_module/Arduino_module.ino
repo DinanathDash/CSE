@@ -6,7 +6,7 @@
 int enableRightMotor = 10;
 int rightMotorPin2 = 4;
 int rightMotorPin1 = 5;
-float rightScale = 0.33; 
+float rightScale = 0.33;
 
 // Left motor
 int enableLeftMotor = 11;
@@ -18,10 +18,9 @@ enum Mode { STOPPED, AUTO, MANUAL };
 Mode currentMode = STOPPED;
 
 // Manual Direction State
-char manualDirection = 'S'; 
+char manualDirection = 'S';
 
-void setup()
-{
+void setup() {
   Serial.begin(9600);
 
   // PWM frequency config
@@ -41,8 +40,7 @@ void setup()
   rotateMotor(0, 0);
 }
 
-void loop()
-{
+void loop() {
   handleWiFi();
 
   switch (currentMode) {
@@ -67,15 +65,12 @@ void handleWiFi() {
 
     if (cmd == "AUTO") {
       currentMode = AUTO;
-    }
-    else if (cmd == "MANUAL") {
+    } else if (cmd == "MANUAL") {
       currentMode = MANUAL;
       manualDirection = 'S';
-    }
-    else if (cmd == "STOP") {
+    } else if (cmd == "STOP") {
       currentMode = STOPPED;
-    }
-    else if (currentMode == MANUAL) {
+    } else if (currentMode == MANUAL) {
       if (cmd == "F") manualDirection = 'F';
       else if (cmd == "B") manualDirection = 'B';
       else if (cmd == "L") manualDirection = 'L';
@@ -91,29 +86,25 @@ void runLineFollower() {
 
   if (rightIRSensorValue == LOW && leftIRSensorValue == LOW) {
     rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
-  }
-  else if (rightIRSensorValue == HIGH && leftIRSensorValue == LOW) {
+  } else if (rightIRSensorValue == HIGH && leftIRSensorValue == LOW) {
     rotateMotor(-MOTOR_SPEED, MOTOR_SPEED);
-  }
-  else if (rightIRSensorValue == LOW && leftIRSensorValue == HIGH) {
+  } else if (rightIRSensorValue == LOW && leftIRSensorValue == HIGH) {
     rotateMotor(MOTOR_SPEED, -MOTOR_SPEED);
-  }
-  else {
+  } else {
     rotateMotor(0, 0);
   }
 }
 
 void runManualControl() {
   // FIXED: Logic for L and R swapped to match your wiring
-  if (manualDirection == 'F')      rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
+  if (manualDirection == 'F') rotateMotor(MOTOR_SPEED, MOTOR_SPEED);
   else if (manualDirection == 'B') rotateMotor(-MOTOR_SPEED, -MOTOR_SPEED);
-  else if (manualDirection == 'L') rotateMotor(MOTOR_SPEED, -MOTOR_SPEED); 
+  else if (manualDirection == 'L') rotateMotor(MOTOR_SPEED, -MOTOR_SPEED);
   else if (manualDirection == 'R') rotateMotor(-MOTOR_SPEED, MOTOR_SPEED);
-  else                             rotateMotor(0, 0);
+  else rotateMotor(0, 0);
 }
 
-void rotateMotor(int rightMotorSpeed, int leftMotorSpeed)
-{
+void rotateMotor(int rightMotorSpeed, int leftMotorSpeed) {
   // ----- RIGHT MOTOR -----
   int rightDirection = 0;
   if (rightMotorSpeed < 0) rightDirection = -1;
